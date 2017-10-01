@@ -172,6 +172,16 @@ public class MenuAsignarSkills extends JFrame {
 		 ImageIcon resetIcon = new ImageIcon("recursos//botonReset.png");
 		 buttonReset.setIcon(resetIcon);
 		 buttonReset.setEnabled(false);
+		 buttonReset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				int fuerzaInicial = cliente.getPaquetePersonaje().get
+//				puntosAsignar = puntosAsignarInicial * cliente.getPaquetePersonaje().getNivel();
+//				cliente.getPaquetePersonaje().setFuerza(fuerzaInicial);
+				
+			}
+		});
 		 buttonReset.setBounds(176, 100, 97, 25);
 		 contentPane.add(buttonReset);
 			
