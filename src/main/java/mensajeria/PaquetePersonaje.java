@@ -25,6 +25,10 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
+	private final int fuerzaInicial = 10;
+	private final int destrezaInicial = 10;
+	private final int inteligenciaInicial = 10;
+	
 	private ArrayList<Item> items = new ArrayList<Item>();
 	
 	public PaquetePersonaje() throws IOException {
@@ -151,6 +155,30 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.inteligencia = inteligencia;
 	}
 
+	//Metodos que me devuelven los atributos iniciales segun la casta.
+		public final int getFuerzaInicial(){
+			
+			if(this.casta == "Guerrero"){
+				return 15;
+			}
+			return 10;
+			
+		}
+		
+		public final int getDestrezaInicial(){
+			if(this.casta == "Asesino"){
+				return 15;
+			}
+			return 10;
+		}
+		
+		public final int getInteligenciaInicial(){
+			if(this.casta == "Hechicero"){
+				return 15;
+			}
+			return 10;
+		}
+	
 	@Override
 	public Object clone() {
 		Object obj = null;

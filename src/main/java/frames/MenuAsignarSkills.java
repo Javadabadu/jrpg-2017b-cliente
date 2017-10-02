@@ -165,25 +165,10 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(buttonCancel);
 		
 		
-		//Boton Reset Skills
-		
-	
-		 final JButton buttonReset = new JButton("Reset");
-		 ImageIcon resetIcon = new ImageIcon("recursos//botonReset.png");
-		 buttonReset.setIcon(resetIcon);
-		 buttonReset.setEnabled(false);
-		 buttonReset.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-//				int fuerzaInicial = cliente.getPaquetePersonaje().get
-//				puntosAsignar = puntosAsignarInicial * cliente.getPaquetePersonaje().getNivel();
-//				cliente.getPaquetePersonaje().setFuerza(fuerzaInicial);
-				
-			}
-		});
-		 buttonReset.setBounds(176, 100, 97, 25);
-		 contentPane.add(buttonReset);
+		final JButton buttonReset = new JButton("Reset");
+		ImageIcon resetIcon = new ImageIcon("recursos//botonReset.png");
+		buttonReset.setIcon(resetIcon);
+		buttonReset.setEnabled(false);
 			
 		
 		final JButton buttonMinus = new JButton("");
@@ -378,6 +363,46 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore2.setIcon(icono_2);
 		buttonMore2.setBounds(118, 217, 34, 25);
 		contentPane.add(buttonMore2);
+		
+		//Boton Reset Skills
+		
+		
+		 
+		 buttonReset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int fuerzaInicial = cliente.getPaquetePersonaje().getFuerzaInicial();
+				int destrezaInicial = cliente.getPaquetePersonaje().getDestrezaInicial();
+				int inteligenciaInicial = cliente.getPaquetePersonaje().getInteligenciaInicial();
+				puntosAsignar = puntosAsignarInicial * cliente.getPaquetePersonaje().getNivel();
+				
+				labelPuntos.setText(String.valueOf(puntosAsignar));
+				labelFuerza.setText(String.valueOf(fuerzaInicial));
+				labelDestreza.setText(String.valueOf(destrezaInicial));
+				labelInteligencia.setText(String.valueOf(inteligenciaInicial));
+				
+				buttonConfirm.setEnabled(false);
+				buttonReset.setEnabled(false);				
+				buttonMinus.setEnabled(false);
+				buttonMinus1.setEnabled(false);
+				buttonMinus2.setEnabled(false);
+				
+				cliente.getPaquetePersonaje().setFuerza(fuerzaInicial);
+				cliente.getPaquetePersonaje().setDestreza(destrezaInicial);
+				cliente.getPaquetePersonaje().setInteligencia(inteligenciaInicial);
+				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
+				try {
+					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(null, "Error al resetear stats");
+
+				}
+				JOptionPane.showMessageDialog(null,"Se han reseteado tus stats.");
+			}
+		});
+		 buttonReset.setBounds(176, 100, 97, 25);
+		 contentPane.add(buttonReset);
 		
 		final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
 		imageLabel.setBounds(0, 0, 298, 294);
