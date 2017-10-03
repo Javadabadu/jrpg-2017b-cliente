@@ -89,7 +89,22 @@ public class Recursos {
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
 	
-
+	//NPC
+	public static Map<String, LinkedList<BufferedImage[]>> npcMap = new HashMap<>();
+	
+	private static SpriteSheet spriteNpc;
+	public static LinkedList<BufferedImage[]> npc = new LinkedList<>();
+	private static BufferedImage[] npcIzq;
+	private static BufferedImage[] npcArribaIzq;
+	private static BufferedImage[] npcArriba;
+	private static BufferedImage[] npcArribaDer;
+	private static BufferedImage[] npcDer;
+	private static BufferedImage[] npcAbajoDer;
+	private static BufferedImage[] npcAbajo;
+	private static BufferedImage[] npcAbajoIzq;
+	
+	//FIN NPC
+	
 	// Se cargan todos los recursos del juego una sola vez al inicio
 
 	public static void cargar(MenuCarga menuCarga) throws NumberFormatException, IOException {
@@ -324,7 +339,82 @@ public class Recursos {
 		elfo.add(elfoAbajoIzq);
 
 		// Fin Elfo
+		
+		//INICIO NPC
+		
+		spriteNpc = new SpriteSheet(CargadorImagen.cargarImagen("/Elfo.png"));
 
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		npcIzq = new BufferedImage[4];
+		npcArribaIzq = new BufferedImage[4];
+		npcArriba = new BufferedImage[4];
+		npcArribaDer = new BufferedImage[4];
+		npcDer = new BufferedImage[4];
+		npcAbajoDer = new BufferedImage[4];
+		npcAbajo = new BufferedImage[4];
+		npcAbajoIzq = new BufferedImage[4];
+
+		for (int i = 0; i < 4; i++) {
+			npcIzq[i] = spriteNpc.getTile(ANCHO * i, 0, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			npcArribaIzq[i] = spriteNpc.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			npcArriba[i] = spriteNpc.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			npcArribaDer[i] = spriteNpc.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			npcDer[i] = spriteNpc.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			npcAbajoDer[i] = spriteNpc.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			npcAbajo[i] = spriteNpc.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			npcAbajoIzq[i] = spriteNpc.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		npc.add(npcIzq);
+		npc.add(npcArribaIzq);
+		npc.add(npcArriba);
+		npc.add(npcArribaDer);
+		npc.add(npcDer);
+		npc.add(npcAbajoDer);
+		npc.add(npcAbajo);
+		npc.add(npcAbajoIzq);
+
+		
+		//FIN NPC
+		
 		// Agrego los pj al hash
 		personaje.put("Humano", humano);
 		personaje.put("Orco", orco);

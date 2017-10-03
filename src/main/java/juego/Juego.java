@@ -16,6 +16,7 @@ import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 
 public class Juego implements Runnable {
@@ -50,6 +51,8 @@ public class Juego implements Runnable {
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
+	private Map<Integer, PaqueteNpc> npcs;
+	private Map<Integer, PaqueteMovimiento> posNpc;
 
 	private CargarRecursos cargarRecursos;
 
@@ -115,7 +118,7 @@ public class Juego implements Runnable {
 
 		// Fin de graficado de imagenes
 
-		bs.show(); // Hace visible el prÃ³ximo buffer disponible
+		bs.show(); // Hace visible el próximo buffer disponible
 		g.dispose();
 	}
 
@@ -247,4 +250,25 @@ public class Juego implements Runnable {
 	public Map<String, MiChat> getChatsActivos() {
 		return chatsActivos;
 	}
+
+	public Map<Integer, PaqueteNpc> getNpcs() {
+		return npcs;
+	}
+
+	public void setNpcs(Map<Integer, PaqueteNpc> npcs) {
+		this.npcs = npcs;
+	}
+
+	public Map<Integer, PaqueteMovimiento> getPosNpc() {
+		return posNpc;
+	}
+
+	public void setPosNpc(Map<Integer, PaqueteMovimiento> posNpc) {
+		this.posNpc = posNpc;
+	}
+	
+	
 }
+
+
+

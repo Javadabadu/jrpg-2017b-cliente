@@ -21,6 +21,7 @@ import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
@@ -34,7 +35,10 @@ public class EstadoJuego extends Estado {
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
-
+	
+	private Map<Integer, PaqueteNpc> npcs;
+	private Map<Integer, PaqueteMovimiento> posNpc;
+	
 	private final Gson gson = new Gson();
 
 	private BufferedImage miniaturaPersonaje;
@@ -55,7 +59,7 @@ public class EstadoJuego extends Estado {
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexiÃ³n con el servidor al ingresar al mundo");
+			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor al ingresar al mundo");
 		}
 	}
 
@@ -69,8 +73,9 @@ public class EstadoJuego extends Estado {
 	public void graficar(Graphics g) {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
-		//entidadPersonaje.graficar(g);
+		entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
+		graficarNpc(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
@@ -82,7 +87,7 @@ public class EstadoJuego extends Estado {
 			menuEnemigo.graficar(g, tipoSolicitud);
 
 	}
-
+	
 	public void graficarPersonajes(Graphics g) {
 
 		if(juego.getPersonajesConectados() != null){
@@ -98,11 +103,19 @@ public class EstadoJuego extends Estado {
 				actual = ubicacionPersonajes.get(key);
 				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
-						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()],
+								(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
+								(int) (actual.getPosY() - juego.getCamara().getyOffset()),
+								64, 64, null);
 				}
 			}
 		}
 	}
+	
+	public void graficarNpc(Graphics g){
+		
+		}
+			 		
 
 	public Entidad getPersonaje() {
 		return entidadPersonaje;
@@ -151,3 +164,6 @@ public class EstadoJuego extends Estado {
 	}
 
 }
+
+
+
