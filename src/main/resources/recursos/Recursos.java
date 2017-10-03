@@ -342,7 +342,7 @@ public class Recursos {
 		
 		//INICIO NPC
 		
-		spriteNpc = new SpriteSheet(CargadorImagen.cargarImagen("/Elfo.png"));
+		spriteNpc = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 

@@ -59,7 +59,7 @@ public class EstadoJuego extends Estado {
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor al ingresar al mundo");
+			JOptionPane.showMessageDialog(null, "Fallo la conexiï¿½n con el servidor al ingresar al mundo");
 		}
 	}
 
@@ -113,8 +113,31 @@ public class EstadoJuego extends Estado {
 	}
 	
 	public void graficarNpc(Graphics g){
+		Integer i = 0;
 		
+		PaqueteNpc monstruo = new PaqueteNpc(0, "Monstruito", "Npc", 2,1, 100, 450 );
+		PaqueteMovimiento posMonstruo = new PaqueteMovimiento(0, monstruo.getPosX(), monstruo.getPosY());
+		
+		Map<Integer, PaqueteNpc> npcs = new HashMap<Integer, PaqueteNpc>();
+		Map<Integer, PaqueteMovimiento> posNpc = new HashMap<Integer, PaqueteMovimiento>();
+		
+		npcs.put(i, monstruo);
+		posNpc.put(i, posMonstruo);
+		
+		juego.setPosNpc(posNpc);
+		posNpc = juego.getPosNpc();
+		
+		Iterator<Integer> itNpc = npcs.keySet().iterator();
+		int key;
+		PaqueteMovimiento actual;
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+		while (itNpc.hasNext()) {				
+			key = itNpc.next();
+			actual = posNpc.get(key);
+	 		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), npcs.get(actual.getIdPersonaje()).getNombre());	g.drawImage(Recursos.npc.get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 		}
+	}
 			 		
 
 	public Entidad getPersonaje() {
