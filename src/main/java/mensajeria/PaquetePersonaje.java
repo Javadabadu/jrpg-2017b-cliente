@@ -158,7 +158,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	//Metodos que me devuelven los atributos iniciales segun la casta.
 		public final int getFuerzaInicial(){
 			
-			if(this.casta == "Guerrero"){
+			if(this.getCasta().equals("Guerrero")){
 				return 15;
 			}
 			return 10;
@@ -166,14 +166,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		}
 		
 		public final int getDestrezaInicial(){
-			if(this.casta == "Asesino"){
+			if(this.getCasta().equals("Asesino")){
 				return 15;
 			}
 			return 10;
 		}
 		
 		public final int getInteligenciaInicial(){
-			if(this.casta == "Hechicero"){
+			if(this.getCasta().equals("Hechicero")){
 				return 15;
 			}
 			return 10;

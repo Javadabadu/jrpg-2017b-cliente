@@ -372,6 +372,9 @@ public class MenuAsignarSkills extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				//Declaro valores iniciales a usar
+				
 				int fuerzaInicial = cliente.getPaquetePersonaje().getFuerzaInicial();
 				int destrezaInicial = cliente.getPaquetePersonaje().getDestrezaInicial();
 				int inteligenciaInicial = cliente.getPaquetePersonaje().getInteligenciaInicial();
@@ -382,11 +385,15 @@ public class MenuAsignarSkills extends JFrame {
 				labelDestreza.setText(String.valueOf(destrezaInicial));
 				labelInteligencia.setText(String.valueOf(inteligenciaInicial));
 				
+				//Si se usa el boton reiniciar se pone en false los menos y el aceptar
+				
 				buttonConfirm.setEnabled(false);
 				buttonReset.setEnabled(false);				
 				buttonMinus.setEnabled(false);
 				buttonMinus1.setEnabled(false);
 				buttonMinus2.setEnabled(false);
+				
+				//Actualizo atributos de personaje
 				
 				cliente.getPaquetePersonaje().setFuerza(fuerzaInicial);
 				cliente.getPaquetePersonaje().setDestreza(destrezaInicial);
