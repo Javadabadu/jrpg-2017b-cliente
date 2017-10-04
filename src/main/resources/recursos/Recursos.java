@@ -22,6 +22,9 @@ public class Recursos {
 
 	private static int ANCHO; // Ancho del frame a obtener
 	private static int ALTO; // Alto del frame a obtener
+	private static int ANCHOHULK;
+	private static int ALTOHULK;
+	
 
 	// Inicio Personajes
 	// Hash de imagenes para los personajes (humano, ogro, elfo)
@@ -103,6 +106,15 @@ public class Recursos {
 	private static BufferedImage[] npcAbajo;
 	private static BufferedImage[] npcAbajoIzq;
 	
+	public static Map<String, LinkedList<BufferedImage[]>> hulkMap = new HashMap<>();
+	
+	private static SpriteSheet spriteHulk;
+	public static LinkedList<BufferedImage[]> hulk = new LinkedList<>();
+	private static BufferedImage[] hulkIzq;
+	private static BufferedImage[] hulkDer;
+	private static BufferedImage[] hulkArriba;
+	private static BufferedImage[] hulkAbajo;
+
 	//FIN NPC
 	
 	// Se cargan todos los recursos del juego una sola vez al inicio
@@ -113,6 +125,9 @@ public class Recursos {
 		
 		ANCHO = 256;
 		ALTO = 256;
+		
+		ANCHOHULK = 40;
+		ALTOHULK = 56;
 		//Items
 		
 		
@@ -413,7 +428,47 @@ public class Recursos {
 		npc.add(npcAbajoIzq);
 
 		
+		spriteHulk = new SpriteSheet(CargadorImagen.cargarImagen("/hulk.png"));
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		hulkIzq = new BufferedImage[4];
+		hulkDer = new BufferedImage[4];
+		hulkArriba = new BufferedImage[4];
+		hulkAbajo = new BufferedImage[4];
+		
+		for (int i = 0; i < 4; i++) {
+			hulkAbajo[i] = spriteHulk.getTile(ANCHOHULK * i, 0, ANCHOHULK, ALTOHULK);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			hulkIzq[i] = spriteHulk.getTile(ANCHOHULK * i, ALTOHULK, ANCHOHULK, ALTOHULK);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			hulkDer[i] = spriteHulk.getTile(ANCHOHULK * i, ALTOHULK * 2, ANCHOHULK, ALTOHULK);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			npcArriba[i] = spriteHulk.getTile(ANCHOHULK * i, ALTOHULK * 3, ANCHOHULK, ALTOHULK);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+		
+		hulk.add(hulkAbajo);
+		hulk.add(hulkIzq);
+		hulk.add(hulkArriba);
+		hulk.add(hulkDer);
 		//FIN NPC
+		
+		npcMap.put("Monstruo", npc);
+		hulkMap.put("Hulk", hulk);
 		
 		// Agrego los pj al hash
 		personaje.put("Humano", humano);
