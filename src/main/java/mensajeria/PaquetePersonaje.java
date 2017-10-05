@@ -301,7 +301,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 		public final int getDestrezaInicial() {
 			int destreza;
-			if (this.getCasta().equals("Guerrero")) {
+			if (this.getCasta().equals("Asesino")) {
 				destreza = 15;
 			}else{
 				destreza = 10;
@@ -325,5 +325,13 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 				inteligencia += item.getBonusInteligencia();
 			}
 			return inteligencia;
+		}
+		
+		public final int getPuntosAsignar(){
+			int puntosAsignar = nivel *3;
+			int totalPuntosInicial = this.getFuerzaInicial()+this.getDestrezaInicial()+this.getInteligenciaInicial();
+			int totalPuntosActual = this.getFuerza()+this.getDestreza()+this.getInteligencia();
+			
+			return puntosAsignar - (totalPuntosActual - totalPuntosInicial);
 		}
 }
