@@ -111,28 +111,40 @@ public class EstadoJuego extends Estado {
 			}
 		}
 	}
-	
 	public void graficarNpc(Graphics g){
 		Integer i = 0;
+		int cantidadMonstruos = (int)(Math.random()*10 + 1);
 		
-		PaqueteNpc monstruo = new PaqueteNpc(0, "Monstruito", "Npc", 2,1, 100, 450 );
-		PaqueteMovimiento posMonstruo = new PaqueteMovimiento(0, monstruo.getPosX(), monstruo.getPosY());
-		PaqueteNpc hulk = new PaqueteNpc(1, "Hulk", "hulk", 2, 1, 100, 300);
-		PaqueteMovimiento posHulk = new PaqueteMovimiento(1, hulk.getPosX(), hulk.getPosY());
 		
-		Map<Integer, PaqueteNpc> npcs = new HashMap<Integer, PaqueteNpc>();
-		Map<Integer, PaqueteMovimiento> posNpc = new HashMap<Integer, PaqueteMovimiento>();
+		while(i < cantidadMonstruos) {
+			PaqueteNpc monstruo;
+			PaqueteMovimiento posMonstruo;
+			Map<Integer, PaqueteNpc> npcs ;
+			Map<Integer, PaqueteMovimiento> posNpc;
+				
+			if(i % 2 ==0) {
+				 monstruo = new PaqueteNpc(i+1, "Monstruito", "Npc", 2,1, i*150, i*100 );
+				 posMonstruo = new PaqueteMovimiento(i+1, monstruo.getPosX(), monstruo.getPosY());
+						
+			}else {
+				 monstruo = new PaqueteNpc(i+1, "Hulk", "hulk", 2, 1, i*100, i*150 );
+				 posMonstruo = new PaqueteMovimiento(i+1, monstruo.getPosX(), monstruo.getPosY());
+				
+			}
+			 npcs = new HashMap<Integer, PaqueteNpc>();
+			 posNpc = new HashMap<Integer,PaqueteMovimiento>();
+			 npcs.put(i, monstruo);
+			 posNpc.put(i, posMonstruo);	
+			 juego.setPosNpc(posNpc);
+			 posNpc = juego.getPosNpc();
+			dibujar(g, npcs, posNpc);				 
+			 i++;
+		}
 		
-		Map<Integer, PaqueteNpc> hulks = new HashMap<Integer, PaqueteNpc>();
-		Map<Integer, PaqueteMovimiento> posHulks = new HashMap<Integer, PaqueteMovimiento>();
+	}
 		
-		npcs.put(i, monstruo);
-		posNpc.put(i, posMonstruo);
-		hulks.put(++i, hulk);
-		posHulks.put(i, posHulk);
 		
-		juego.setPosNpc(posNpc);
-		posNpc = juego.getPosNpc();
+	public void dibujar(Graphics g, Map<Integer, PaqueteNpc> npcs,Map<Integer, PaqueteMovimiento> posNpc) {
 		
 		
 		Iterator<Integer> itNpc = npcs.keySet().iterator();
@@ -145,7 +157,7 @@ public class EstadoJuego extends Estado {
 			actual = posNpc.get(key);
 	 		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
 	 				(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
-	 				npcs.get(actual.getIdPersonaje()).getNombre());	
+	 				npcs.get(actual.getIdPersonaje()-1).getNombre());	
 	 		
 	 		g.drawImage(Recursos.npc.get(actual.getDireccion())[actual.getFrame()],
 	 				(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
@@ -153,28 +165,10 @@ public class EstadoJuego extends Estado {
 	 				64, 64, null);
 	 	
 		}
-		
-		Iterator<Integer> ithulk = hulks.keySet().iterator();
-		int key1;
-		PaqueteMovimiento actual1;
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
-		while (ithulk.hasNext()) {				
-			key1 = ithulk.next();
-			actual1 = posHulks.get(key1);
-	 		Pantalla.centerString(g, new Rectangle((int) (actual1.getPosX() - juego.getCamara().getxOffset() + 32),
-	 				(int) (actual1.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
-	 				hulks.get(actual1.getIdPersonaje()).getNombre());	
-	 		
-	 			 		g.drawImage(Recursos.hulk.get(actual1.getDireccion())[actual1.getFrame()],
-	 				(int) (actual1.getPosX() - juego.getCamara().getxOffset() ),
-	 				(int) (actual1.getPosY() - juego.getCamara().getyOffset()),
-	 				64, 64, null);
-		}
-		
 	}
-			 		
-
+		
+		
+	
 	public Entidad getPersonaje() {
 		return entidadPersonaje;
 	}
