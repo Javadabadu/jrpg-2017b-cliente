@@ -35,7 +35,7 @@ public class EstadoJuego extends Estado {
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
-	
+	private PaqueteNpc paqueteNpc;
 	private Map<Integer, PaqueteNpc> npcs;
 	private Map<Integer, PaqueteMovimiento> posNpc;
 	
@@ -142,6 +142,10 @@ public class EstadoJuego extends Estado {
 		}
 		
 	}
+	
+	public void actualizarNpc() {
+		 paqueteNpc = juego.getNpc();
+		 }
 		
 		
 	public void dibujar(Graphics g, Map<Integer, PaqueteNpc> npcs,Map<Integer, PaqueteMovimiento> posNpc) {

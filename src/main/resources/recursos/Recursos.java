@@ -92,7 +92,7 @@ public class Recursos {
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
 	
-<<<<<<< HEAD
+
 	//NPC
 	public static Map<String, LinkedList<BufferedImage[]>> npcMap = new HashMap<>();
 	
@@ -117,13 +117,8 @@ public class Recursos {
 	private static BufferedImage[] hulkAbajo;
 
 	//FIN NPC
-	
-=======
-	//Inicio NPCS
-	
-	
 
->>>>>>> pepe/NivelesFix
+
 	// Se cargan todos los recursos del juego una sola vez al inicio
 
 	public static void cargar(MenuCarga menuCarga) throws NumberFormatException, IOException {
