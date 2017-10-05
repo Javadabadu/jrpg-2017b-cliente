@@ -149,7 +149,7 @@ public class MenuAsignarSkills extends JFrame {
 				dispose();
 			}
 		});
-		buttonConfirm.setBounds(176, 145, 97, 25);
+		buttonConfirm.setBounds(176, 112, 97, 25);
 		contentPane.add(buttonConfirm);
 		
 		final JButton buttonCancel = new JButton("Cancelar");
@@ -161,15 +161,8 @@ public class MenuAsignarSkills extends JFrame {
 				dispose();
 			}
 		});
-		buttonCancel.setBounds(176, 190, 97, 25);
+		buttonCancel.setBounds(176, 146, 97, 25);
 		contentPane.add(buttonCancel);
-		
-		
-		final JButton buttonReset = new JButton("Reset");
-		ImageIcon resetIcon = new ImageIcon("recursos//botonReset.png");
-		buttonReset.setIcon(resetIcon);
-		buttonReset.setEnabled(true);
-			
 		
 		final JButton buttonMinus = new JButton("");
 		final JButton buttonMinus1 = new JButton("");
@@ -293,7 +286,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosFuerza++;
 					puntosAsignar--;
 					buttonConfirm.setEnabled(true);
-					buttonReset.setEnabled(true); //Habilito el botonReset
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelFuerza.setText(String.valueOf(puntosFuerza));
 					buttonMinus.setEnabled(true);
@@ -320,7 +312,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosDestreza++;
 					puntosAsignar--;
 					buttonConfirm.setEnabled(true);
-					buttonReset.setEnabled(true); //Habilito el botonReset
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelDestreza.setText(String.valueOf(puntosDestreza));
 					buttonMinus1.setEnabled(true);
@@ -345,7 +336,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosInteligencia++;
 					puntosAsignar--;
 					buttonConfirm.setEnabled(true);
-					buttonReset.setEnabled(true); //Habilito el botonReset
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelInteligencia.setText(String.valueOf(puntosInteligencia));					
 					buttonMinus2.setEnabled(true);
@@ -363,36 +353,6 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore2.setIcon(icono_2);
 		buttonMore2.setBounds(118, 217, 34, 25);
 		contentPane.add(buttonMore2);
-		
-		//Boton Reset Skills
-		 buttonReset.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				//Valores iniciales a usar
-				puntosAsignar = (cliente.getPaquetePersonaje().getNivel()-1) * 3; // Multiplico por 3 ya que obtiene 3 puntos por nivel
-				puntosFuerza = cliente.getPaquetePersonaje().getFuerzaInicial();
-				puntosDestreza = cliente.getPaquetePersonaje().getDestrezaInicial();
- 				puntosInteligencia = cliente.getPaquetePersonaje().getInteligenciaInicial();
-				
-				labelPuntos.setText(String.valueOf(puntosAsignar));
-				labelFuerza.setText(String.valueOf(puntosFuerza));
-				labelDestreza.setText(String.valueOf(puntosDestreza));
-				labelInteligencia.setText(String.valueOf(puntosInteligencia));
-				
-				//Si se usa el boton reiniciar, se pone en false los menos 				
-				buttonConfirm.setEnabled(true);
-				buttonReset.setEnabled(false);				
-				buttonMinus.setEnabled(false);
-				buttonMinus1.setEnabled(false);
-				buttonMinus2.setEnabled(false);
-				
-				JOptionPane.showMessageDialog(null,"Se han reseteado tus stats.");
-			}
-		});
-		 buttonReset.setBounds(176, 100, 97, 25);
-		 contentPane.add(buttonReset);
 		
 		final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
 		imageLabel.setBounds(0, 0, 298, 294);

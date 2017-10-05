@@ -92,7 +92,6 @@ public class Recursos {
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
 	
-
 	//NPC
 	public static Map<String, LinkedList<BufferedImage[]>> npcMap = new HashMap<>();
 	
@@ -107,18 +106,21 @@ public class Recursos {
 	private static BufferedImage[] npcAbajo;
 	private static BufferedImage[] npcAbajoIzq;
 	
-	public static Map<String, LinkedList<BufferedImage[]>> hulkMap = new HashMap<>();
+	public static Map<String, LinkedList<BufferedImage[]>> leoMap = new HashMap<>();
 	
-	private static SpriteSheet spriteHulk;
-	public static LinkedList<BufferedImage[]> hulk = new LinkedList<>();
-	private static BufferedImage[] hulkIzq;
-	private static BufferedImage[] hulkDer;
-	private static BufferedImage[] hulkArriba;
-	private static BufferedImage[] hulkAbajo;
+	private static SpriteSheet spriteLeo;
+	public static LinkedList<BufferedImage[]> leo = new LinkedList<>();
+	private static BufferedImage[] leoIzq;
+	private static BufferedImage[] leoArribaIzq;
+	private static BufferedImage[] leoArriba;
+	private static BufferedImage[] leoArribaDer;
+	private static BufferedImage[] leoDer;
+	private static BufferedImage[] leoAbajoDer;
+	private static BufferedImage[] leoAbajo;
+	private static BufferedImage[] leoAbajoIzq;
 
 	//FIN NPC
-
-
+	
 	// Se cargan todos los recursos del juego una sola vez al inicio
 
 	public static void cargar(MenuCarga menuCarga) throws NumberFormatException, IOException {
@@ -359,7 +361,7 @@ public class Recursos {
 		
 		//INICIO NPC
 		
-		spriteNpc = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
+		spriteNpc = new SpriteSheet(CargadorImagen.cargarImagen("/Lucas.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
@@ -430,47 +432,79 @@ public class Recursos {
 		npc.add(npcAbajoIzq);
 
 		
-		spriteHulk = new SpriteSheet(CargadorImagen.cargarImagen("/hulk.png"));
+		spriteLeo = new SpriteSheet(CargadorImagen.cargarImagen("/Leo.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-		hulkIzq = new BufferedImage[4];
-		hulkDer = new BufferedImage[4];
-		hulkArriba = new BufferedImage[4];
-		hulkAbajo = new BufferedImage[4];
-		
+		leoIzq = new BufferedImage[4];
+		leoArribaIzq = new BufferedImage[4];
+		leoArriba = new BufferedImage[4];
+		leoArribaDer = new BufferedImage[4];
+		leoDer = new BufferedImage[4];
+		leoAbajoDer = new BufferedImage[4];
+		leoAbajo = new BufferedImage[4];
+		leoAbajoIzq = new BufferedImage[4];
+
 		for (int i = 0; i < 4; i++) {
-			hulkAbajo[i] = spriteHulk.getTile(ANCHOHULK * i, 0, ANCHOHULK, ALTOHULK);
+			leoIzq[i] = spriteLeo.getTile(ANCHO * i, 0, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			hulkIzq[i] = spriteHulk.getTile(ANCHOHULK * i, ALTOHULK, ANCHOHULK, ALTOHULK);
+			leoArribaIzq[i] = spriteLeo.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			hulkDer[i] = spriteHulk.getTile(ANCHOHULK * i, ALTOHULK * 2, ANCHOHULK, ALTOHULK);
+			leoArriba[i] = spriteLeo.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			npcArriba[i] = spriteHulk.getTile(ANCHOHULK * i, ALTOHULK * 3, ANCHOHULK, ALTOHULK);
+			leoArribaDer[i] = spriteLeo.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
-		
-		hulk.add(hulkAbajo);
-		hulk.add(hulkIzq);
-		hulk.add(hulkArriba);
-		hulk.add(hulkDer);
+
+		for (int i = 0; i < 4; i++) {
+			leoDer[i] = spriteLeo.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leoAbajoDer[i] = spriteLeo.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leoAbajo[i] = spriteLeo.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leoAbajoIzq[i] = spriteLeo.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		leo.add(leoIzq);
+		leo.add(leoArribaIzq);
+		leo.add(leoArriba);
+		leo.add(leoArribaDer);
+		leo.add(leoDer);
+		leo.add(leoAbajoDer);
+		leo.add(leoAbajo);
+		leo.add(leoAbajoIzq);
 		//FIN NPC
 		
-		npcMap.put("Monstruo", npc);
-		hulkMap.put("Hulk", hulk);
+		npcMap.put("Lucas", npc);
+		leoMap.put("Leo", leo);
 		
 		// Agrego los pj al hash
 		personaje.put("Humano", humano);

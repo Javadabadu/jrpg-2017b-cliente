@@ -19,7 +19,6 @@ import mensajeria.Comando;
 import mensajeria.Paquete;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteMensaje;
-import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import mensajeria.PaqueteUsuario;
 /**La clase Cliente tiene como función  
@@ -40,7 +39,6 @@ public class Cliente extends Thread {
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteComerciar paqueteComercio;
 	private PaqueteMensaje paqueteMensaje = new PaqueteMensaje();
-	private PaqueteNpc paqueteNpc;
 
 	// Acciones que realiza el usuario
 	private int accion;
@@ -315,15 +313,4 @@ public class Cliente extends Thread {
 	public void setPaqueteMensaje(PaqueteMensaje paqueteMensaje) {
 		this.paqueteMensaje = paqueteMensaje;
 	}
-	public PaqueteNpc getNpc() {
-		return paqueteNpc;
-	}
-	public void setNpc(PaqueteNpc paqueteNpc) {
-		this.paqueteNpc = paqueteNpc;
-	}
-
-	public void actualizarNpc(PaqueteNpc paqueteNpc) {
-	 	 this.paqueteNpc = paqueteNpc;
-	 }
-	
 }
