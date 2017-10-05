@@ -154,30 +154,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public void setInteligencia(int inteligencia) {
 		this.inteligencia = inteligencia;
 	}
-
-	//Metodos que me devuelven los atributos iniciales segun la casta.
-		public final int getFuerzaInicial(){
-			
-			if(this.getCasta().equals("Guerrero")){
-				return 15;
-			}
-			return 10;
-			
-		}
-		
-		public final int getDestrezaInicial(){
-			if(this.getCasta().equals("Asesino")){
-				return 15;
-			}
-			return 10;
-		}
-		
-		public final int getInteligenciaInicial(){
-			if(this.getCasta().equals("Hechicero")){
-				return 15;
-			}
-			return 10;
-		}
 	
 	@Override
 	public Object clone() {
@@ -306,4 +282,48 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			this.items.add(item);
 		}
 	}
+	
+	//Metodos que me devuelven los atributos iniciales segun la casta.
+		public final int getFuerzaInicial() {
+			int fuerza;
+			if (this.getCasta().equals("Guerrero")) {
+				fuerza = 15;
+			}else{
+				fuerza = 10;
+			}
+			//Obtiene los puntos de fuerza segun el nivel del personaje
+			for (Item item : items) {
+				fuerza += item.getBonusFuerza();
+			}
+			return fuerza;
+
+		}
+
+		public final int getDestrezaInicial() {
+			int destreza;
+			if (this.getCasta().equals("Guerrero")) {
+				destreza = 15;
+			}else{
+				destreza = 10;
+			}
+			//Obtiene los puntos de destreza segun el nivel del personaje
+			for (Item item : items) {
+				destreza += item.getBonusDestreza();
+			}
+			return destreza;
+		}
+
+		public final int getInteligenciaInicial() {
+			int inteligencia;
+			if (this.getCasta().equals("Hechicero")) {
+				inteligencia = 15;
+			}else{
+				inteligencia = 10;
+			}
+			//Obtiene los puntos de inteligencia segun el nivel del personaje
+			for (Item item : items) {
+				inteligencia += item.getBonusInteligencia();
+			}
+			return inteligencia;
+		}
 }

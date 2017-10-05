@@ -168,7 +168,7 @@ public class MenuAsignarSkills extends JFrame {
 		final JButton buttonReset = new JButton("Reset");
 		ImageIcon resetIcon = new ImageIcon("recursos//botonReset.png");
 		buttonReset.setIcon(resetIcon);
-		buttonReset.setEnabled(false);
+		buttonReset.setEnabled(true);
 			
 		
 		final JButton buttonMinus = new JButton("");
@@ -365,46 +365,29 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(buttonMore2);
 		
 		//Boton Reset Skills
-		
-		
-		 
 		 buttonReset.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				//Declaro valores iniciales a usar
-				
-				int fuerzaInicial = cliente.getPaquetePersonaje().getFuerzaInicial();
-				int destrezaInicial = cliente.getPaquetePersonaje().getDestrezaInicial();
-				int inteligenciaInicial = cliente.getPaquetePersonaje().getInteligenciaInicial();
-				puntosAsignar = puntosAsignarInicial * cliente.getPaquetePersonaje().getNivel();
+				//Valores iniciales a usar
+				puntosAsignar = (cliente.getPaquetePersonaje().getNivel()-1) * 3; // Multiplico por 3 ya que obtiene 3 puntos por nivel
+				puntosFuerza = cliente.getPaquetePersonaje().getFuerzaInicial();
+				puntosDestreza = cliente.getPaquetePersonaje().getDestrezaInicial();
+ 				puntosInteligencia = cliente.getPaquetePersonaje().getInteligenciaInicial();
 				
 				labelPuntos.setText(String.valueOf(puntosAsignar));
-				labelFuerza.setText(String.valueOf(fuerzaInicial));
-				labelDestreza.setText(String.valueOf(destrezaInicial));
-				labelInteligencia.setText(String.valueOf(inteligenciaInicial));
+				labelFuerza.setText(String.valueOf(puntosFuerza));
+				labelDestreza.setText(String.valueOf(puntosDestreza));
+				labelInteligencia.setText(String.valueOf(puntosInteligencia));
 				
-				//Si se usa el boton reiniciar se pone en false los menos y el aceptar
-				
-				buttonConfirm.setEnabled(false);
+				//Si se usa el boton reiniciar, se pone en false los menos 				
+				buttonConfirm.setEnabled(true);
 				buttonReset.setEnabled(false);				
 				buttonMinus.setEnabled(false);
 				buttonMinus1.setEnabled(false);
 				buttonMinus2.setEnabled(false);
 				
-				//Actualizo atributos de personaje
-				
-				cliente.getPaquetePersonaje().setFuerza(fuerzaInicial);
-				cliente.getPaquetePersonaje().setDestreza(destrezaInicial);
-				cliente.getPaquetePersonaje().setInteligencia(inteligenciaInicial);
-				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
-				try {
-					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
-				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(null, "Error al resetear stats");
-
-				}
 				JOptionPane.showMessageDialog(null,"Se han reseteado tus stats.");
 			}
 		});
