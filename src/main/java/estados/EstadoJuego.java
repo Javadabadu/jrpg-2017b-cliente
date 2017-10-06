@@ -33,6 +33,7 @@ public class EstadoJuego extends Estado {
 	private Mundo mundo;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
+	private PaqueteNpc paqueteNpc;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
 	
@@ -122,18 +123,18 @@ public class EstadoJuego extends Estado {
 		Map<Integer, PaqueteNpc> leos = new HashMap<Integer, PaqueteNpc>();
 		Map<Integer, PaqueteMovimiento> posLeos = new HashMap<Integer, PaqueteMovimiento>();
 		
-		PaqueteNpc lucas = new PaqueteNpc(0, "Lucaneitor", "Lucaneitor", 2,1, 100, 450 );
+		PaqueteNpc lucas = new PaqueteNpc(0, "Lucaneitor", "Lucaneitor", 2,1, -100	, 500 );
 		PaqueteMovimiento posLucas = new PaqueteMovimiento(0, lucas.getPosX(), lucas.getPosY());
-		PaqueteNpc lucas1 = new PaqueteNpc(1, "Lucaneitor1", "Lucaneitor", 2,1, 80, 100 );
+		PaqueteNpc lucas1 = new PaqueteNpc(1, "Lucaneitor1", "Lucaneitor", 2,1, -70, 100 );
 		PaqueteMovimiento posLucas1 = new PaqueteMovimiento(0, lucas1.getPosX(), lucas1.getPosY());
-		PaqueteNpc lucas2 = new PaqueteNpc(2, "Lucaneitor2", "Lucaneitor", 2,1, 20, 70 );
+		PaqueteNpc lucas2 = new PaqueteNpc(2, "Lucaneitor2", "Lucaneitor", 2,1, 50, 1400 );
 		PaqueteMovimiento posLucas2 = new PaqueteMovimiento(0, lucas2.getPosX(), lucas2.getPosY());
 		
-		PaqueteNpc leo = new PaqueteNpc(0, "Leo-nidas", "Leo-nidas", 2, 1, 100, 150);
+		PaqueteNpc leo = new PaqueteNpc(0, "Leo-nidas", "Leo-nidas", 2, 1, 50, 0);
 		PaqueteMovimiento posLeo = new PaqueteMovimiento(1, leo.getPosX(), leo.getPosY());
-		PaqueteNpc leo1 = new PaqueteNpc(1, "Leo-nidas", "Leo-nidas", 2, 1, 150, 230);
+		PaqueteNpc leo1 = new PaqueteNpc(1, "Leo-nidas", "Leo-nidas", 2, 1, 100, 0);
 		PaqueteMovimiento posLeo1 = new PaqueteMovimiento(1, leo1.getPosX(), leo1.getPosY());
-		PaqueteNpc leo2 = new PaqueteNpc(2, "Leo-nidas", "Leo-nidas", 2, 1, 200, 200);
+		PaqueteNpc leo2 = new PaqueteNpc(2, "Leo-nidas", "Leo-nidas", 2, 1, 150, 0);
 		PaqueteMovimiento posLeo2 = new PaqueteMovimiento(1, leo2.getPosX(), leo2.getPosY());
 		
 		
@@ -243,7 +244,10 @@ public class EstadoJuego extends Estado {
 	public boolean esEstadoDeJuego() {
 		return true;
 	}
-
+	
+	public void actualizarNpc() {
+		paqueteNpc = juego.getPaqueteNpc();
+	}
 }
 
 

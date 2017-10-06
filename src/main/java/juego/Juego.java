@@ -47,6 +47,7 @@ public class Juego implements Runnable {
 	private EscuchaMensajes escuchaMensajes;
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteMovimiento ubicacionPersonaje;
+	private PaqueteNpc	paqueteNpc;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
@@ -118,7 +119,7 @@ public class Juego implements Runnable {
 
 		// Fin de graficado de imagenes
 
-		bs.show(); // Hace visible el próximo buffer disponible
+		bs.show(); // Hace visible el prï¿½ximo buffer disponible
 		g.dispose();
 	}
 
@@ -265,6 +266,19 @@ public class Juego implements Runnable {
 
 	public void setPosNpc(Map<Integer, PaqueteMovimiento> posNpc) {
 		this.posNpc = posNpc;
+		
+	}
+
+	public PaqueteNpc getPaqueteNpc() {
+		return paqueteNpc;
+	}
+
+	public void setPaqueteNpc(PaqueteNpc paqueteNpc) {
+		this.paqueteNpc = paqueteNpc;
+	}
+	
+	public void actualizarPaqueteNpc() {
+		paqueteNpc = (PaqueteNpc) (npcs.get(paqueteNpc.getId()).clone());
 	}
 	
 	

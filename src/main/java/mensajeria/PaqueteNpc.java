@@ -1,5 +1,7 @@
 package mensajeria;
 
+import com.sun.javafx.collections.MappingChange.Map;
+
 import dominio.NonPlayableCharacter;
 
 public class PaqueteNpc {
@@ -7,7 +9,9 @@ public class PaqueteNpc {
 	private NonPlayableCharacter npc;
 	private int id;
 	private String type;
-
+	private Map<Integer, PaqueteNpc> npcs;
+	
+	
 	private int posX;
 	private int posY;
 
@@ -39,4 +43,25 @@ public class PaqueteNpc {
 		return posY;
 	}
 
+	public Map<Integer, PaqueteNpc> getNpcs() {
+		return npcs;
+	}
+
+	public void setNpcs(Map<Integer, PaqueteNpc> npcs) {
+		this.npcs = npcs;
+	}
+
+	
+	 @Override 
+	 public Object clone() { 
+		 Object obj = null; 
+		 try {
+			obj = super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	  return obj; 
+	 } 
+	
 }
