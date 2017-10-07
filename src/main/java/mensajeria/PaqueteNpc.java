@@ -1,26 +1,36 @@
 package mensajeria;
 
-import com.sun.javafx.collections.MappingChange.Map;
+import java.io.IOException;
+import java.io.Serializable;
 
 import dominio.NonPlayableCharacter;
+import estados.Estado;
 
-public class PaqueteNpc {
+public class PaqueteNpc extends Paquete implements Serializable, Cloneable{
 
 	private NonPlayableCharacter npc;
 	private int id;
 	private String type;
-	private Map<Integer, PaqueteNpc> npcs;
-	
-	
+
 	private int posX;
 	private int posY;
-
-	public PaqueteNpc(int id, String nombre, String tipo, int nivel, int dificultad, int posX, int posY) {
+	private int direccion;
+	private int frame;
+	
+	private int estado;
+	
+	public  PaqueteNpc() throws IOException {
+		estado = Estado.estadoOffline;
+	}
+	public PaqueteNpc(int id, String nombre, String tipo, int nivel, int dificultad, int posX, int posY, int estado, int direccion, int frame) {
 		this.npc = new NonPlayableCharacter(nombre, nivel, dificultad);
 		this.id = id;
 		this.type = tipo;
 		this.posX = posX;
 		this.posY = posY;
+		this.estado = estado;
+		this.direccion = direccion;
+		this.frame = frame;
 	}
 
 	public int getId() {
@@ -42,26 +52,29 @@ public class PaqueteNpc {
 	public int getPosY() {
 		return posY;
 	}
-
-	public Map<Integer, PaqueteNpc> getNpcs() {
-		return npcs;
+	
+	public int getEstado() {
+		return estado;
+	}
+	
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+	
+	public int getDireccion() {
+		return direccion;
 	}
 
-	public void setNpcs(Map<Integer, PaqueteNpc> npcs) {
-		this.npcs = npcs;
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
 	}
 
-	
-	 @Override 
-	 public Object clone() { 
-		 Object obj = null; 
-		 try {
-			obj = super.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-	  return obj; 
-	 } 
-	
+	public int getFrame() {
+		return frame;
+	}
+
+	public void setFrame(int frame) {
+		this.frame = frame;
+	}
+
 }

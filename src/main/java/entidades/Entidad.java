@@ -294,8 +294,8 @@ public class Entidad {
 					
 					//tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
 					
-					tilePersonajes = Mundo.mouseATile(100,450);	//lucas
-					tilePersonajes = Mundo.mouseATile(80,100);	//lucas1
+					//tilePersonajes = Mundo.mouseATile(100,450);	//lucas
+					//tilePersonajes = Mundo.mouseATile(80,100);	//lucas1
 					
 					
 					tilePersonajes = Mundo.mouseATile(20, 70);		//lucas1
