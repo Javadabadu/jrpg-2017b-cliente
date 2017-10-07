@@ -130,11 +130,19 @@ public class EstadoJuego extends Estado {
 		 		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
 		 				(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
 		 				npcs.get(actual.getId()).getNombre());	
-		 		
-		 		g.drawImage(Recursos.npc.get(actual.getDireccion())[actual.getFrame()],
-		 				(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
-		 				(int) (actual.getPosY() - juego.getCamara().getyOffset()),
-		 				64, 64, null);
+		 		if (actual.getType().equals(PaqueteNpc.LUCANEITOR)) {
+		 			g.drawImage(Recursos.npc.get(actual.getDireccion())[actual.getFrame()],
+			 				(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
+			 				(int) (actual.getPosY() - juego.getCamara().getyOffset()),
+			 				64, 64, null);
+					}
+				
+				if (actual.getType().equals(PaqueteNpc.LEONIDAS)) {
+		 			g.drawImage(Recursos.leo.get(actual.getDireccion())[actual.getFrame()],
+			 				(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
+			 				(int) (actual.getPosY() - juego.getCamara().getyOffset()),
+			 				64, 64, null);
+					}
 				}
 			}
 			

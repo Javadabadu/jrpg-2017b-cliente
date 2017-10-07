@@ -7,7 +7,10 @@ import dominio.NonPlayableCharacter;
 import estados.Estado;
 
 public class PaqueteNpc extends Paquete implements Serializable, Cloneable{
-
+	
+	public static final String LUCANEITOR = "Lucaneitor";
+	public static final String LEONIDAS = "Leo-nidas";
+	
 	private NonPlayableCharacter npc;
 	private int id;
 	private String type;
