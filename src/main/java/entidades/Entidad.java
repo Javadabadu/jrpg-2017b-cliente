@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import com.google.gson.Gson;
 
 import chat.VentanaContactos;
-import estados.Estado;
 import frames.MenuEscape;
 import frames.MenuInventario;
 import interfaz.MenuInfoPersonaje;
@@ -26,7 +25,6 @@ import mensajeria.PaquetePersonaje;
 import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
-import mundo.Tile;
 import recursos.Recursos;
 /**Clase Entidad
  */
@@ -54,6 +52,7 @@ public class Entidad {
 	private int []posMouseRecorrido;
 	private int []posMouse;
 	private int[] tile;
+	private PaquetePersonaje paquete;
 
 	// Movimiento Actual
 	private static final int horizontalDer = 4;
@@ -297,8 +296,19 @@ public class Entidad {
 					
 					//tilePersonajes = Mundo.mouseATile(100,450);	//lucas
 					//tilePersonajes = Mundo.mouseATile(80,100);	//lucas1
-					tilePersonajes = Mundo.mouseATile(20, 70);		//lucas2
-					//PaquetePersonaje paquete = new PaquetePersonaje();
+					
+					
+					tilePersonajes = Mundo.mouseATile(20, 70);		//lucas1
+					try {
+						paquete = new PaquetePersonaje();
+						paquete.setEstado(1);
+						paquete.setMapa(1);
+						paquete.setNivel(3);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					//tilePersonajes = Mundo.mouseATile(100, 150);	//leo
 					//tilePersonajes = Mundo.mouseATile(150,230);	//leo2
 					//tilePersonajes = Mundo.mouseATile(200,200);	//leo3
@@ -347,7 +357,7 @@ public class Entidad {
 								////////////////////////////////////
 								// HARDCODEADO PAQUETE DE PERSONAJE, PARA QUE MUESTRE BIEN, HASTA QUE ESTE EN EL SERVIDOR.
 								juego.getEstadoJuego().setHaySolicitud(true
-										, 
+										, paquete
 										, MenuInfoPersonaje.
 										menuBatallar);		
 								*/

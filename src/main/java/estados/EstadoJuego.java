@@ -125,7 +125,7 @@ public class EstadoJuego extends Estado {
 		
 		PaqueteNpc lucas = new PaqueteNpc(0, "Lucaneitor", "Lucaneitor", 2,1, -100	, 500 );
 		PaqueteMovimiento posLucas = new PaqueteMovimiento(0, lucas.getPosX(), lucas.getPosY());
-		PaqueteNpc lucas1 = new PaqueteNpc(1, "Lucaneitor1", "Lucaneitor", 2,1, -70, 100 );
+		PaqueteNpc lucas1 = new PaqueteNpc(1, "Lucaneitor1", "Lucaneitor", 2,1, 20, 70 );
 		PaqueteMovimiento posLucas1 = new PaqueteMovimiento(0, lucas1.getPosX(), lucas1.getPosY());
 		PaqueteNpc lucas2 = new PaqueteNpc(2, "Lucaneitor2", "Lucaneitor", 2,1, 50, 1400 );
 		PaqueteMovimiento posLucas2 = new PaqueteMovimiento(0, lucas2.getPosX(), lucas2.getPosY());
