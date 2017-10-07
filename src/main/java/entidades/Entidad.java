@@ -22,9 +22,11 @@ import juego.Pantalla;
 import mensajeria.PaqueteBatalla;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaquetePersonaje;
 import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
+import mundo.Tile;
 import recursos.Recursos;
 /**Clase Entidad
  */
@@ -268,25 +270,62 @@ public class Entidad {
 					juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
 				}
 			} else {
-				Iterator<Integer> it = juego.getUbicacionPersonajes().
-						keySet().iterator();
-				int key;
+				Iterator<Integer> it = juego.getUbicacionPersonajes().keySet().iterator();
+				int key;	//Key de los personajes que hay en el mapa.
 				int []tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - 
 						xOffset,posMouse[1] + juego.getCamara().getyOffset() - yOffset);
 				PaqueteMovimiento actual;
-
+				
 				while (it.hasNext()) {
-					key = it.next();
-					actual = juego.getUbicacionPersonajes().get(key);
-					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
-					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
-							&& juego.getPersonajesConectados().get(actual.
-									getIdPersonaje()) != null
-							&& juego.getPersonajesConectados().get(actual.
-									getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+					key = it.next();	//Obtiene de una en una las key de los personajes en el mapa.
+					actual = juego.getUbicacionPersonajes().get(key);	//Obtiene el personaje Correspondiente de la coleccion (personaje del jugador, npc, otro jugador).
+					
+					
+					
+					
+					
+					
+					////////////////////////////////////
+					// HARDCODEADO COORDENADAS NPC, HASTA QUE SE ENCUENTRE DESARROLLADO EN EL SERVIDOR.
+					// DESCOMENTAR: "tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());" 
+					// PARA OPDER OBTENER LAS COORDENADAS DE LOS NPC DESDE EL SERVIDOR.
 
-						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == 
-								tilePersonajes[1]) {
+					
+					
+					
+					//tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
+					
+					//tilePersonajes = Mundo.mouseATile(100,450);	//lucas
+					//tilePersonajes = Mundo.mouseATile(80,100);	//lucas1
+					tilePersonajes = Mundo.mouseATile(20, 70);		//lucas2
+					//PaquetePersonaje paquete = new PaquetePersonaje();
+					//tilePersonajes = Mundo.mouseATile(100, 150);	//leo
+					//tilePersonajes = Mundo.mouseATile(150,230);	//leo2
+					//tilePersonajes = Mundo.mouseATile(200,200);	//leo3
+					
+					
+
+					////////////////////////////////////
+					
+					
+					////////////////////////////////////
+					// HARDCODEADO PERSONAJE ID, HASTA QUE SE ENCUENTRE DESARROLLADO EN EL SERVIDOR.
+					// "getPersonajesConectados" DEVUELVE VACIO, PORQUE FALTAN LOS PERSONAJES NPC.
+					// Y DEVUELVA LA POSICION Y EL ID DEL NPC.
+					
+					
+					/*
+					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
+							&& juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
+							&& juego.getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+					*/
+					
+					////////////////////////////////////
+						
+						
+						
+						// Compara si las coordenadas que se clickearon coinciden con algun personaje, sea NPC u otro personaje.
+						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
 							idEnemigo = actual.getIdPersonaje();
 							float XY[] = Mundo.isoA2D(x,y);
 							// ESTA ESTE PARA NO MOVERME HASTA EL LUGAR.
@@ -299,13 +338,23 @@ public class Entidad {
 							} else {
 								// SI ESTOY DENTRO DE LA ZONA DE BATALLA SETEO QUE SE ABRA EL MENU
 								// DE BATALLA
+								
 								juego.getEstadoJuego().setHaySolicitud(true,juego.
 										getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.
+										menuBatallar);	
+								
+								/*
+								////////////////////////////////////
+								// HARDCODEADO PAQUETE DE PERSONAJE, PARA QUE MUESTRE BIEN, HASTA QUE ESTE EN EL SERVIDOR.
+								juego.getEstadoJuego().setHaySolicitud(true
+										, 
+										, MenuInfoPersonaje.
 										menuBatallar);		
+								*/
 							}
 							juego.getHandlerMouse().setNuevoClick(false);
 						}
-					}
+					//}
 				}
 			}
 		}
