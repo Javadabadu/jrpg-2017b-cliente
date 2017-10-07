@@ -89,6 +89,9 @@ public class Recursos {
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
 	
+	//Inicio NPCS
+	
+	
 
 	// Se cargan todos los recursos del juego una sola vez al inicio
 

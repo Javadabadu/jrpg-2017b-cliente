@@ -25,6 +25,10 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
+	private final int fuerzaInicial = 10;
+	private final int destrezaInicial = 10;
+	private final int inteligenciaInicial = 10;
+	
 	private ArrayList<Item> items = new ArrayList<Item>();
 	
 	public PaquetePersonaje() throws IOException {
@@ -150,7 +154,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public void setInteligencia(int inteligencia) {
 		this.inteligencia = inteligencia;
 	}
-
+	
 	@Override
 	public Object clone() {
 		Object obj = null;
@@ -278,4 +282,56 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			this.items.add(item);
 		}
 	}
+	
+	//Metodos que me devuelven los atributos iniciales segun la casta.
+		public final int getFuerzaInicial() {
+			int fuerza;
+			if (this.getCasta().equals("Guerrero")) {
+				fuerza = 15;
+			}else{
+				fuerza = 10;
+			}
+			//Obtiene los puntos de fuerza segun el nivel del personaje
+			for (Item item : items) {
+				fuerza += item.getBonusFuerza();
+			}
+			return fuerza;
+
+		}
+
+		public final int getDestrezaInicial() {
+			int destreza;
+			if (this.getCasta().equals("Asesino")) {
+				destreza = 15;
+			}else{
+				destreza = 10;
+			}
+			//Obtiene los puntos de destreza segun el nivel del personaje
+			for (Item item : items) {
+				destreza += item.getBonusDestreza();
+			}
+			return destreza;
+		}
+
+		public final int getInteligenciaInicial() {
+			int inteligencia;
+			if (this.getCasta().equals("Hechicero")) {
+				inteligencia = 15;
+			}else{
+				inteligencia = 10;
+			}
+			//Obtiene los puntos de inteligencia segun el nivel del personaje
+			for (Item item : items) {
+				inteligencia += item.getBonusInteligencia();
+			}
+			return inteligencia;
+		}
+		
+		public final int getPuntosAsignar(){
+			int puntosAsignar = nivel *3;
+			int totalPuntosInicial = this.getFuerzaInicial()+this.getDestrezaInicial()+this.getInteligenciaInicial();
+			int totalPuntosActual = this.getFuerza()+this.getDestreza()+this.getInteligencia();
+			
+			return puntosAsignar - (totalPuntosActual - totalPuntosInicial);
+		}
 }
