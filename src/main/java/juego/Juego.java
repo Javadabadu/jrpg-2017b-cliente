@@ -47,7 +47,6 @@ public class Juego implements Runnable {
 	private EscuchaMensajes escuchaMensajes;
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteMovimiento ubicacionPersonaje;
-	private PaqueteNpc	paqueteNpc;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
@@ -83,6 +82,10 @@ public class Juego implements Runnable {
 	}
 
 	public void iniciar() { // Carga lo necesario para iniciar el juego
+		
+		npcs = new HashMap<Integer, PaqueteNpc>();
+		posNpc  = new HashMap<>();
+		
 		pantalla = new Pantalla(NOMBRE, ANCHO, ALTO, cliente);
 
 		pantalla.getCanvas().addMouseListener(handlerMouse);
@@ -90,6 +93,7 @@ public class Juego implements Runnable {
 		camara = new Camara(this, 0, 0);
 
 		Personaje.cargarTablaNivel();
+		
 	}
 
 	private void actualizar() { // Actualiza los objetos y sus posiciones
@@ -266,19 +270,6 @@ public class Juego implements Runnable {
 
 	public void setPosNpc(Map<Integer, PaqueteMovimiento> posNpc) {
 		this.posNpc = posNpc;
-		
-	}
-
-	public PaqueteNpc getPaqueteNpc() {
-		return paqueteNpc;
-	}
-
-	public void setPaqueteNpc(PaqueteNpc paqueteNpc) {
-		this.paqueteNpc = paqueteNpc;
-	}
-	
-	public void actualizarPaqueteNpc() {
-		paqueteNpc = (PaqueteNpc) (npcs.get(paqueteNpc.getId()).clone());
 	}
 	
 	

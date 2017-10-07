@@ -13,6 +13,7 @@ import mensajeria.Comando;
 import mensajeria.Paquete;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
+import mensajeria.PaqueteNpc;
 /**La clase EscuchaMensajes tiene como función  
  * esuchar los mensajes que se enviaran
  * al servidor.
@@ -45,7 +46,8 @@ public class EscuchaMensajes extends Thread {
 			ComandosEscucha comand;
 			juego.setPersonajesConectados(new HashMap<Integer, PaquetePersonaje>());
 			juego.setUbicacionPersonajes(new HashMap<Integer, PaqueteMovimiento>());
-
+			juego.setNpcs(new HashMap<Integer, PaqueteNpc>());
+			
 			while (true) {
 
 				String objetoLeido = (String) entrada.readObject();

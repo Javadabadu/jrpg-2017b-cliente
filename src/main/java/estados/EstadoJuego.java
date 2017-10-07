@@ -33,7 +33,6 @@ public class EstadoJuego extends Estado {
 	private Mundo mundo;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
-	private PaqueteNpc paqueteNpc;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
 	
@@ -114,87 +113,113 @@ public class EstadoJuego extends Estado {
 	}
 	
 	public void graficarNpc(Graphics g){
-		Integer i = 0;
-		Integer j = 0;
-		
-		Map<Integer, PaqueteNpc> npcs = new HashMap<Integer, PaqueteNpc>();
-		Map<Integer, PaqueteMovimiento> posNpc = new HashMap<Integer, PaqueteMovimiento>();
-		
-		Map<Integer, PaqueteNpc> leos = new HashMap<Integer, PaqueteNpc>();
-		Map<Integer, PaqueteMovimiento> posLeos = new HashMap<Integer, PaqueteMovimiento>();
-		
-		PaqueteNpc lucas = new PaqueteNpc(0, "Lucaneitor", "Lucaneitor", 2,1, -100	, 500 );
-		PaqueteMovimiento posLucas = new PaqueteMovimiento(0, lucas.getPosX(), lucas.getPosY());
-		PaqueteNpc lucas1 = new PaqueteNpc(1, "Lucaneitor1", "Lucaneitor", 2,1, 20, 70 );
-		PaqueteMovimiento posLucas1 = new PaqueteMovimiento(0, lucas1.getPosX(), lucas1.getPosY());
-		PaqueteNpc lucas2 = new PaqueteNpc(2, "Lucaneitor2", "Lucaneitor", 2,1, 50, 1400 );
-		PaqueteMovimiento posLucas2 = new PaqueteMovimiento(0, lucas2.getPosX(), lucas2.getPosY());
-		
-		PaqueteNpc leo = new PaqueteNpc(0, "Leo-nidas", "Leo-nidas", 2, 1, 50, 0);
-		PaqueteMovimiento posLeo = new PaqueteMovimiento(1, leo.getPosX(), leo.getPosY());
-		PaqueteNpc leo1 = new PaqueteNpc(1, "Leo-nidas", "Leo-nidas", 2, 1, 100, 0);
-		PaqueteMovimiento posLeo1 = new PaqueteMovimiento(1, leo1.getPosX(), leo1.getPosY());
-		PaqueteNpc leo2 = new PaqueteNpc(2, "Leo-nidas", "Leo-nidas", 2, 1, 150, 0);
-		PaqueteMovimiento posLeo2 = new PaqueteMovimiento(1, leo2.getPosX(), leo2.getPosY());
-		
-		
-		
-		npcs.put(i, lucas);
-		posNpc.put(i, posLucas);
-		npcs.put(++i, lucas1);
-		posNpc.put(i, posLucas1);
-		npcs.put(++i, lucas2);
-		posNpc.put(i, posLucas2);
-		
-		leos.put(j, leo);
-		posLeos.put(j, posLeo);
-		leos.put(++j, leo1);
-		posLeos.put(j, posLeo1);
-		leos.put(++j, leo2);
-		posLeos.put(j, posLeo2);
-		
-		juego.setPosNpc(posNpc);
-		posNpc = juego.getPosNpc();
-		
-		juego.setPosNpc(posLeos);
-		posLeos = juego.getPosNpc();
-		
-		Iterator<Integer> itNpc = npcs.keySet().iterator();
-		int key;
-		PaqueteMovimiento actual;
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
-		while (itNpc.hasNext()) {				
-			key = itNpc.next();
-			actual = posNpc.get(key);
-	 		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
-	 				(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
-	 				npcs.get(actual.getIdPersonaje()).getNombre());	
-	 		
-	 		g.drawImage(Recursos.npc.get(actual.getDireccion())[actual.getFrame()],
-	 				(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
-	 				(int) (actual.getPosY() - juego.getCamara().getyOffset()),
-	 				64, 64, null);
-	 	
+		if (juego.getNpcs() != null) {
+			//Obtengo los NPC y su posicion que se crearon cuando inicio el juego
+			npcs = new HashMap<Integer, PaqueteNpc>(juego.getNpcs());
+			posNpc = new HashMap<Integer, PaqueteMovimiento>(juego.getPosNpc());
+			
+			Iterator<Integer> itNpc = npcs.keySet().iterator();
+			int key;
+			PaqueteNpc actual;
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+			while (itNpc.hasNext()) {				
+				key = itNpc.next();
+				actual = npcs.get(key);
+				if (actual != null && npcs.get(actual.getId()).getEstado() == Estado.estadoJuego){
+		 		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
+		 				(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
+		 				npcs.get(actual.getId()).getNombre());	
+		 		
+		 		g.drawImage(Recursos.npc.get(actual.getDireccion())[actual.getFrame()],
+		 				(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
+		 				(int) (actual.getPosY() - juego.getCamara().getyOffset()),
+		 				64, 64, null);
+				}
+			}
+			
 		}
-		
-		Iterator<Integer> itLeo = leos.keySet().iterator();
-		int key1;
-		PaqueteMovimiento actual1;
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
-		while (itLeo.hasNext()) {				
-			key1 = itLeo.next();
-			actual1 = posLeos.get(key1);
-	 		Pantalla.centerString(g, new Rectangle((int) (actual1.getPosX() - juego.getCamara().getxOffset() + 32),
-	 				(int) (actual1.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
-	 				leos.get(actual1.getIdPersonaje()).getNombre());	
-	 		
-	 			 		g.drawImage(Recursos.leo.get(actual1.getDireccion())[actual1.getFrame()],
-	 				(int) (actual1.getPosX() - juego.getCamara().getxOffset() ),
-	 				(int) (actual1.getPosY() - juego.getCamara().getyOffset()),
-	 				64, 64, null);
-		}
+//		Integer i = 0;
+//		Integer j = 0;
+//		
+//		Map<Integer, PaqueteNpc> npcs = new HashMap<Integer, PaqueteNpc>();
+//		Map<Integer, PaqueteMovimiento> posNpc = new HashMap<Integer, PaqueteMovimiento>();
+//		
+//		Map<Integer, PaqueteNpc> leos = new HashMap<Integer, PaqueteNpc>();
+//		Map<Integer, PaqueteMovimiento> posLeos = new HashMap<Integer, PaqueteMovimiento>();
+//		
+//		PaqueteNpc lucas = new PaqueteNpc(0, "Lucaneitor", "Lucaneitor", 2,1, 100, 450, Estado.estadoJuego );
+//		PaqueteMovimiento posLucas = new PaqueteMovimiento(0, lucas.getPosX(), lucas.getPosY());
+//		PaqueteNpc lucas1 = new PaqueteNpc(1, "Lucaneitor1", "Lucaneitor", 2,1, 80, 100, Estado.estadoJuego );
+//		PaqueteMovimiento posLucas1 = new PaqueteMovimiento(0, lucas1.getPosX(), lucas1.getPosY());
+//		PaqueteNpc lucas2 = new PaqueteNpc(2, "Lucaneitor2", "Lucaneitor", 2,1, 20, 70, Estado.estadoJuego );
+//		PaqueteMovimiento posLucas2 = new PaqueteMovimiento(0, lucas2.getPosX(), lucas2.getPosY());
+//		
+//		PaqueteNpc leo = new PaqueteNpc(0, "Leo-nidas", "Leo-nidas", 2, 1, 100, 150, Estado.estadoJuego);
+//		PaqueteMovimiento posLeo = new PaqueteMovimiento(1, leo.getPosX(), leo.getPosY());
+//		PaqueteNpc leo1 = new PaqueteNpc(1, "Leo-nidas", "Leo-nidas", 2, 1, 150, 230, Estado.estadoJuego);
+//		PaqueteMovimiento posLeo1 = new PaqueteMovimiento(1, leo1.getPosX(), leo1.getPosY());
+//		PaqueteNpc leo2 = new PaqueteNpc(2, "Leo-nidas", "Leo-nidas", 2, 1, 200, 200, Estado.estadoJuego);
+//		PaqueteMovimiento posLeo2 = new PaqueteMovimiento(1, leo2.getPosX(), leo2.getPosY());
+//		
+//		
+//		
+//		npcs.put(i, lucas);
+//		posNpc.put(i, posLucas);
+//		npcs.put(++i, lucas1);
+//		posNpc.put(i, posLucas1);
+//		npcs.put(++i, lucas2);
+//		posNpc.put(i, posLucas2);
+//		
+//		leos.put(j, leo);
+//		posLeos.put(j, posLeo);
+//		leos.put(++j, leo1);
+//		posLeos.put(j, posLeo1);
+//		leos.put(++j, leo2);
+//		posLeos.put(j, posLeo2);
+//		
+//		juego.setPosNpc(posNpc);
+//		posNpc = juego.getPosNpc();
+//		
+//		juego.setPosNpc(posLeos);
+//		posLeos = juego.getPosNpc();
+//		
+//		Iterator<Integer> itNpc = npcs.keySet().iterator();
+//		int key;
+//		PaqueteMovimiento actual;
+//		g.setColor(Color.WHITE);
+//		g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+//		while (itNpc.hasNext()) {				
+//			key = itNpc.next();
+//			actual = posNpc.get(key);
+//	 		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
+//	 				(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
+//	 				npcs.get(actual.getIdPersonaje()).getNombre());	
+//	 		
+//	 		g.drawImage(Recursos.npc.get(actual.getDireccion())[actual.getFrame()],
+//	 				(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
+//	 				(int) (actual.getPosY() - juego.getCamara().getyOffset()),
+//	 				64, 64, null);
+//	 	
+//		}
+//		
+//		Iterator<Integer> itLeo = leos.keySet().iterator();
+//		int key1;
+//		PaqueteMovimiento actual1;
+//		g.setColor(Color.WHITE);
+//		g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+//		while (itLeo.hasNext()) {				
+//			key1 = itLeo.next();
+//			actual1 = posLeos.get(key1);
+//	 		Pantalla.centerString(g, new Rectangle((int) (actual1.getPosX() - juego.getCamara().getxOffset() + 32),
+//	 				(int) (actual1.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
+//	 				leos.get(actual1.getIdPersonaje()).getNombre());	
+//	 		
+//	 			 		g.drawImage(Recursos.leo.get(actual1.getDireccion())[actual1.getFrame()],
+//	 				(int) (actual1.getPosX() - juego.getCamara().getxOffset() ),
+//	 				(int) (actual1.getPosY() - juego.getCamara().getyOffset()),
+//	 				64, 64, null);
+//		}
 		
 	}
 			 		
@@ -244,10 +269,7 @@ public class EstadoJuego extends Estado {
 	public boolean esEstadoDeJuego() {
 		return true;
 	}
-	
-	public void actualizarNpc() {
-		paqueteNpc = juego.getPaqueteNpc();
-	}
+
 }
 
 
