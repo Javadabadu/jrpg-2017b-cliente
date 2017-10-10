@@ -9,7 +9,7 @@ import estados.Estado;
 public class PaqueteNpc extends Paquete implements Serializable, Cloneable{
 	
 	public static final String LUCANEITOR = "Lucaneitor";
-	public static final String LEONIDAS = "Leo-nidas";
+	public static final String LEONIDAS = "Leonidas";
 	
 	private NonPlayableCharacter npc;
 	private int id;

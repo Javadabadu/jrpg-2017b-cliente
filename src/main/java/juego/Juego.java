@@ -52,7 +52,6 @@ public class Juego implements Runnable {
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
 	private Map<Integer, PaqueteNpc> npcs;
-	private Map<Integer, PaqueteMovimiento> posNpc;
 
 	private CargarRecursos cargarRecursos;
 
@@ -82,10 +81,7 @@ public class Juego implements Runnable {
 	}
 
 	public void iniciar() { // Carga lo necesario para iniciar el juego
-		
-		npcs = new HashMap<Integer, PaqueteNpc>();
-		posNpc  = new HashMap<>();
-		
+				
 		pantalla = new Pantalla(NOMBRE, ANCHO, ALTO, cliente);
 
 		pantalla.getCanvas().addMouseListener(handlerMouse);
@@ -263,15 +259,6 @@ public class Juego implements Runnable {
 	public void setNpcs(Map<Integer, PaqueteNpc> npcs) {
 		this.npcs = npcs;
 	}
-
-	public Map<Integer, PaqueteMovimiento> getPosNpc() {
-		return posNpc;
-	}
-
-	public void setPosNpc(Map<Integer, PaqueteMovimiento> posNpc) {
-		this.posNpc = posNpc;
-	}
-	
 	
 }
 

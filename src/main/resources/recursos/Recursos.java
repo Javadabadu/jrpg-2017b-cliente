@@ -62,6 +62,29 @@ public class Recursos {
 	private static BufferedImage[] elfoAbajoDer;
 	private static BufferedImage[] elfoAbajo;
 	private static BufferedImage[] elfoAbajoIzq;
+	
+	//Personajes NPC
+	private static SpriteSheet spriteLucaneitor;
+	public static LinkedList<BufferedImage[]> lucaneitor = new LinkedList<>();
+	private static BufferedImage[] lucaneitorIzq;
+	private static BufferedImage[] lucaneitorArribaIzq;
+	private static BufferedImage[] lucaneitorArriba;
+	private static BufferedImage[] lucaneitorArribaDer;
+	private static BufferedImage[] lucaneitorDer;
+	private static BufferedImage[] lucaneitorAbajoDer;
+	private static BufferedImage[] lucaneitorAbajo;
+	private static BufferedImage[] lucaneitorAbajoIzq;
+	
+	private static SpriteSheet spriteLeonidas;
+	public static LinkedList<BufferedImage[]> leonidas = new LinkedList<>();
+	private static BufferedImage[] leonidasIzq;
+	private static BufferedImage[] leonidasArribaIzq;
+	private static BufferedImage[] leonidasArriba;
+	private static BufferedImage[] leonidasArribaDer;
+	private static BufferedImage[] leonidasDer;
+	private static BufferedImage[] leonidasAbajoDer;
+	private static BufferedImage[] leonidasAbajo;
+	private static BufferedImage[] leonidasAbajoIzq;
 	// Fin Personajes
 
 	// Entorno
@@ -91,35 +114,6 @@ public class Recursos {
 	public static BufferedImage chat;
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
-	
-	//NPC
-	public static Map<String, LinkedList<BufferedImage[]>> npcMap = new HashMap<>();
-	
-	private static SpriteSheet spriteNpc;
-	public static LinkedList<BufferedImage[]> npc = new LinkedList<>();
-	private static BufferedImage[] npcIzq;
-	private static BufferedImage[] npcArribaIzq;
-	private static BufferedImage[] npcArriba;
-	private static BufferedImage[] npcArribaDer;
-	private static BufferedImage[] npcDer;
-	private static BufferedImage[] npcAbajoDer;
-	private static BufferedImage[] npcAbajo;
-	private static BufferedImage[] npcAbajoIzq;
-	
-	public static Map<String, LinkedList<BufferedImage[]>> leoMap = new HashMap<>();
-	
-	private static SpriteSheet spriteLeo;
-	public static LinkedList<BufferedImage[]> leo = new LinkedList<>();
-	private static BufferedImage[] leoIzq;
-	private static BufferedImage[] leoArribaIzq;
-	private static BufferedImage[] leoArriba;
-	private static BufferedImage[] leoArribaDer;
-	private static BufferedImage[] leoDer;
-	private static BufferedImage[] leoAbajoDer;
-	private static BufferedImage[] leoAbajo;
-	private static BufferedImage[] leoAbajoIzq;
-
-	//FIN NPC
 	
 	// Se cargan todos los recursos del juego una sola vez al inicio
 
@@ -361,155 +355,154 @@ public class Recursos {
 		
 		//INICIO NPC
 		
-		spriteNpc = new SpriteSheet(CargadorImagen.cargarImagen("/Lucas.png"));
+		spriteLucaneitor = new SpriteSheet(CargadorImagen.cargarImagen("/Lucas.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-		npcIzq = new BufferedImage[4];
-		npcArribaIzq = new BufferedImage[4];
-		npcArriba = new BufferedImage[4];
-		npcArribaDer = new BufferedImage[4];
-		npcDer = new BufferedImage[4];
-		npcAbajoDer = new BufferedImage[4];
-		npcAbajo = new BufferedImage[4];
-		npcAbajoIzq = new BufferedImage[4];
+		lucaneitorIzq = new BufferedImage[4];
+		lucaneitorArribaIzq = new BufferedImage[4];
+		lucaneitorArriba = new BufferedImage[4];
+		lucaneitorArribaDer = new BufferedImage[4];
+		lucaneitorDer = new BufferedImage[4];
+		lucaneitorAbajoDer = new BufferedImage[4];
+		lucaneitorAbajo = new BufferedImage[4];
+		lucaneitorAbajoIzq = new BufferedImage[4];
 
 		for (int i = 0; i < 4; i++) {
-			npcIzq[i] = spriteNpc.getTile(ANCHO * i, 0, ANCHO, ALTO);
+			lucaneitorIzq[i] = spriteLucaneitor.getTile(ANCHO * i, 0, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			npcArribaIzq[i] = spriteNpc.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+			lucaneitorArribaIzq[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			npcArriba[i] = spriteNpc.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+			lucaneitorArriba[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			npcArribaDer[i] = spriteNpc.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+			lucaneitorArribaDer[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			npcDer[i] = spriteNpc.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+			lucaneitorDer[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			npcAbajoDer[i] = spriteNpc.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+			lucaneitorAbajoDer[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			npcAbajo[i] = spriteNpc.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+			lucaneitorAbajo[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			npcAbajoIzq[i] = spriteNpc.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+			lucaneitorAbajoIzq[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-		npc.add(npcIzq);
-		npc.add(npcArribaIzq);
-		npc.add(npcArriba);
-		npc.add(npcArribaDer);
-		npc.add(npcDer);
-		npc.add(npcAbajoDer);
-		npc.add(npcAbajo);
-		npc.add(npcAbajoIzq);
+		lucaneitor.add(lucaneitorIzq);
+		lucaneitor.add(lucaneitorArribaIzq);
+		lucaneitor.add(lucaneitorArriba);
+		lucaneitor.add(lucaneitorArribaDer);
+		lucaneitor.add(lucaneitorDer);
+		lucaneitor.add(lucaneitorAbajoDer);
+		lucaneitor.add(lucaneitorAbajo);
+		lucaneitor.add(lucaneitorAbajoIzq);
 
 		
-		spriteLeo = new SpriteSheet(CargadorImagen.cargarImagen("/Leo.png"));
+		spriteLeonidas = new SpriteSheet(CargadorImagen.cargarImagen("/Leo.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-		leoIzq = new BufferedImage[4];
-		leoArribaIzq = new BufferedImage[4];
-		leoArriba = new BufferedImage[4];
-		leoArribaDer = new BufferedImage[4];
-		leoDer = new BufferedImage[4];
-		leoAbajoDer = new BufferedImage[4];
-		leoAbajo = new BufferedImage[4];
-		leoAbajoIzq = new BufferedImage[4];
+		leonidasIzq = new BufferedImage[4];
+		leonidasArribaIzq = new BufferedImage[4];
+		leonidasArriba = new BufferedImage[4];
+		leonidasArribaDer = new BufferedImage[4];
+		leonidasDer = new BufferedImage[4];
+		leonidasAbajoDer = new BufferedImage[4];
+		leonidasAbajo = new BufferedImage[4];
+		leonidasAbajoIzq = new BufferedImage[4];
 
 		for (int i = 0; i < 4; i++) {
-			leoIzq[i] = spriteLeo.getTile(ANCHO * i, 0, ANCHO, ALTO);
+			leonidasIzq[i] = spriteLeonidas.getTile(ANCHO * i, 0, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			leoArribaIzq[i] = spriteLeo.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+			leonidasArribaIzq[i] = spriteLeonidas.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			leoArriba[i] = spriteLeo.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+			leonidasArriba[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			leoArribaDer[i] = spriteLeo.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+			leonidasArribaDer[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			leoDer[i] = spriteLeo.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+			leonidasDer[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			leoAbajoDer[i] = spriteLeo.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+			leonidasAbajoDer[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			leoAbajo[i] = spriteLeo.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+			leonidasAbajo[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
 		for (int i = 0; i < 4; i++) {
-			leoAbajoIzq[i] = spriteLeo.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+			leonidasAbajoIzq[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
 		}
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
-		leo.add(leoIzq);
-		leo.add(leoArribaIzq);
-		leo.add(leoArriba);
-		leo.add(leoArribaDer);
-		leo.add(leoDer);
-		leo.add(leoAbajoDer);
-		leo.add(leoAbajo);
-		leo.add(leoAbajoIzq);
+		leonidas.add(leonidasIzq);
+		leonidas.add(leonidasArribaIzq);
+		leonidas.add(leonidasArriba);
+		leonidas.add(leonidasArribaDer);
+		leonidas.add(leonidasDer);
+		leonidas.add(leonidasAbajoDer);
+		leonidas.add(leonidasAbajo);
+		leonidas.add(leonidasAbajoIzq);
 		//FIN NPC
-		
-		npcMap.put("Lucas", npc);
-		leoMap.put("Leo", leo);
-		
+				
 		// Agrego los pj al hash
 		personaje.put("Humano", humano);
 		personaje.put("Orco", orco);
 		personaje.put("Elfo", elfo);
+		personaje.put("Lucaneitor", lucaneitor);
+		personaje.put("Leonidas", leonidas);
 
 		// Inicio Entorno
 		cesped = CargadorImagen.cargarImagen("/Cesped.png");
