@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuInfoPersonaje;
+import interfaz.MenuNPC;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
@@ -34,16 +35,17 @@ public class EstadoJuego extends Estado {
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private boolean haySolicitud;
+	private boolean haySolicitudNPC;
 	private int tipoSolicitud;
 	
 	private Map<Integer, PaqueteNpc> npcs;
-	private Map<Integer, PaqueteMovimiento> posNpc;
 	
 	private final Gson gson = new Gson();
 
 	private BufferedImage miniaturaPersonaje;
 
 	MenuInfoPersonaje menuEnemigo;
+	MenuNPC menuEnemigoNPC;
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
@@ -59,7 +61,7 @@ public class EstadoJuego extends Estado {
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexi�n con el servidor al ingresar al mundo");
+			JOptionPane.showMessageDialog(null, "Fallo la conexion con el servidor al ingresar al mundo");
 		}
 	}
 
@@ -85,6 +87,8 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.chat, 3, 524, 102, 35, null);
 		if(haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
+		if(haySolicitudNPC)
+			menuEnemigoNPC.graficar(g, tipoSolicitud);
 
 	}
 	
@@ -188,7 +192,21 @@ public class EstadoJuego extends Estado {
 	public boolean esEstadoDeJuego() {
 		return true;
 	}
+	
+	public void setHaySolicitudNPC(boolean b, PaqueteNpc enemigo, int tipoSolicitud) {
+		haySolicitudNPC = b;
+		// menu que mostrara al enemigo
+		menuEnemigoNPC = new MenuNPC(300, 50, enemigo);
+		this.tipoSolicitud = tipoSolicitud;
+	}
 
+	public boolean getHaySolicitudNPC() {
+		return haySolicitudNPC;
+	}
+	
+	public MenuNPC getMenuEnemigoNPC(){
+		return menuEnemigoNPC;
+	}
 }
 
 

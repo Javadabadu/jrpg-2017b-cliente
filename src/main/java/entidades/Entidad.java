@@ -13,14 +13,17 @@ import javax.swing.JOptionPane;
 import com.google.gson.Gson;
 
 import chat.VentanaContactos;
+import estados.Estado;
 import frames.MenuEscape;
 import frames.MenuInventario;
 import interfaz.MenuInfoPersonaje;
+import interfaz.MenuNPC;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaqueteBatalla;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import mundo.Grafo;
 import mundo.Mundo;
@@ -88,6 +91,7 @@ public class Entidad {
 	private Mundo mundo;
 	private String nombre;
 	private int[] tilePersonajes;
+	private int[] tilePersonajesNPC;
 	private int idEnemigo;
 	
 	//Ubicacion para abrir comerciar.
@@ -191,7 +195,33 @@ public class Entidad {
 		}
 		// Tomo el click izquierdo 
 		if (juego.getHandlerMouse().getNuevoClick()) {
-			if (juego.getEstadoJuego().getHaySolicitud()) {
+			
+			//Comienzo NPC
+			if (juego.getEstadoJuego().getHaySolicitudNPC()) {
+				if (juego.getEstadoJuego().getMenuEnemigoNPC().clickEnCerrar(posMouse[0], posMouse[1])) {
+					juego.getEstadoJuego().setHaySolicitudNPC(false, null,MenuNPC.menuBatallar);
+				} else if (juego.getEstadoJuego().getMenuEnemigoNPC().clickEnMenu(posMouse[0], posMouse[1])) {
+					if (juego.getEstadoJuego().getMenuEnemigoNPC().clickEnBoton(posMouse[0], posMouse[1])) {
+						if (juego.getEstadoJuego().getTipoSolicitud() == MenuNPC.menuBatallar) {
+							juego.getEstadoJuego().setHaySolicitudNPC(false, null, MenuNPC.menuBatallar);
+							PaqueteBatalla pBatalla = new PaqueteBatalla(PaqueteBatalla.BATALLANPC);
+
+							pBatalla.setId(juego.getPersonaje().getId());
+							pBatalla.setIdEnemigo(idEnemigo);
+
+							juego.getEstadoJuego().setHaySolicitudNPC(false, null, MenuNPC.menuBatallar);
+
+							try {
+								juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
+							} catch (IOException e) {
+								JOptionPane.showMessageDialog(null,"Fallo la conexión " + "con el servidor");
+							}
+						}
+					}
+				}
+				// FIN NPC
+
+			} else if (juego.getEstadoJuego().getHaySolicitud()) {
 
 				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], 
@@ -267,7 +297,7 @@ public class Entidad {
 					}
 				} else {
 					juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
-				}
+				} 
 			} else {
 				Iterator<Integer> it = juego.getUbicacionPersonajes().keySet().iterator();
 				int key;	//Key de los personajes que hay en el mapa.
@@ -298,7 +328,7 @@ public class Entidad {
 					//tilePersonajes = Mundo.mouseATile(80,100);	//lucas1
 					
 					
-					tilePersonajes = Mundo.mouseATile(20, 70);		//lucas1
+					/*tilePersonajes = Mundo.mouseATile(20, 70);		//lucas1
 					try {
 						paquete = new PaquetePersonaje();
 						paquete.setEstado(1);
@@ -307,7 +337,7 @@ public class Entidad {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					}*/
 					
 					//tilePersonajes = Mundo.mouseATile(100, 150);	//leo
 					//tilePersonajes = Mundo.mouseATile(150,230);	//leo2
@@ -324,11 +354,11 @@ public class Entidad {
 					// Y DEVUELVA LA POSICION Y EL ID DEL NPC.
 					
 					
-					/*
+					
 					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
 							&& juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
 							&& juego.getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-					*/
+					
 					
 					////////////////////////////////////
 						
@@ -364,8 +394,30 @@ public class Entidad {
 							}
 							juego.getHandlerMouse().setNuevoClick(false);
 						}
-					//}
+					}
 				}
+				
+				// Me fijo si hice click sobre un NPC
+				it = juego.getNpcs().keySet().iterator();
+				PaqueteNpc actualNPC;
+
+				while (it.hasNext()) {
+					key = it.next();
+					actualNPC = juego.getNpcs().get(key);
+					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(), actualNPC.getPosY());
+					if (actualNPC != null) {
+						if (tileMoverme[0] == tilePersonajesNPC[0] && tileMoverme[1] == tilePersonajesNPC[1]) {
+							idEnemigo = actualNPC.getId();
+							float XY[] = Mundo.isoA2D(x,y);
+
+							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.
+									getNpcs().get(idEnemigo), MenuNPC.menuBatallar);
+							juego.getHandlerMouse().setNuevoClick(false);
+						}
+					}
+				}
+				//FIN NPC
+				
 			}
 		}
 
