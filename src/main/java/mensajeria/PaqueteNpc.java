@@ -6,26 +6,27 @@ import java.io.Serializable;
 import dominio.NonPlayableCharacter;
 import estados.Estado;
 
-public class PaqueteNpc extends Paquete implements Serializable, Cloneable{
-	
+public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
+
 	public static final String LUCANEITOR = "Lucaneitor";
 	public static final String LEONIDAS = "Leonidas";
-	
+
 	private NonPlayableCharacter npc;
 	private int id;
 	private String type;
-
 	private int posX;
 	private int posY;
 	private int direccion;
 	private int frame;
-	
 	private int estado;
-	
-	public  PaqueteNpc() throws IOException {
+
+	public PaqueteNpc() throws IOException {
 		estado = Estado.estadoOffline;
 	}
-	public PaqueteNpc(int id, String nombre, String tipo, int nivel, int dificultad, int posX, int posY, int estado, int direccion, int frame) {
+
+	public PaqueteNpc(int id, String nombre, String tipo, int nivel,
+			int dificultad, int posX, int posY, int estado, int direccion,
+			int frame) {
 		this.npc = new NonPlayableCharacter(nombre, nivel, dificultad);
 		this.id = id;
 		this.type = tipo;
@@ -55,15 +56,15 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable{
 	public int getPosY() {
 		return posY;
 	}
-	
+
 	public int getEstado() {
 		return estado;
 	}
-	
+
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	
+
 	public int getDireccion() {
 		return direccion;
 	}
@@ -78,6 +79,14 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable{
 
 	public void setFrame(int frame) {
 		this.frame = frame;
+	}
+
+	public NonPlayableCharacter getNpc() {
+		return npc;
+	}
+
+	public void setNpc(NonPlayableCharacter npc) {
+		this.npc = npc;
 	}
 
 }
