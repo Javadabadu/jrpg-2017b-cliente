@@ -32,6 +32,7 @@ public class EstadoJuego extends Estado {
 	private Mundo mundo;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
+	private Map<Integer,String> mapas = new HashMap<Integer,String>();
 	private boolean haySolicitud;
 	private int tipoSolicitud;
 
@@ -43,6 +44,7 @@ public class EstadoJuego extends Estado {
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
+		iniciarMapas();
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
 		paquetePersonaje = juego.getPersonaje();
 		entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje.get(juego.getPersonaje().getRaza()), 150);
@@ -59,6 +61,13 @@ public class EstadoJuego extends Estado {
 		}
 	}
 
+	private void iniciarMapas() {
+		mapas.put(1, "Aubenor");
+		mapas.put(2, "Aris");
+		mapas.put(3, "Eodrim");
+	}
+	
+	
 	@Override
 	public void actualizar() {
 		mundo.actualizar();
@@ -109,17 +118,7 @@ public class EstadoJuego extends Estado {
 	}
 
 	private String getMundo() {
-		int mundo = juego.getPersonaje().getMapa();
-
-		if (mundo == 1) {
-			return "Aubenor";
-		} else if (mundo == 2) {
-			return "Aris";
-		} else if (mundo == 3) {
-			return "Eodrim";
-		}
-
-		return null;
+		return mapas.get(juego.getPersonaje().getMapa());
 	}
 
 	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo, int tipoSolicitud) {
