@@ -14,8 +14,10 @@ import cliente.EscuchaMensajes;
 import dominio.Personaje;
 import estados.Estado;
 import estados.EstadoBatalla;
+import estados.EstadoBatallaNPC;
 import estados.EstadoJuego;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 
 public class Juego implements Runnable {
@@ -50,6 +52,7 @@ public class Juego implements Runnable {
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
+	private Map<Integer, PaqueteNpc> npcs;
 
 	private CargarRecursos cargarRecursos;
 
@@ -79,6 +82,7 @@ public class Juego implements Runnable {
 	}
 
 	public void iniciar() { // Carga lo necesario para iniciar el juego
+				
 		pantalla = new Pantalla(NOMBRE, ANCHO, ALTO, cliente);
 
 		pantalla.getCanvas().addMouseListener(handlerMouse);
@@ -86,6 +90,7 @@ public class Juego implements Runnable {
 		camara = new Camara(this, 0, 0);
 
 		Personaje.cargarTablaNivel();
+		
 	}
 
 	private void actualizar() { // Actualiza los objetos y sus posiciones
@@ -115,7 +120,7 @@ public class Juego implements Runnable {
 
 		// Fin de graficado de imagenes
 
-		bs.show(); // Hace visible el próximo buffer disponible
+		bs.show(); // Hace visible el pr�ximo buffer disponible
 		g.dispose();
 	}
 
@@ -247,4 +252,23 @@ public class Juego implements Runnable {
 	public Map<String, MiChat> getChatsActivos() {
 		return chatsActivos;
 	}
+
+	public Map<Integer, PaqueteNpc> getNpcs() {
+		return npcs;
+	}
+
+	public void setNpcs(Map<Integer, PaqueteNpc> npcs) {
+		this.npcs = npcs;
+	}
+	
+	public void setEstadoBatalla(EstadoBatallaNPC estadoBatalla){
+		this.estadoBatalla = estadoBatalla;
+	}
+	
+	public EstadoBatallaNPC getEstadoBatallaNPC(){
+		return (EstadoBatallaNPC) estadoBatalla;
+	}
 }
+
+
+

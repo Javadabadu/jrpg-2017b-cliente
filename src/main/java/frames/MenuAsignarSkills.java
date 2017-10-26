@@ -151,7 +151,7 @@ public class MenuAsignarSkills extends JFrame {
 				dispose();
 			}
 		});
-		buttonConfirm.setBounds(176, 145, 97, 25);
+		buttonConfirm.setBounds(176, 112, 97, 25);
 		contentPane.add(buttonConfirm);
 		
 		final JButton buttonCancel = new JButton("Cancelar");
@@ -163,10 +163,10 @@ public class MenuAsignarSkills extends JFrame {
 				dispose();
 			}
 		});
-		buttonCancel.setBounds(176, 190, 97, 25);
+		buttonCancel.setBounds(176, 146, 97, 25);
 		contentPane.add(buttonCancel);
 		
-		
+
 		final JButton buttonReset = new JButton("Reset");
 		ImageIcon resetIcon = new ImageIcon("recursos//botonReset.png");
 		buttonReset.setIcon(resetIcon);
@@ -175,7 +175,7 @@ public class MenuAsignarSkills extends JFrame {
 		}else{
 			buttonReset.setEnabled(true);
 		}			
-		
+
 		final JButton buttonMinus = new JButton("");
 		final JButton buttonMinus1 = new JButton("");
 		final JButton buttonMinus2 = new JButton("");
@@ -307,7 +307,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosFuerza++;
 					puntosAsignar--;
 					buttonConfirm.setEnabled(true);
-					buttonReset.setEnabled(true); //Habilito el botonReset
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelFuerza.setText(String.valueOf(puntosFuerza));
 					buttonMinus.setEnabled(true);
@@ -334,7 +333,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosDestreza++;
 					puntosAsignar--;
 					buttonConfirm.setEnabled(true);
-					buttonReset.setEnabled(true); //Habilito el botonReset
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelDestreza.setText(String.valueOf(puntosDestreza));
 					buttonMinus1.setEnabled(true);
@@ -359,7 +357,6 @@ public class MenuAsignarSkills extends JFrame {
 					puntosInteligencia++;
 					puntosAsignar--;
 					buttonConfirm.setEnabled(true);
-					buttonReset.setEnabled(true); //Habilito el botonReset
 					labelPuntos.setText(String.valueOf(puntosAsignar));
 					labelInteligencia.setText(String.valueOf(puntosInteligencia));					
 					buttonMinus2.setEnabled(true);
@@ -377,7 +374,7 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore2.setIcon(icono_2);
 		buttonMore2.setBounds(118, 217, 34, 25);
 		contentPane.add(buttonMore2);
-		
+
 		//Boton Reset Skills
 		 buttonReset.addActionListener(new ActionListener() {
 			
@@ -407,7 +404,7 @@ public class MenuAsignarSkills extends JFrame {
 		});
 		 buttonReset.setBounds(176, 100, 97, 25);
 		 contentPane.add(buttonReset);
-		
+
 		final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
 		imageLabel.setBounds(0, 0, 298, 294);
 		imageLabel.setVisible(true);

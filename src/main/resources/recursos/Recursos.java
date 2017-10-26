@@ -22,6 +22,9 @@ public class Recursos {
 
 	private static int ANCHO; // Ancho del frame a obtener
 	private static int ALTO; // Alto del frame a obtener
+	private static int ANCHOHULK;
+	private static int ALTOHULK;
+	
 
 	// Inicio Personajes
 	// Hash de imagenes para los personajes (humano, ogro, elfo)
@@ -59,6 +62,29 @@ public class Recursos {
 	private static BufferedImage[] elfoAbajoDer;
 	private static BufferedImage[] elfoAbajo;
 	private static BufferedImage[] elfoAbajoIzq;
+	
+	//Personajes NPC
+	private static SpriteSheet spriteLucaneitor;
+	public static LinkedList<BufferedImage[]> lucaneitor = new LinkedList<>();
+	private static BufferedImage[] lucaneitorIzq;
+	private static BufferedImage[] lucaneitorArribaIzq;
+	private static BufferedImage[] lucaneitorArriba;
+	private static BufferedImage[] lucaneitorArribaDer;
+	private static BufferedImage[] lucaneitorDer;
+	private static BufferedImage[] lucaneitorAbajoDer;
+	private static BufferedImage[] lucaneitorAbajo;
+	private static BufferedImage[] lucaneitorAbajoIzq;
+	
+	private static SpriteSheet spriteLeonidas;
+	public static LinkedList<BufferedImage[]> leonidas = new LinkedList<>();
+	private static BufferedImage[] leonidasIzq;
+	private static BufferedImage[] leonidasArribaIzq;
+	private static BufferedImage[] leonidasArriba;
+	private static BufferedImage[] leonidasArribaDer;
+	private static BufferedImage[] leonidasDer;
+	private static BufferedImage[] leonidasAbajoDer;
+	private static BufferedImage[] leonidasAbajo;
+	private static BufferedImage[] leonidasAbajoIzq;
 	// Fin Personajes
 
 	// Entorno
@@ -89,10 +115,6 @@ public class Recursos {
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
 	
-	//Inicio NPCS
-	
-	
-
 	// Se cargan todos los recursos del juego una sola vez al inicio
 
 	public static void cargar(MenuCarga menuCarga) throws NumberFormatException, IOException {
@@ -101,6 +123,9 @@ public class Recursos {
 		
 		ANCHO = 256;
 		ALTO = 256;
+		
+		ANCHOHULK = 40;
+		ALTOHULK = 56;
 		//Items
 		
 		
@@ -327,11 +352,157 @@ public class Recursos {
 		elfo.add(elfoAbajoIzq);
 
 		// Fin Elfo
+		
+		//INICIO NPC
+		
+		spriteLucaneitor = new SpriteSheet(CargadorImagen.cargarImagen("/Lucas.png"));
 
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		lucaneitorIzq = new BufferedImage[4];
+		lucaneitorArribaIzq = new BufferedImage[4];
+		lucaneitorArriba = new BufferedImage[4];
+		lucaneitorArribaDer = new BufferedImage[4];
+		lucaneitorDer = new BufferedImage[4];
+		lucaneitorAbajoDer = new BufferedImage[4];
+		lucaneitorAbajo = new BufferedImage[4];
+		lucaneitorAbajoIzq = new BufferedImage[4];
+
+		for (int i = 0; i < 4; i++) {
+			lucaneitorIzq[i] = spriteLucaneitor.getTile(ANCHO * i, 0, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			lucaneitorArribaIzq[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			lucaneitorArriba[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			lucaneitorArribaDer[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			lucaneitorDer[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			lucaneitorAbajoDer[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			lucaneitorAbajo[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			lucaneitorAbajoIzq[i] = spriteLucaneitor.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		lucaneitor.add(lucaneitorIzq);
+		lucaneitor.add(lucaneitorArribaIzq);
+		lucaneitor.add(lucaneitorArriba);
+		lucaneitor.add(lucaneitorArribaDer);
+		lucaneitor.add(lucaneitorDer);
+		lucaneitor.add(lucaneitorAbajoDer);
+		lucaneitor.add(lucaneitorAbajo);
+		lucaneitor.add(lucaneitorAbajoIzq);
+
+		
+		spriteLeonidas = new SpriteSheet(CargadorImagen.cargarImagen("/Leo.png"));
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		leonidasIzq = new BufferedImage[4];
+		leonidasArribaIzq = new BufferedImage[4];
+		leonidasArriba = new BufferedImage[4];
+		leonidasArribaDer = new BufferedImage[4];
+		leonidasDer = new BufferedImage[4];
+		leonidasAbajoDer = new BufferedImage[4];
+		leonidasAbajo = new BufferedImage[4];
+		leonidasAbajoIzq = new BufferedImage[4];
+
+		for (int i = 0; i < 4; i++) {
+			leonidasIzq[i] = spriteLeonidas.getTile(ANCHO * i, 0, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leonidasArribaIzq[i] = spriteLeonidas.getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leonidasArriba[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leonidasArribaDer[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 3, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leonidasDer[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 4, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leonidasAbajoDer[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 5, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leonidasAbajo[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 6, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		for (int i = 0; i < 4; i++) {
+			leonidasAbajoIzq[i] = spriteLeonidas.getTile(ANCHO * i, ALTO * 7, ANCHO, ALTO);
+		}
+
+		actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+		leonidas.add(leonidasIzq);
+		leonidas.add(leonidasArribaIzq);
+		leonidas.add(leonidasArriba);
+		leonidas.add(leonidasArribaDer);
+		leonidas.add(leonidasDer);
+		leonidas.add(leonidasAbajoDer);
+		leonidas.add(leonidasAbajo);
+		leonidas.add(leonidasAbajoIzq);
+		//FIN NPC
+				
 		// Agrego los pj al hash
 		personaje.put("Humano", humano);
 		personaje.put("Orco", orco);
 		personaje.put("Elfo", elfo);
+		personaje.put("Lucaneitor", lucaneitor);
+		personaje.put("Leonidas", leonidas);
 
 		// Inicio Entorno
 		cesped = CargadorImagen.cargarImagen("/Cesped.png");
