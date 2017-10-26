@@ -418,20 +418,38 @@ public class Entidad {
 				it = juego.getNpcs().keySet().iterator();
 				PaqueteNpc actualNPC;
 
-				while (it.hasNext()) {
+//				while (it.hasNext()) {
+//					key = it.next();
+//					actualNPC = juego.getNpcs().get(key);
+//					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
+//														actualNPC.getPosY());
+//					if (actualNPC != null) {
+//						if (tileMoverme[0] == tilePersonajesNPC[0]
+//								&& tileMoverme[1] == tilePersonajesNPC[1]) {
+//							
+//							idEnemigo = actualNPC.getId();
+//							float XY[] = Mundo.isoA2D(x, y);
+//
+//							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
+//																		MenuNPC.menuBatallar);
+//							juego.getHandlerMouse().setNuevoClick(false);
+//						}
+//					}
+//				}
+				//Me fijo si estoy cerca de un NPC (como pide Lucas)
+				
+				while(it.hasNext()){
 					key = it.next();
 					actualNPC = juego.getNpcs().get(key);
-					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
-							actualNPC.getPosY());
-					if (actualNPC != null) {
-						if (tileMoverme[0] == tilePersonajesNPC[0]
-								&& tileMoverme[1] == tilePersonajesNPC[1]) {
+					
+					if(actualNPC != null){
+						if(distanciaPeleable(tileActual[0], actualNPC.getPosX()) || distanciaPeleable(tileActual[1], actualNPC.getPosY())){
+							
 							idEnemigo = actualNPC.getId();
 							float XY[] = Mundo.isoA2D(x, y);
 
-							juego.getEstadoJuego().setHaySolicitudNPC(true,
-									juego.getNpcs().get(idEnemigo),
-									MenuNPC.menuBatallar);
+							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
+																		MenuNPC.menuBatallar);
 							juego.getHandlerMouse().setNuevoClick(false);
 						}
 					}
@@ -902,5 +920,19 @@ public class Entidad {
 	 */
 	public int getYOffset() {
 		return yOffset;
+	}
+	
+	public static boolean distanciaPeleable(int x, int y){
+		
+		int absX, absY;
+		
+		absX = Math.abs(x);
+		absY = Math.abs(y);
+		
+		if(Math.abs(absX - absY) <= 2){
+			return true;
+		}
+		
+		return false;
 	}
 }
