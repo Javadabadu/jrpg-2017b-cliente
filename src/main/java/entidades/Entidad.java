@@ -791,9 +791,9 @@ private int getFrame() {
 	 * @return true or false
 	 */
 	private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
-		 return (nodoUno.obtenerX() == nodoDos.obtenerX()
+		 return !(nodoUno.obtenerX() == nodoDos.obtenerX()
 				|| nodoUno.obtenerY() == nodoDos.obtenerY());
-		
+			
 	}
 
 	/**
