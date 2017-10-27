@@ -87,6 +87,7 @@ public class Entidad {
 	// pila de movimiento
 	private PilaDeTiles pilaMovimiento;
 	private int[] tileActual;
+	private int[] tileNPC;
 	private int[] tileFinal;
 	private int[] tileMoverme;
 
@@ -437,13 +438,26 @@ public class Entidad {
 //					}
 //				}
 				//Me fijo si estoy cerca de un NPC (como pide Lucas)
+
+				
+				
+				tileActual =  Mundo.mouseATile(posMouse[0]
+						+ juego.getCamara().getxOffset() - xOffset, posMouse[1]
+						+ juego.getCamara().getyOffset() - yOffset);
 				
 				while(it.hasNext()){
 					key = it.next();
 					actualNPC = juego.getNpcs().get(key);
 					
+					//obtengo el tile del npc, asi puedo comparar entre ambos tiles (jugador y npc)
+					tileNPC = Mundo.mouseATile(posMouse[0] + 
+							actualNPC.getPosX() + juego.getCamara().getxOffset() - xOffset, 
+							posMouse[1] + 
+							actualNPC.getPosY() + juego.getCamara().getyOffset() - yOffset);
+					
 					if(actualNPC != null){
-						if(distanciaPeleable(tileActual[0], actualNPC.getPosX()) || distanciaPeleable(tileActual[1], actualNPC.getPosY())){
+						//Valido que este a menos de 2 tiles tanto en X como en Y.
+						if(distanciaPeleable(tileActual[0], tileNPC[0]) && distanciaPeleable(tileActual[1], tileNPC[1])){
 							
 							idEnemigo = actualNPC.getId();
 							float XY[] = Mundo.isoA2D(x, y);
@@ -922,14 +936,20 @@ public class Entidad {
 		return yOffset;
 	}
 	
-	public static boolean distanciaPeleable(int x, int y){
+	/**
+	 * Verifica si se encuentra a una distancia de 5 o menos para pelear
+	 * @param a valor de coordenada X o Y del jugador.
+	 * @param b valor de coordenada X o Y (correspondiente al primer campo) del otro jugador.
+	 * @return
+	 */
+	public static boolean distanciaPeleable(int a, int b){
 		
-		int absX, absY;
+		int absA, absB;
 		
-		absX = Math.abs(x);
-		absY = Math.abs(y);
+		absA = Math.abs(a);
+		absB = Math.abs(b);
 		
-		if(Math.abs(absX - absY) <= 2){
+		if(Math.abs(absA - absB) <= 5){
 			return true;
 		}
 		

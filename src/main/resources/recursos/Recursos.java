@@ -355,7 +355,7 @@ public class Recursos {
 		
 		//INICIO NPC
 		
-		spriteLucaneitor = new SpriteSheet(CargadorImagen.cargarImagen("/Lucas.png"));
+		spriteLucaneitor = new SpriteSheet(CargadorImagen.cargarImagen("/Lucas2.png"));
 
 		actualizarBarraDeCarga(++elementosCargados, menuCarga);
 
