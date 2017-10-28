@@ -17,14 +17,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
+import com.sun.glass.events.KeyEvent;
 
 import cliente.Cliente;
 import estados.Estado;
 import juego.Pantalla;
+
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
-public class MenuEscape extends JFrame {
+public class MenuEscape extends JFrame  {
 
 	private JPanel contentPane;
 	private final Gson gson = new Gson();
@@ -137,4 +139,5 @@ public class MenuEscape extends JFrame {
 		background.setBounds(0, 0, 186, 273);
 		contentPane.add(background);
 	}
+
 }
