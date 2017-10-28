@@ -5,12 +5,14 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
+import com.sun.javafx.collections.MappingChange.Map;
 
 import chat.VentanaContactos;
 import estados.Estado;
@@ -72,22 +74,13 @@ public class Entidad {
 	private boolean enMovimiento;
 
 	// Animaciones
-	private final Animacion moverIzq;
-	private final Animacion moverArribaIzq;
-	private final Animacion moverArriba;
-	private final Animacion moverArribaDer;
-	private final Animacion moverDer;
-	private final Animacion moverAbajoDer;
-	private final Animacion moverAbajo;
-	private final Animacion moverAbajoIzq;
-
+	private final HashMap<Integer, Animacion> movimientoPersonaje = new HashMap<Integer, Animacion>();
 	private final Gson gson = new Gson();
 	private int intervaloEnvio = 0;
 
 	// pila de movimiento
 	private PilaDeTiles pilaMovimiento;
 	private int[] tileActual;
-	private int[] tileNPC;
 	private int[] tileFinal;
 	private int[] tileMoverme;
 
@@ -138,14 +131,15 @@ public class Entidad {
 		x = (int) (spawnX / 64) * 64;
 		y = (int) (spawnY / 32) * 32;
 
-		moverIzq = new Animacion(velAnimacion, animaciones.get(0));
-		moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
-		moverArriba = new Animacion(velAnimacion, animaciones.get(2));
-		moverArribaDer = new Animacion(velAnimacion, animaciones.get(3));
-		moverDer = new Animacion(velAnimacion, animaciones.get(4));
-		moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
-		moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
-		moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
+	
+		    movimientoPersonaje.put(horizontalIzq, new Animacion(velAnimacion, animaciones.get(0)));
+			movimientoPersonaje.put(diagonalSupIzq,  new Animacion(velAnimacion, animaciones.get(1)));
+			movimientoPersonaje.put(verticalSup, new Animacion(velAnimacion, animaciones.get(2)));
+			movimientoPersonaje.put(diagonalSupDer,new Animacion(velAnimacion, animaciones.get(3)));
+			movimientoPersonaje.put(horizontalDer,new Animacion(velAnimacion, animaciones.get(4)));
+			movimientoPersonaje.put(diagonalInfDer,new Animacion(velAnimacion, animaciones.get(5)));
+			movimientoPersonaje.put(verticalInf,new Animacion(velAnimacion, animaciones.get(6)));
+			movimientoPersonaje.put(diagonalInfIzq, new Animacion(velAnimacion, animaciones.get(7)));
 
 		// Informo mi posicion actual
 		juego.getUbicacionPersonaje().setPosX(x);
@@ -154,29 +148,29 @@ public class Entidad {
 		juego.getUbicacionPersonaje().setFrame(getFrame());
 	}
 
+	/**Actualiza el personaje
+/**Actualiza el personaj*/
+
+
 	/**
 	 * Actualiza el personaje
 	 */
+
 	public void actualizar() {
 
+		Iterator<Integer> it = movimientoPersonaje.keySet().iterator();
+		Integer key;
 		if (enMovimiento) {
-			moverIzq.actualizar();
-			moverArribaIzq.actualizar();
-			moverArriba.actualizar();
-			moverArribaDer.actualizar();
-			moverDer.actualizar();
-			moverAbajoDer.actualizar();
-			moverAbajo.actualizar();
-			moverAbajoIzq.actualizar();
+			while(it.hasNext()){
+				key = it.next();
+				movimientoPersonaje.get(key).actualizar();
+			}
+
 		} else {
-			moverIzq.reset();
-			moverArribaIzq.reset();
-			moverArriba.reset();
-			moverArribaDer.reset();
-			moverDer.reset();
-			moverAbajoDer.reset();
-			moverAbajo.reset();
-			moverAbajoIzq.reset();
+			while(it.hasNext()){
+				key = it.next();
+				movimientoPersonaje.get(key).reset();
+			}
 		}
 
 		getEntrada();
@@ -419,45 +413,14 @@ public class Entidad {
 				it = juego.getNpcs().keySet().iterator();
 				PaqueteNpc actualNPC;
 
-//				while (it.hasNext()) {
-//					key = it.next();
-//					actualNPC = juego.getNpcs().get(key);
-//					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
-//														actualNPC.getPosY());
-//					if (actualNPC != null) {
-//						if (tileMoverme[0] == tilePersonajesNPC[0]
-//								&& tileMoverme[1] == tilePersonajesNPC[1]) {
-//							
-//							idEnemigo = actualNPC.getId();
-//							float XY[] = Mundo.isoA2D(x, y);
-//
-//							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
-//																		MenuNPC.menuBatallar);
-//							juego.getHandlerMouse().setNuevoClick(false);
-//						}
-//					}
-//				}
-				//Me fijo si estoy cerca de un NPC (como pide Lucas)
-
-				
-				
-				tileActual =  Mundo.mouseATile(posMouse[0]
-						+ juego.getCamara().getxOffset() - xOffset, posMouse[1]
-						+ juego.getCamara().getyOffset() - yOffset);
-				
-				while(it.hasNext()){
+				while (it.hasNext()) {
 					key = it.next();
 					actualNPC = juego.getNpcs().get(key);
-					
-					//obtengo el tile del npc, asi puedo comparar entre ambos tiles (jugador y npc)
-					tileNPC = Mundo.mouseATile(posMouse[0] + 
-							actualNPC.getPosX() + juego.getCamara().getxOffset() - xOffset, 
-							posMouse[1] + 
-							actualNPC.getPosY() + juego.getCamara().getyOffset() - yOffset);
-					
-					if(actualNPC != null){
-						//Valido que este a menos de 2 tiles tanto en X como en Y.
-						if(distanciaPeleable(tileActual[0], tileNPC[0]) && distanciaPeleable(tileActual[1], tileNPC[1])){
+					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
+														actualNPC.getPosY());
+					if (actualNPC != null) {
+						if (tileMoverme[0] == tilePersonajesNPC[0]
+								&& tileMoverme[1] == tilePersonajesNPC[1]) {
 							
 							idEnemigo = actualNPC.getId();
 							float XY[] = Mundo.isoA2D(x, y);
@@ -468,6 +431,24 @@ public class Entidad {
 						}
 					}
 				}
+				//Me fijo si estoy cerca de un NPC (como pide Lucas)
+				
+//				while(it.hasNext()){
+//					key = it.next();
+//					actualNPC = juego.getNpcs().get(key);
+//					
+//					if(actualNPC != null){
+//						if(distanciaPeleable(tileActual[0], actualNPC.getPosX()) || distanciaPeleable(tileActual[1], actualNPC.getPosY())){
+//							
+//							idEnemigo = actualNPC.getId();
+//							float XY[] = Mundo.isoA2D(x, y);
+//
+//							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
+//																		MenuNPC.menuBatallar);
+//							juego.getHandlerMouse().setNuevoClick(false);
+//						}
+//					}
+//				}
 				// FIN NPC
 
 			}
@@ -649,30 +630,21 @@ public class Entidad {
 	 * Obtiene el frameActual del personaje
 	 */
 	private BufferedImage getFrameAnimacionActual() {
-		if (movimientoHacia == horizontalIzq) {
-			return moverIzq.getFrameActual();
-		} else if (movimientoHacia == horizontalDer) {
-			return moverDer.getFrameActual();
-		} else if (movimientoHacia == verticalSup) {
-			return moverArriba.getFrameActual();
-		} else if (movimientoHacia == verticalInf) {
-			return moverAbajo.getFrameActual();
-		} else if (movimientoHacia == diagonalInfIzq) {
-			return moverAbajoIzq.getFrameActual();
-		} else if (movimientoHacia == diagonalInfDer) {
-			return moverAbajoDer.getFrameActual();
-		} else if (movimientoHacia == diagonalSupIzq) {
-			return moverArribaIzq.getFrameActual();
-		} else if (movimientoHacia == diagonalSupDer) {
-			return moverArribaDer.getFrameActual();
+		if(movimientoPersonaje.get(movimientoHacia) != null)
+			return movimientoPersonaje.get(movimientoHacia).getFrameActual();
+
+			return Recursos.orco.get(6)[0];
 		}
 
+	/**Pide la direccion donde va
+=======
 		return Recursos.orco.get(6)[0];
 	}
 
 	/**
 	 * Pide la direccion donde va
 	 * 
+>>>>>>> origin/NpcBranch
 	 * @return devuelve el movimiento hacia donde va
 	 */
 	private int getDireccion() {
@@ -682,26 +654,9 @@ public class Entidad {
 	/**
 	 * Obtiene el frame donde esta el personaje
 	 */
-	private int getFrame() {
-		if (movimientoHacia == horizontalIzq) {
-			return moverIzq.getFrame();
-		} else if (movimientoHacia == horizontalDer) {
-			return moverDer.getFrame();
-		} else if (movimientoHacia == verticalSup) {
-			return moverArriba.getFrame();
-		} else if (movimientoHacia == verticalInf) {
-			return moverAbajo.getFrame();
-		} else if (movimientoHacia == diagonalInfIzq) {
-			return moverAbajoIzq.getFrame();
-		} else if (movimientoHacia == diagonalInfDer) {
-			return moverAbajoDer.getFrame();
-		} else if (movimientoHacia == diagonalSupIzq) {
-			return moverArribaIzq.getFrame();
-		} else if (movimientoHacia == diagonalSupDer) {
-			return moverArribaDer.getFrame();
-		}
-
-		return 0;
+private int getFrame() {
+	
+		return movimientoPersonaje.get(movimientoHacia).getFrame();
 	}
 
 	/**
@@ -836,10 +791,9 @@ public class Entidad {
 	 * @return true or false
 	 */
 	private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
-		if (nodoUno.obtenerX() == nodoDos.obtenerX()
-				|| nodoUno.obtenerY() == nodoDos.obtenerY())
-			return false;
-		return true;
+		 return !(nodoUno.obtenerX() == nodoDos.obtenerX()
+				|| nodoUno.obtenerY() == nodoDos.obtenerY());
+			
 	}
 
 	/**
@@ -936,20 +890,14 @@ public class Entidad {
 		return yOffset;
 	}
 	
-	/**
-	 * Verifica si se encuentra a una distancia de 5 o menos para pelear
-	 * @param a valor de coordenada X o Y del jugador.
-	 * @param b valor de coordenada X o Y (correspondiente al primer campo) del otro jugador.
-	 * @return
-	 */
-	public static boolean distanciaPeleable(int a, int b){
+	public static boolean distanciaPeleable(int x, int y){
 		
-		int absA, absB;
+		int absX, absY;
 		
-		absA = Math.abs(a);
-		absB = Math.abs(b);
+		absX = Math.abs(x);
+		absY = Math.abs(y);
 		
-		if(Math.abs(absA - absB) <= 5){
+		if(Math.abs(absX - absY) <= 2){
 			return true;
 		}
 		
