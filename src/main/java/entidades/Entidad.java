@@ -410,35 +410,17 @@ public class Entidad {
 				}
 
 				// Me fijo si hice click sobre un NPC
-				it = juego.getNpcs().keySet().iterator();
-				PaqueteNpc actualNPC;
+//				it = juego.getNpcs().keySet().iterator();
+//				PaqueteNpc actualNPC;
 
-				while (it.hasNext()) {
-					key = it.next();
-					actualNPC = juego.getNpcs().get(key);
-					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
-														actualNPC.getPosY());
-					if (actualNPC != null) {
-						if (tileMoverme[0] == tilePersonajesNPC[0]
-								&& tileMoverme[1] == tilePersonajesNPC[1]) {
-							
-							idEnemigo = actualNPC.getId();
-							float XY[] = Mundo.isoA2D(x, y);
-
-							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
-																		MenuNPC.menuBatallar);
-							juego.getHandlerMouse().setNuevoClick(false);
-						}
-					}
-				}
-				//Me fijo si estoy cerca de un NPC (como pide Lucas)
-				
-//				while(it.hasNext()){
+//				while (it.hasNext()) {
 //					key = it.next();
 //					actualNPC = juego.getNpcs().get(key);
-//					
-//					if(actualNPC != null){
-//						if(distanciaPeleable(tileActual[0], actualNPC.getPosX()) || distanciaPeleable(tileActual[1], actualNPC.getPosY())){
+//					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
+//														actualNPC.getPosY());
+//					if (actualNPC != null) {
+//						if (tileMoverme[0] == tilePersonajesNPC[0]
+//								&& tileMoverme[1] == tilePersonajesNPC[1]) {
 //							
 //							idEnemigo = actualNPC.getId();
 //							float XY[] = Mundo.isoA2D(x, y);
@@ -449,6 +431,7 @@ public class Entidad {
 //						}
 //					}
 //				}
+				
 				// FIN NPC
 
 			}
@@ -602,6 +585,29 @@ public class Entidad {
 
 			if (x == xFinal && y == yFinal - 32) {
 				enMovimiento = false;
+			}
+			
+			Iterator<Integer> it = juego.getUbicacionPersonajes().keySet()
+					.iterator();
+			int key;
+			it = juego.getNpcs().keySet().iterator();
+			PaqueteNpc actualNPC;
+			while(it.hasNext()){
+				key = it.next();
+				actualNPC = juego.getNpcs().get(key);
+				tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
+				actualNPC.getPosY());
+				if(actualNPC != null){
+					if(distanciaPeleable(tileActual[0], tileActual[1], tileMoverme[0], tileMoverme[1])){
+						
+						idEnemigo = actualNPC.getId();
+						float XY[] = Mundo.isoA2D(x, y);
+
+						juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
+																	MenuNPC.menuBatallar);
+						juego.getHandlerMouse().setNuevoClick(false);
+					}
+				}
 			}
 		}
 	}
@@ -890,17 +896,12 @@ private int getFrame() {
 		return yOffset;
 	}
 	
-	public static boolean distanciaPeleable(int x, int y){
+	public static boolean distanciaPeleable(int npcX, int npcY, int perX, int perY){
 		
-		int absX, absY;
-		
-		absX = Math.abs(x);
-		absY = Math.abs(y);
-		
-		if(Math.abs(absX - absY) <= 2){
-			return true;
-		}
-		
-		return false;
+		int radio = 1;
+		int distanciaX = Math.abs(npcX - perX) ;
+		int distanciaY = Math.abs(npcY - perY);
+		int distanciaTotal = (int) Math.sqrt(Math.pow((float)distanciaX, 2) + Math.pow((float)distanciaY, 2));
+		return distanciaTotal==radio;
 	}
 }
