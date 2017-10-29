@@ -25,10 +25,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
-	private final int fuerzaInicial = 10;
-	private final int destrezaInicial = 10;
-	private final int inteligenciaInicial = 10;
-	
 	private ArrayList<Item> items = new ArrayList<Item>();
 	
 	public PaquetePersonaje() throws IOException {
@@ -154,7 +150,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public void setInteligencia(int inteligencia) {
 		this.inteligencia = inteligencia;
 	}
-	
+
 	@Override
 	public Object clone() {
 		Object obj = null;

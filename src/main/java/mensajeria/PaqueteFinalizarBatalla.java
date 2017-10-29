@@ -7,6 +7,8 @@ public class PaqueteFinalizarBatalla extends Paquete implements Serializable, Cl
 	private int id;
 	private int idEnemigo;
 	private int ganadorBatalla;
+	private int tipoBatalla; 
+	
 	public PaqueteFinalizarBatalla(){
 		setComando(Comando.FINALIZARBATALLA);
 	}
@@ -33,5 +35,13 @@ public class PaqueteFinalizarBatalla extends Paquete implements Serializable, Cl
 
 	public void setGanadorBatalla(int ganadorBatalla) {
 		this.ganadorBatalla = ganadorBatalla;
+	}
+	
+	public int getTipoBatalla() {
+		return tipoBatalla;
+	}
+
+	public void setTipoBatalla(int tipoBatalla){
+		this.tipoBatalla = tipoBatalla;
 	}
 }

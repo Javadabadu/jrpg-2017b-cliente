@@ -17,10 +17,12 @@ import com.google.gson.Gson;
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuInfoPersonaje;
+import interfaz.MenuNPC;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
@@ -33,13 +35,17 @@ public class EstadoJuego extends Estado {
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private boolean haySolicitud;
+	private boolean haySolicitudNPC;
 	private int tipoSolicitud;
-
+	
+	private Map<Integer, PaqueteNpc> npcs;
+	
 	private final Gson gson = new Gson();
 
 	private BufferedImage miniaturaPersonaje;
 
 	MenuInfoPersonaje menuEnemigo;
+	MenuNPC menuEnemigoNPC;
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
@@ -55,7 +61,7 @@ public class EstadoJuego extends Estado {
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor al ingresar al mundo");
+			JOptionPane.showMessageDialog(null, "Fallo la conexion con el servidor al ingresar al mundo");
 		}
 	}
 
@@ -69,8 +75,9 @@ public class EstadoJuego extends Estado {
 	public void graficar(Graphics g) {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
-		//entidadPersonaje.graficar(g);
+		entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
+		graficarNpc(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
@@ -80,9 +87,11 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.chat, 3, 524, 102, 35, null);
 		if(haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
+		if(haySolicitudNPC)
+			menuEnemigoNPC.graficar(g, tipoSolicitud);
 
 	}
-
+	
 	public void graficarPersonajes(Graphics g) {
 
 		if(juego.getPersonajesConectados() != null){
@@ -98,11 +107,45 @@ public class EstadoJuego extends Estado {
 				actual = ubicacionPersonajes.get(key);
 				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
-						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()],
+								(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
+								(int) (actual.getPosY() - juego.getCamara().getyOffset()),
+								64, 64, null);
 				}
 			}
 		}
 	}
+	
+	public void graficarNpc(Graphics g){
+		if (juego.getNpcs() != null) {
+			//Obtengo los NPC y su posicion que se crearon cuando inicio el juego
+			npcs = new HashMap<Integer, PaqueteNpc>(juego.getNpcs());
+			
+			Iterator<Integer> itNpc = npcs.keySet().iterator();
+			int key;
+			PaqueteNpc actual;
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+			while (itNpc.hasNext()) {				
+				key = itNpc.next();
+				actual = npcs.get(key);
+				if (actual != null && npcs.get(actual.getId()).getEstado() == Estado.estadoJuego){
+		 		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
+		 				(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
+		 				npcs.get(actual.getId()).getNombre());	
+		 	
+		 		g.drawImage(Recursos.personaje.get(actual.getType()).get(actual.getDireccion())[actual.getFrame()],
+		 				(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
+		 				(int) (actual.getPosY() - juego.getCamara().getyOffset()),
+		 				64, 64, null);
+		 		
+				}
+			}
+			
+		}
+
+	}
+			 		
 
 	public Entidad getPersonaje() {
 		return entidadPersonaje;
@@ -149,5 +192,22 @@ public class EstadoJuego extends Estado {
 	public boolean esEstadoDeJuego() {
 		return true;
 	}
+	
+	public void setHaySolicitudNPC(boolean b, PaqueteNpc enemigo, int tipoSolicitud) {
+		haySolicitudNPC = b;
+		// menu que mostrara al enemigo
+		menuEnemigoNPC = new MenuNPC(300, 50, enemigo);
+		this.tipoSolicitud = tipoSolicitud;
+	}
 
+	public boolean getHaySolicitudNPC() {
+		return haySolicitudNPC;
+	}
+	
+	public MenuNPC getMenuEnemigoNPC(){
+		return menuEnemigoNPC;
+	}
 }
+
+
+
