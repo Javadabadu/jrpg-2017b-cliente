@@ -408,29 +408,31 @@ public class Entidad {
 						}
 					}
 				}
+				
+				
 
 				// Me fijo si hice click sobre un NPC
-//				it = juego.getNpcs().keySet().iterator();
-//				PaqueteNpc actualNPC;
+				it = juego.getNpcs().keySet().iterator();
+				PaqueteNpc actualNPC;
 
-//				while (it.hasNext()) {
-//					key = it.next();
-//					actualNPC = juego.getNpcs().get(key);
-//					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
-//														actualNPC.getPosY());
-//					if (actualNPC != null) {
-//						if (tileMoverme[0] == tilePersonajesNPC[0]
-//								&& tileMoverme[1] == tilePersonajesNPC[1]) {
-//							
-//							idEnemigo = actualNPC.getId();
-//							float XY[] = Mundo.isoA2D(x, y);
-//
-//							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
-//																		MenuNPC.menuBatallar);
-//							juego.getHandlerMouse().setNuevoClick(false);
-//						}
-//					}
-//				}
+				while (it.hasNext()) {
+					key = it.next();
+					actualNPC = juego.getNpcs().get(key);
+					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
+														actualNPC.getPosY());
+					if (actualNPC != null) {
+						if (tileMoverme[0] == tilePersonajesNPC[0]
+								&& tileMoverme[1] == tilePersonajesNPC[1]) {
+							
+							idEnemigo = actualNPC.getId();
+							float XY[] = Mundo.isoA2D(x, y);
+
+							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
+																		MenuNPC.menuBatallar);
+							juego.getHandlerMouse().setNuevoClick(false);
+						}
+					}
+				}
 				
 				// FIN NPC
 
@@ -550,6 +552,7 @@ public class Entidad {
 
 		double paso = 1;
 
+		
 		if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
 			if (movimientoHacia == verticalSup) {
 				dy -= paso;
@@ -587,28 +590,28 @@ public class Entidad {
 				enMovimiento = false;
 			}
 			
-			Iterator<Integer> it = juego.getUbicacionPersonajes().keySet()
-					.iterator();
-			int key;
-			it = juego.getNpcs().keySet().iterator();
-			PaqueteNpc actualNPC;
-			while(it.hasNext()){
-				key = it.next();
-				actualNPC = juego.getNpcs().get(key);
-				tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
-				actualNPC.getPosY());
-				if(actualNPC != null){
-					if(distanciaPeleable(tileActual[0], tileActual[1], tileMoverme[0], tileMoverme[1])){
-						
-						idEnemigo = actualNPC.getId();
-						float XY[] = Mundo.isoA2D(x, y);
-
-						juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
-																	MenuNPC.menuBatallar);
-						juego.getHandlerMouse().setNuevoClick(false);
-					}
-				}
-			}
+//			Iterator<Integer> it = juego.getUbicacionPersonajes().keySet()
+//					.iterator();
+//			int key;
+//			it = juego.getNpcs().keySet().iterator();
+//			PaqueteNpc actualNPC;
+//			while(it.hasNext()){
+//				key = it.next();
+//				actualNPC = juego.getNpcs().get(key);
+//				tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
+//				actualNPC.getPosY());
+//				if(actualNPC != null){
+//					if(distanciaPeleable(tileActual[0], tileActual[1], tileMoverme[0], tileMoverme[1])){
+//						
+//						idEnemigo = actualNPC.getId();
+//						float XY[] = Mundo.isoA2D(x, y);
+//
+//						juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
+//																	MenuNPC.menuBatallar);
+//						juego.getHandlerMouse().setNuevoClick(false);
+//					}
+//				}
+//			}
 		}
 	}
 
