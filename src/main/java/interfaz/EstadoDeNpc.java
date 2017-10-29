@@ -36,9 +36,6 @@ public class EstadoDeNpc {
 					/ npc.getSaludTope();
 		}
 
-		System.out.println(npc.getSalud());
-		System.out.println(npc.getSaludTope());
-		
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD,
