@@ -1,9 +1,11 @@
 package cliente;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
@@ -48,7 +50,7 @@ public class Cliente extends Thread {
 		
 	// Ip y puerto
 	private String ip;
-	private final int puerto = 55050;
+	private int puerto;
 	/**Pide la accion
 	 * @return Devuelve la accion
 	 */
@@ -69,12 +71,16 @@ public class Cliente extends Thread {
 	public Cliente() {
 
 
-		
 		ip = JOptionPane.showInputDialog("Ingrese IP del servidor: (default localhost)");
 		if(ip == null) {
 			ip = "localhost";
 		}
 		try {
+			Properties prop = new Properties();
+			FileInputStream archivoPuerto = new FileInputStream("puerto.properties");
+			prop.load(archivoPuerto);
+			String puertoArchivo = prop.getProperty("puerto");
+			puerto = Integer.parseInt(puertoArchivo);
 			cliente = new Socket(ip, puerto);
 			miIp = cliente.getInetAddress().getHostAddress();
 			entrada = new ObjectInputStream(cliente.getInputStream());
