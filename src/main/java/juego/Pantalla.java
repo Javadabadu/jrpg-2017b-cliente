@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -36,6 +37,7 @@ public class Pantalla {
 
 	private JFrame pantalla;
 	private Canvas canvas;
+	private Cliente myClient;
 
 	// Menus
 	public static MenuInventario menuInventario;
@@ -43,10 +45,14 @@ public class Pantalla {
 	public static MenuStats menuStats;
 	public static MenuEscape menuEscp;
 	public static VentanaContactos ventContac;
+	private HashMap<Integer, Runnable> mapMenus = new HashMap<Integer, Runnable>(); //Necesito el hashmap de runnables para los metodos de menus
 		
 	private final Gson gson = new Gson();
 
 	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
+		
+		this.myClient = cliente; //Necesito atributo cliente para usar en los metodos propios de la clase
+		
 		pantalla = new JFrame(NOMBRE);
 		pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
@@ -74,47 +80,27 @@ public class Pantalla {
 				}
 			}
 		});
+		
+		this.mapMenus.put(KeyEvent.VK_I, ()->menuInventario());
+		this.mapMenus.put(KeyEvent.VK_A, ()->menuAsignarSkills());
+		this.mapMenus.put(KeyEvent.VK_S, ()->menuStats());
+		this.mapMenus.put(KeyEvent.VK_ESCAPE, ()->menuEscape());
+		this.mapMenus.put(KeyEvent.VK_C, ()->ventanaContacto());
+		
 		pantalla.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_I) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuInventario == null) {
-							menuInventario = new MenuInventario(cliente);
-							menuInventario.setVisible(true);
-						}
+				
+				if (mapMenus.get(e.getKeyCode()) != null) {
+					
+					if (Estado.getEstado().esEstadoDeJuego()) {
+						
+						mapMenus.get(e.getKeyCode()).run();
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuAsignar == null) {
-							menuAsignar = new MenuAsignarSkills(cliente);
-							menuAsignar.setVisible(true);
-						}
-					} 
-				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuStats == null) {
-							menuStats = new MenuStats(cliente);
-							menuStats.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuEscp == null) {
-							menuEscp = new MenuEscape(cliente);
-							menuEscp.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_C) {
-//					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (ventContac == null) {
-							ventContac = new VentanaContactos(cliente.getJuego());
-							ventContac.setVisible(true);
-						}
-//					}
 				}
 			}
 		});
+
 
 
 		pantalla.setLocationRelativeTo(null);
@@ -155,5 +141,42 @@ public class Pantalla {
 	    int b = (r.height / 2) - (rHeight / 2) - rY;
 
 	    g.drawString(s, r.x + a, r.y + b);
+	}
+	
+	private void menuInventario(){
+		
+		if (menuInventario == null) {
+			menuInventario = new MenuInventario(myClient);
+			menuInventario.setVisible(true);
+		}
+	
+	}
+	
+	private void menuAsignarSkills(){
+		if(menuAsignar == null){
+			menuAsignar = new MenuAsignarSkills(myClient);
+			menuAsignar.setVisible(true);
+		}
+	}
+	
+	private void menuStats(){
+		if(menuStats == null){
+			menuStats = new MenuStats(myClient);
+			menuStats.setVisible(true);
+		}
+	}
+	
+	private void menuEscape(){
+		if (menuEscp == null) {
+			menuEscp = new MenuEscape(myClient);
+			menuEscp.setVisible(true);
+		}
+	}
+	
+	private void ventanaContacto(){
+		if (ventContac == null) {
+			ventContac = new VentanaContactos(myClient.getJuego());
+			ventContac.setVisible(true);
+		}
 	}
 }
