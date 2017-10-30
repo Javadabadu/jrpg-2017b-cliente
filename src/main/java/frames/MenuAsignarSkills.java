@@ -151,7 +151,7 @@ public class MenuAsignarSkills extends JFrame {
 				dispose();
 			}
 		});
-		buttonConfirm.setBounds(176, 112, 97, 25);
+		buttonConfirm.setBounds(176, 140, 97, 25);
 		contentPane.add(buttonConfirm);
 		
 		final JButton buttonCancel = new JButton("Cancelar");
@@ -163,7 +163,7 @@ public class MenuAsignarSkills extends JFrame {
 				dispose();
 			}
 		});
-		buttonCancel.setBounds(176, 146, 97, 25);
+		buttonCancel.setBounds(176, 182, 97, 25);
 		contentPane.add(buttonCancel);
 		
 
@@ -405,7 +405,7 @@ public class MenuAsignarSkills extends JFrame {
 				JOptionPane.showMessageDialog(null,"Se han reseteado tus stats.");
 			}
 		});
-		 buttonReset.setBounds(176, 100, 97, 25);
+		 buttonReset.setBounds(176, 98, 97, 25);
 		 contentPane.add(buttonReset);
 		
 
