@@ -1,5 +1,7 @@
 package chat;
 
+import com.google.gson.Gson;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -19,40 +21,65 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
 
-import com.google.gson.Gson;
-
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
 
+/**
+ * @author UnlamPrograAvanzada contenedor que tendra el chat. 
+ */
+
 public class MiChat extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField texto;
-	private JTextArea chat;
-	private Juego juego;
-	private final Gson gson = new Gson();
-	private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
-	private DefaultCaret caret;
+  private static final long serialVersionUID = 1L;
+  private static final int F_ALTO = 300;
+  private static final  int F_ANCHO = 450;
+  private static final int F_VALORX =100;
+  private static final int F_VALORY = 100;
+  private static final int PANEL_BORDE = 5;
+  private static final int SCROLL_ALTO = 201;
+  private static final  int SCROLL_ANCHO = 414;
+  private static final int SCROLL_VALORX = 10;
+  private static final int SCROLL_VALORY = 11;
+  private static final int BACK_ALTO = 283;
+  private static final  int BACK_ANCHO = 480;
+  private static final int BACK_VALORX = -20;
+  private static final int BACK_VALORY = 0;
+  private static final int BOTONENV_ALTO = 23;
+  private static final  int BOTONENV_ANCHO = 81;
+  private static final int BOTONENV_VALORX = 225;
+  private static final int BOTONENV_VALORY = 334;
+  private static final int TEXTO_ALTO = 27;
+  private static final  int TEXTO_ANCHO = 314;
+  private static final int TEXTO_VALORX = 10;
+  private static final int TEXTO_VALORY = 223;
+  private static final String TIT_SALA = "Sala";
+  private JPanel contentPane;
+  private JTextField texto;
+  private JTextArea chat;
+  /**
+   * @param atributo que tendra el juego actual.
+   */
+  private Juego juego;
+  private final Gson gson = new Gson();
+  private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
+  private DefaultCaret caret;
 
-	/**
-	 * Create the frame. 
-	 */
+
 	public MiChat(final Juego juego) {
 		this.juego = juego;
-		setTitle("Mi Chat");
-		
+		setTitle("Mi Chat");	
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(F_VALORX, F_VALORY , F_ANCHO, F_ALTO);
 		setResizable(false);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(PANEL_BORDE,PANEL_BORDE,PANEL_BORDE,PANEL_BORDE));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(10, 11, 414, 201);
+		scrollPane.setBounds(SCROLL_VALORX, SCROLL_VALORY,SCROLL_ANCHO, SCROLL_ALTO);
 		contentPane.add(scrollPane);
 		
 		chat = new JTextArea();
@@ -66,9 +93,10 @@ public class MiChat extends JFrame {
 			public void windowOpened(WindowEvent e) {
 				texto.requestFocus();
 			}
+			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if (getTitle() == "Sala") {
+				if (getTitle() == TIT_SALA) {
 					if (Pantalla.ventContac != null) {
 						VentanaContactos.getBotonMc().setEnabled(true);						
 					}
@@ -90,7 +118,7 @@ public class MiChat extends JFrame {
 					// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
 					juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
 					// El user receptor en espacio indica que es para todos
-					if(getTitle() == "Sala"){
+					if( getTitle() == TIT_SALA ){
 						juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
 					}
 					
@@ -135,13 +163,13 @@ public class MiChat extends JFrame {
 				texto.requestFocus();
 			}
 		});
-		enviar.setBounds(334, 225, 81, 23);
-		contentPane.add(enviar);
+		enviar.setBounds(BOTONENV_VALORX, BOTONENV_VALORY, BOTONENV_ANCHO, BOTONENV_ALTO);
 		
-		texto.setBounds(10, 223, 314, 27);
+		contentPane.add(enviar);
+		texto.setBounds( TEXTO_VALORX, TEXTO_VALORY, TEXTO_ANCHO, TEXTO_ALTO);
 		contentPane.add(texto);
 		texto.setColumns(10);
-		background.setBounds(-20, 0, 480, 283);
+		background.setBounds(BACK_VALORX, BACK_VALORY, BACK_ANCHO, BACK_ALTO);
 		contentPane.add(background);
 	}
 	
