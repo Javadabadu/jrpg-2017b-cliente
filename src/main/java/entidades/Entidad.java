@@ -89,6 +89,7 @@ public class Entidad {
 	private int[] tilePersonajes;
 	private int[] tilePersonajesNPC;
 	private int idEnemigo;
+	private int[][] posNpcs;
 
 	// Ubicacion para abrir comerciar.
 	private float xComercio;
@@ -146,6 +147,23 @@ public class Entidad {
 		juego.getUbicacionPersonaje().setPosY(y);
 		juego.getUbicacionPersonaje().setDireccion(getDireccion());
 		juego.getUbicacionPersonaje().setFrame(getFrame());
+		
+		posNpcs = new int[10][2];
+		
+		int key;
+		Iterator<Integer>  it = juego.getNpcs().keySet().iterator();
+		PaqueteNpc actualNPC;
+		int i = 0;
+		while(it.hasNext()){
+			key = it.next();
+			actualNPC = juego.getNpcs().get(key);
+			posNpcs[i][0] = actualNPC.getPosX();
+			posNpcs[i][1] = actualNPC.getPosY();
+			
+			i++;
+		}
+		
+		
 	}
 
 	/**Actualiza el personaje
@@ -412,27 +430,27 @@ public class Entidad {
 				
 
 				// Me fijo si hice click sobre un NPC
-				it = juego.getNpcs().keySet().iterator();
-				PaqueteNpc actualNPC;
-
-				while (it.hasNext()) {
-					key = it.next();
-					actualNPC = juego.getNpcs().get(key);
-					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
-														actualNPC.getPosY());
-					if (actualNPC != null) {
-						if (tileMoverme[0] == tilePersonajesNPC[0]
-								&& tileMoverme[1] == tilePersonajesNPC[1]) {
-							
-							idEnemigo = actualNPC.getId();
-							float XY[] = Mundo.isoA2D(x, y);
-
-							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
-																		MenuNPC.menuBatallar);
-							juego.getHandlerMouse().setNuevoClick(false);
-						}
-					}
-				}
+//				it = juego.getNpcs().keySet().iterator();
+//				PaqueteNpc actualNPC;
+//
+//				while (it.hasNext()) {
+//					key = it.next();
+//					actualNPC = juego.getNpcs().get(key);
+//					tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
+//														actualNPC.getPosY());
+//					if (actualNPC != null) {
+//						if (tileMoverme[0] == tilePersonajesNPC[0]
+//								&& tileMoverme[1] == tilePersonajesNPC[1]) {
+//							
+//							idEnemigo = actualNPC.getId();
+//							float XY[] = Mundo.isoA2D(x, y);
+//
+//							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
+//																		MenuNPC.menuBatallar);
+//							juego.getHandlerMouse().setNuevoClick(false);
+//						}
+//					}
+//				}
 				
 				// FIN NPC
 
@@ -590,6 +608,23 @@ public class Entidad {
 				enMovimiento = false;
 			}
 			
+			for (int i = 0; i < posNpcs.length; i++) {
+				if(distanciaPeleable(juego.getUbicacionPersonaje().getPosX(),
+						 juego.getUbicacionPersonaje().getPosY(),
+						 posNpcs[i][0], posNpcs[i][1] )){
+					
+					PaqueteNpc actualNpc = juego.getNpcs().get(i);
+					idEnemigo = actualNpc.getId();
+					float XY[] = Mundo.isoA2D(x, y);
+
+					juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
+																MenuNPC.menuBatallar);
+					
+				}
+			}
+			
+//			System.out.println("X: "+ juego.getUbicacionPersonaje().getPosX() + " | Y: "+ juego.getUbicacionPersonaje().getPosY());
+//			
 //			Iterator<Integer> it = juego.getUbicacionPersonajes().keySet()
 //					.iterator();
 //			int key;
@@ -598,10 +633,17 @@ public class Entidad {
 //			while(it.hasNext()){
 //				key = it.next();
 //				actualNPC = juego.getNpcs().get(key);
+//				System.out.println(actualNPC.getPosX() + " | "  + actualNPC.getPosY());
 //				tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
-//				actualNPC.getPosY());
+////													actualNPC.getPosY());
+//				float[] posNpc = new float[2];
+//				posNpc[0] = actualNPC.getPosX();
+//				posNpc[1] = actualNPC.getPosY();
+//				
 //				if(actualNPC != null){
-//					if(distanciaPeleable(tileActual[0], tileActual[1], tileMoverme[0], tileMoverme[1])){
+//					if(distanciaPeleable(juego.getUbicacionPersonaje().getPosX(),
+//										 juego.getUbicacionPersonaje().getPosY(),
+//										 posNpc[0], posNpc[1] )){
 //						
 //						idEnemigo = actualNPC.getId();
 //						float XY[] = Mundo.isoA2D(x, y);
@@ -612,6 +654,8 @@ public class Entidad {
 //					}
 //				}
 //			}
+			
+			
 		}
 	}
 
@@ -899,12 +943,12 @@ private int getFrame() {
 		return yOffset;
 	}
 	
-	public static boolean distanciaPeleable(int npcX, int npcY, int perX, int perY){
+	public static boolean distanciaPeleable(float npcX, float npcY, float perX, float perY){
 		
-		int radio = 1;
-		int distanciaX = Math.abs(npcX - perX) ;
-		int distanciaY = Math.abs(npcY - perY);
-		int distanciaTotal = (int) Math.sqrt(Math.pow((float)distanciaX, 2) + Math.pow((float)distanciaY, 2));
+		float radio = 1;
+		float distanciaX = Math.abs(npcX - perX) ;
+		float distanciaY = Math.abs(npcY - perY);
+		float distanciaTotal = (float) Math.sqrt(Math.pow((float)distanciaX, 2) + Math.pow((float)distanciaY, 2));
 		return distanciaTotal==radio;
 	}
 }
