@@ -34,27 +34,31 @@ import mensajeria.Paquete;
 
 public class Pantalla {
 
-	private JFrame pantalla;
-	private Canvas canvas;
+  private JFrame pantalla;
+  private Canvas canvas;
 
 	// Menus
-	public static MenuInventario menuInventario;
-	public static MenuAsignarSkills menuAsignar;
-	public static MenuStats menuStats;
-	public static MenuEscape menuEscp;
-	public static VentanaContactos ventContac;
-		
-	private final Gson gson = new Gson();
+  public static MenuInventario menuInventario;
+  public static MenuAsignarSkills menuAsignar;
+  public static MenuStats menuStats;
+  public static MenuEscape menuEscp;
+  public static VentanaContactos ventContac;
 
-	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
-		pantalla = new JFrame(NOMBRE);
-		pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-			new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-			new Point(0,0),"custom cursor"));
+  private final Gson gson = new Gson();
 
-		pantalla.setSize(ANCHO, ALTO);
-		pantalla.setResizable(false);
+  /*
+   * @author Javadabadu
+   * Constructor Pantalla
+   */
+  public Pantalla(final String nombre, final int ancho, final int alto, final Cliente cliente) {
+    pantalla = new JFrame(nombre);
+    pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+    pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+	new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
+	"custom cursor"));
+
+    pantalla.setSize(ancho, alto);
+    pantalla.setResizable(false);
 		pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		pantalla.addWindowListener(new WindowAdapter() {
 			@Override
@@ -78,49 +82,47 @@ public class Pantalla {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				int tecla = e.getKeyCode();
-				if(Estado.getEstado().esEstadoDeJuego()) {
-				if (tecla == KeyEvent.VK_I) {
+				if (Estado.getEstado().esEstadoDeJuego()) {
+					if (tecla == KeyEvent.VK_I) {
 						if (menuInventario == null) {
 							menuInventario = new MenuInventario(cliente);
 							menuInventario.setVisible(true);
 						}
-					}
-				 else if (tecla == KeyEvent.VK_A) {
+					} else if (tecla == KeyEvent.VK_A) {
 						if (menuAsignar == null) {
 							menuAsignar = new MenuAsignarSkills(cliente);
 							menuAsignar.setVisible(true);
-						} 
-				} else if (tecla == KeyEvent.VK_S) {
+						}
+					} else if (tecla == KeyEvent.VK_S) {
 						if (menuStats == null) {
 							menuStats = new MenuStats(cliente);
 							menuStats.setVisible(true);
 						}
-				} else if (tecla == KeyEvent.VK_ESCAPE) {
-					
+					} else if (tecla == KeyEvent.VK_ESCAPE) {
+
 						if (menuEscp == null) {
 							menuEscp = new MenuEscape(cliente);
 							menuEscp.setVisible(true);
 						}
 					}
 				} else if (tecla == KeyEvent.VK_C) {
-//					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (ventContac == null) {
-							ventContac = new VentanaContactos(cliente.getJuego());
-							ventContac.setVisible(true);
-						}
-//					}
+					// if(Estado.getEstado().esEstadoDeJuego()) {
+					if (ventContac == null) {
+						ventContac = new VentanaContactos(cliente.getJuego());
+						ventContac.setVisible(true);
+					}
+					// }
 				}
 			}
 		});
-
 
 		pantalla.setLocationRelativeTo(null);
 		pantalla.setVisible(false);
 
 		canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(ANCHO, ALTO));
-		canvas.setMaximumSize(new Dimension(ANCHO, ALTO));
-		canvas.setMinimumSize(new Dimension(ANCHO, ALTO));
+		canvas.setPreferredSize(new Dimension(ancho, alto));
+		canvas.setMaximumSize(new Dimension(ancho, alto));
+		canvas.setMinimumSize(new Dimension(ancho, alto));
 		canvas.setFocusable(false);
 
 		pantalla.add(canvas);
@@ -131,26 +133,26 @@ public class Pantalla {
 		return canvas;
 	}
 
-	public JFrame getFrame() {
-		return pantalla;
+ public JFrame getFrame() {
+     return pantalla;
 	}
 
-	public void mostrar() {
-		pantalla.setVisible(true);
-	}
+  public void mostrar() {
+    pantalla.setVisible(true);
+  }
 
 	public static void centerString(Graphics g, Rectangle r, String s) {
-	    FontRenderContext frc = new FontRenderContext(null, true, true);
+		FontRenderContext frc = new FontRenderContext(null, true, true);
 
-	    Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
-	    int rWidth = (int) Math.round(r2D.getWidth());
-	    int rHeight = (int) Math.round(r2D.getHeight());
-	    int rX = (int) Math.round(r2D.getX());
-	    int rY = (int) Math.round(r2D.getY());
+		Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
+		int rWidth = (int) Math.round(r2D.getWidth());
+		int rHeight = (int) Math.round(r2D.getHeight());
+		int rX = (int) Math.round(r2D.getX());
+		int rY = (int) Math.round(r2D.getY());
 
-	    int a = (r.width / 2) - (rWidth / 2) - rX;
-	    int b = (r.height / 2) - (rHeight / 2) - rY;
+		int a = (r.width / 2) - (rWidth / 2) - rX;
+		int b = (r.height / 2) - (rHeight / 2) - rY;
 
-	    g.drawString(s, r.x + a, r.y + b);
+		g.drawString(s, r.x + a, r.y + b);
 	}
 }
