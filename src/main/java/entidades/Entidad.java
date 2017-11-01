@@ -89,7 +89,7 @@ public class Entidad {
 	private int[] tilePersonajes;
 	private int[] tilePersonajesNPC;
 	private int idEnemigo;
-	private int[][] posNpcs;
+
 
 	// Ubicacion para abrir comerciar.
 	private float xComercio;
@@ -147,21 +147,6 @@ public class Entidad {
 		juego.getUbicacionPersonaje().setPosY(y);
 		juego.getUbicacionPersonaje().setDireccion(getDireccion());
 		juego.getUbicacionPersonaje().setFrame(getFrame());
-		
-		posNpcs = new int[10][2];
-		
-		int key;
-		Iterator<Integer>  it = juego.getNpcs().keySet().iterator();
-		PaqueteNpc actualNPC;
-		int i = 0;
-		while(it.hasNext()){
-			key = it.next();
-			actualNPC = juego.getNpcs().get(key);
-			posNpcs[i][0] = actualNPC.getPosX();
-			posNpcs[i][1] = actualNPC.getPosY();
-			
-			i++;
-		}
 		
 		
 	}
@@ -428,6 +413,7 @@ public class Entidad {
 				}
 				
 				
+				
 
 				// Me fijo si hice click sobre un NPC
 //				it = juego.getNpcs().keySet().iterator();
@@ -608,12 +594,21 @@ public class Entidad {
 				enMovimiento = false;
 			}
 			
-			for (int i = 0; i < posNpcs.length; i++) {
-				if(distanciaPeleable(juego.getUbicacionPersonaje().getPosX(),
+//			System.out.println("X: "+ juego.getUbicacionPersonaje().getPosX() + " | Y: "+ juego.getUbicacionPersonaje().getPosY());
+//			System.out.println("X: "+ x + " | Y: " + y);
+//			System.out.println("NPCX: "+ juego.getNpcs().get(4).getPosX() + " | NPCY: " + juego.getNpcs().get(4).getPosY());
+//			System.out.println("NPCXLEO: "+ juego.getNpcs().get(8).getPosX() + " | NPCYLEO: " + juego.getNpcs().get(8).getPosY());
+//			
+			
+		Iterator<Integer> it = juego.getNpcs().keySet().iterator();
+		int key;
+		while (it.hasNext()) {
+			key = it.next();
+			if(distanciaPeleable(juego.getUbicacionPersonaje().getPosX(),
 						 juego.getUbicacionPersonaje().getPosY(),
-						 posNpcs[i][0], posNpcs[i][1] )){
+						 juego.getNpcs().get(key).getPosX(), juego.getNpcs().get(key).getPosY() )){
 					
-					PaqueteNpc actualNpc = juego.getNpcs().get(i);
+					PaqueteNpc actualNpc = juego.getNpcs().get(key);
 					idEnemigo = actualNpc.getId();
 					float XY[] = Mundo.isoA2D(x, y);
 
@@ -621,42 +616,9 @@ public class Entidad {
 																MenuNPC.menuBatallar);
 					
 				}
-			}
-			
-//			System.out.println("X: "+ juego.getUbicacionPersonaje().getPosX() + " | Y: "+ juego.getUbicacionPersonaje().getPosY());
-//			
-//			Iterator<Integer> it = juego.getUbicacionPersonajes().keySet()
-//					.iterator();
-//			int key;
-//			it = juego.getNpcs().keySet().iterator();
-//			PaqueteNpc actualNPC;
-//			while(it.hasNext()){
-//				key = it.next();
-//				actualNPC = juego.getNpcs().get(key);
-//				System.out.println(actualNPC.getPosX() + " | "  + actualNPC.getPosY());
-//				tilePersonajesNPC = Mundo.mouseATile(actualNPC.getPosX(),
-////													actualNPC.getPosY());
-//				float[] posNpc = new float[2];
-//				posNpc[0] = actualNPC.getPosX();
-//				posNpc[1] = actualNPC.getPosY();
-//				
-//				if(actualNPC != null){
-//					if(distanciaPeleable(juego.getUbicacionPersonaje().getPosX(),
-//										 juego.getUbicacionPersonaje().getPosY(),
-//										 posNpc[0], posNpc[1] )){
-//						
-//						idEnemigo = actualNPC.getId();
-//						float XY[] = Mundo.isoA2D(x, y);
-//
-//						juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
-//																	MenuNPC.menuBatallar);
-//						juego.getHandlerMouse().setNuevoClick(false);
-//					}
-//				}
-//			}
-			
-			
+		
 		}
+	  }
 	}
 
 	/**
@@ -945,10 +907,10 @@ private int getFrame() {
 	
 	public static boolean distanciaPeleable(float npcX, float npcY, float perX, float perY){
 		
-		float radio = 1;
+		float radio = 30;
 		float distanciaX = Math.abs(npcX - perX) ;
 		float distanciaY = Math.abs(npcY - perY);
 		float distanciaTotal = (float) Math.sqrt(Math.pow((float)distanciaX, 2) + Math.pow((float)distanciaY, 2));
-		return distanciaTotal==radio;
+		return distanciaTotal<=radio;
 	}
 }
