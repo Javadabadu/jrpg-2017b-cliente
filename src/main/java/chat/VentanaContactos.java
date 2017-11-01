@@ -22,7 +22,7 @@ import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
 
-public class VentanaContactos extends JFrame {	
+public class VentanaContactos extends JFrame{	
 
 	private static final long serialVersionUID = 1L;
 	private static final int F_ALTO = 273;
@@ -52,7 +52,7 @@ public class VentanaContactos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaContactos(final Juego juego) {
+	public VentanaContactos(final Juego juego){
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(F_VALORX, F_VALORY, F_ANCHO, F_ALTO);
@@ -60,17 +60,20 @@ public class VentanaContactos extends JFrame {
 		setTitle("Usuarios");
 		
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(PANEL_BORDE,PANEL_BORDE,PANEL_BORDE, PANEL_BORDE));
+		contentPane.setBorder(
+			new EmptyBorder(
+				PANEL_BORDE,PANEL_BORDE,PANEL_BORDE, PANEL_BORDE));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(SCROLL_VALORX, SCROLL_VALORY, SCROLL_ANCHO, SCROLL_ALTO);
+		scrollPane.setBounds(
+				SCROLL_VALORX, SCROLL_VALORY, SCROLL_ANCHO, SCROLL_ALTO);
 		contentPane.add(scrollPane);
 
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent arg0) {
+			public void windowClosing(final WindowEvent arg0) {
 				Pantalla.ventContac = null;
 				dispose();
 			}
@@ -91,7 +94,8 @@ public class VentanaContactos extends JFrame {
 				}
 			}
 		});
-		botonMc.setBounds(BOTONMC_VALORX, BOTONMC_VALORY, BOTONMC_ANCHO, BOTONMC_ALTO);
+		botonMc.setBounds(
+				BOTONMC_VALORX, BOTONMC_VALORY, BOTONMC_ANCHO, BOTONMC_ALTO);
 		contentPane.add(botonMc);
 		
 		// Cargo la lista de contactos
@@ -126,7 +130,8 @@ public class VentanaContactos extends JFrame {
 		scrollPane.setViewportView(list);
 		
 		background = new JLabel(new ImageIcon("recursos//background.jpg"));
-		background.setBounds(BACK_VALORX,BACK_VALORY, BACK_ANCHO,BACK_ALTO);
+		background.setBounds(
+				BACK_VALORX,BACK_VALORY, BACK_ANCHO,BACK_ALTO);
 		contentPane.add(background);
 	}
 

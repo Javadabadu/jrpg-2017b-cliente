@@ -1,7 +1,11 @@
 package comandos;
 
 import mensajeria.PaquetePersonaje;
-
+/**
+ * Actualiza el Inventario del personaje.
+ * @author prograAvanzada
+ * 
+ */
 public class ActualizarInventario extends ComandosEscucha {
 
 	@Override

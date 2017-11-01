@@ -1,11 +1,15 @@
 package comandos;
 
 import javax.swing.JOptionPane;
-
 import dominio.Item;
 import mensajeria.PaqueteComerciar;
-
+/**
+ * 
+ * @author Progra Avanzada
+ *
+ */
 public class ActualizarComercio extends ComandosEscucha {
+private static final int TAM_CUENTA = 9;
 
 	@Override
 	public void ejecutar() {
@@ -18,10 +22,10 @@ public class ActualizarComercio extends ComandosEscucha {
 		sizeAObtener = paqueteComerciar.getItemsADar().size();
 		cuentaSize = sizeMisItems - sizeADar + sizeAObtener;
 		if (sizeADar != 0) {
-			if (cuentaSize <= 9) {
+			if (cuentaSize <= TAM_CUENTA) {
 				juego.getCliente().getM1().getChckbxListo().setEnabled(true);
 				juego.getCliente().getM1().getLeyenda().setVisible(false);
-			} else if (cuentaSize > 9) {
+			} else if (cuentaSize > TAM_CUENTA) {
 				juego.getCliente().getM1().getChckbxListo().setEnabled(false);
 				juego.getCliente().getM1().getLeyenda().setVisible(true);
 			}			
@@ -30,7 +34,7 @@ public class ActualizarComercio extends ComandosEscucha {
 			juego.getCliente().getM1().getChckbxListo().setEnabled(false);
 			juego.getCliente().getM1().getLeyenda().setVisible(true);
 		}
-		if(juego.getCliente().getPaqueteComercio().getListo() == paqueteComerciar.getListo()) {
+		if (juego.getCliente().getPaqueteComercio().getListo() == paqueteComerciar.getListo()) {
 				//actualizar la lista
 				juego.getCliente().getM1().getObtener().removeAllElements();
 				for (Item item : paqueteComerciar.getItemsADar()) {	
@@ -48,7 +52,7 @@ public class ActualizarComercio extends ComandosEscucha {
 			// modifico la cant de listos en el jframe y tambien el lbl
 			juego.getCliente().getM1().setCantListos(paqueteComerciar.getListo());
 			juego.getCliente().getM1().getCantListo().setText(String.valueOf(juego.getCliente().getM1().getCantListos()) + "/2");
-			if(juego.getCliente().getM1().getCantListos() == 2) {
+			if (juego.getCliente().getM1().getCantListos() == 2) {
 				JOptionPane.showMessageDialog(juego.getCliente().getM1(), "Se ha realizado con exito el comercio");
 				juego.getCliente().getM1().dispose();
 			}
