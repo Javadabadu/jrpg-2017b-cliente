@@ -8,10 +8,14 @@ import javax.swing.JOptionPane;
 import cliente.Cliente;
 import mensajeria.Comando;
 import recursos.Recursos;
-
+/**
+ * 
+ * @author UnlamPrograAvanzada
+ *
+ */
 public class CargarRecursos extends Thread {
 
-	private Cliente cliente;
+	private final Cliente cliente;
 
 	public CargarRecursos(Cliente cliente) {
 		this.cliente = cliente;
