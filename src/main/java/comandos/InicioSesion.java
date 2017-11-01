@@ -4,7 +4,11 @@ import javax.swing.JOptionPane;
 
 import mensajeria.Paquete;
 import mensajeria.PaquetePersonaje;
-
+/**
+ * 
+ * @author UnlamPrograAvanzada
+ *
+ */
 public class InicioSesion extends ComandosCliente {
 
 	@Override
