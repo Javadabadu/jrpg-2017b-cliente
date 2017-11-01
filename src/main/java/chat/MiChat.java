@@ -26,66 +26,68 @@ import juego.Pantalla;
 import mensajeria.Comando;
 
 /**
- * @author UnlamPrograAvanzada contenedor que tendra el chat. 
+ * @author UnlamPrograAvanzada contenedor que tendra el chat.
  */
 
 public class MiChat extends JFrame {
 
-  private static final long serialVersionUID = 1L;
-  private static final int F_ALTO = 300;
-  private static final  int F_ANCHO = 450;
-  private static final int F_VALORX =100;
-  private static final int F_VALORY = 100;
-  private static final int PANEL_BORDE = 5;
-  private static final int SCROLL_ALTO = 201;
-  private static final  int SCROLL_ANCHO = 414;
-  private static final int SCROLL_VALORX = 10;
-  private static final int SCROLL_VALORY = 11;
-  private static final int BACK_ALTO = 283;
-  private static final  int BACK_ANCHO = 480;
-  private static final int BACK_VALORX = -20;
-  private static final int BACK_VALORY = 0;
-  private static final int BOTONENV_ALTO = 23;
-  private static final  int BOTONENV_ANCHO = 81;
-  private static final int BOTONENV_VALORX = 225;
-  private static final int BOTONENV_VALORY = 334;
-  private static final int TEXTO_ALTO = 27;
-  private static final  int TEXTO_ANCHO = 314;
-  private static final int TEXTO_VALORX = 10;
-  private static final int TEXTO_VALORY = 223;
-  private static final String TIT_SALA = "Sala";
-  private JPanel contentPane;
-  private JTextField texto;
-  private JTextArea chat;
-  /**
-   * @param atributo que tendra el juego actual.
-   */
-  private Juego juego;
-  private final Gson gson = new Gson();
-  private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
-  private DefaultCaret caret;
+	private static final long serialVersionUID = 1L;
+	private static final int F_ALTO = 300;
+	private static final int F_ANCHO = 450;
+	private static final int F_VALORX = 100;
+	private static final int F_VALORY = 100;
+	private static final int PANEL_BORDE = 5;
+	private static final int SCROLL_ALTO = 201;
+	private static final int SCROLL_ANCHO = 414;
+	private static final int SCROLL_VALORX = 10;
+	private static final int SCROLL_VALORY = 11;
+	private static final int BACK_ALTO = 283;
+	private static final int BACK_ANCHO = 480;
+	private static final int BACK_VALORX = -20;
+	private static final int BACK_VALORY = 0;
+	private static final int BOTONENV_ALTO = 23;
+	private static final int BOTONENV_ANCHO = 81;
+	private static final int BOTONENV_VALORX = 225;
+	private static final int BOTONENV_VALORY = 334;
+	private static final int TEXTO_ALTO = 27;
+	private static final int TEXTO_ANCHO = 314;
+	private static final int TEXTO_VALORX = 10;
+	private static final int TEXTO_VALORY = 223;
+	private static final String TIT_SALA = "Sala";
+	private JPanel contentPane;
+	private JTextField texto;
+	private JTextArea chat;
 
+	/**
+	 * @param atributo
+	 *            que tendra el juego actual.
+	 * 
+	 */
+	private Juego juego;
+	private final Gson gson = new Gson();
+	private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
+	private DefaultCaret caret;
 
 	public MiChat(final Juego juego) {
 		this.juego = juego;
-		setTitle("Mi Chat");	
+		setTitle("Mi Chat");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(F_VALORX, F_VALORY , F_ANCHO, F_ALTO);
+		setBounds(F_VALORX, F_VALORY, F_ANCHO, F_ALTO);
 		setResizable(false);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(PANEL_BORDE,PANEL_BORDE,PANEL_BORDE,PANEL_BORDE));
+		contentPane.setBorder(new EmptyBorder(PANEL_BORDE, PANEL_BORDE, PANEL_BORDE, PANEL_BORDE));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(SCROLL_VALORX, SCROLL_VALORY,SCROLL_ANCHO, SCROLL_ALTO);
+		scrollPane.setBounds(SCROLL_VALORX, SCROLL_VALORY, SCROLL_ANCHO, SCROLL_ALTO);
 		contentPane.add(scrollPane);
-		
+
 		chat = new JTextArea();
 		chat.setEditable(false);
 		scrollPane.setViewportView(chat);
-		caret = (DefaultCaret)chat.getCaret();
+		caret = (DefaultCaret) chat.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
 		texto = new JTextField();
@@ -93,35 +95,35 @@ public class MiChat extends JFrame {
 			public void windowOpened(WindowEvent e) {
 				texto.requestFocus();
 			}
-			
+
 			@Override
 			public void windowClosing(WindowEvent e) {
 				if (getTitle() == TIT_SALA) {
 					if (Pantalla.ventContac != null) {
-						VentanaContactos.getBotonMc().setEnabled(true);						
+						VentanaContactos.getBotonMc().setEnabled(true);
 					}
 				}
 				juego.getChatsActivos().remove(getTitle());
 			}
 		});
-		
-		//SI TOCO ENTER
+
+		// SI TOCO ENTER
 		texto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!texto.getText().equals("")) {
+				if (!texto.getText().equals("")) {
 					chat.append("Me: " + texto.getText() + "\n");
-					
+
 					juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
 					juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
 					juego.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
-					
+
 					// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
 					juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
 					// El user receptor en espacio indica que es para todos
-					if( getTitle() == TIT_SALA ){
+					if (getTitle() == TIT_SALA) {
 						juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
 					}
-					
+
 					try {
 						juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
 					} catch (IOException e1) {
@@ -132,26 +134,26 @@ public class MiChat extends JFrame {
 				texto.requestFocus();
 			}
 		});
-		
-		//SI TOCO ENVIAR
+
+		// SI TOCO ENVIAR
 		JButton enviar = new JButton("ENVIAR");
 		enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
 		enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!texto.getText().equals("")) {
+				if (!texto.getText().equals("")) {
 					chat.append("Me: " + texto.getText() + "\n");
-					
+
 					juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
 					juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
 					juego.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
-					
+
 					// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
 					juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
 					// El user receptor en espacio indica que es para todos
-					if(getTitle() == "Sala"){
+					if (getTitle() == "Sala") {
 						juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
 					}
-					
+
 					try {
 						juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
 					} catch (IOException e1) {
@@ -164,15 +166,15 @@ public class MiChat extends JFrame {
 			}
 		});
 		enviar.setBounds(BOTONENV_VALORX, BOTONENV_VALORY, BOTONENV_ANCHO, BOTONENV_ALTO);
-		
+
 		contentPane.add(enviar);
-		texto.setBounds( TEXTO_VALORX, TEXTO_VALORY, TEXTO_ANCHO, TEXTO_ALTO);
+		texto.setBounds(TEXTO_VALORX, TEXTO_VALORY, TEXTO_ANCHO, TEXTO_ALTO);
 		contentPane.add(texto);
 		texto.setColumns(10);
 		background.setBounds(BACK_VALORX, BACK_VALORY, BACK_ANCHO, BACK_ALTO);
 		contentPane.add(background);
 	}
-	
+
 	public JTextArea getChat() {
 		return chat;
 	}

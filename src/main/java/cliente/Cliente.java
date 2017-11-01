@@ -1,59 +1,62 @@
 package cliente;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.Properties;
-
-import javax.swing.JOptionPane;
-
 import com.google.gson.Gson;
 
 import comandos.ComandosCliente;
+
 import frames.MenuCarga;
 import frames.MenuComerciar;
 import frames.MenuJugar;
 import frames.MenuMapas;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import java.net.Socket;
+
+import java.util.Properties;
+
+import javax.swing.JOptionPane;
+
 import juego.Juego;
+
 import mensajeria.Comando;
 import mensajeria.Paquete;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteMensaje;
 import mensajeria.PaquetePersonaje;
 import mensajeria.PaqueteUsuario;
+
 /**La clase Cliente tiene como función  
  * ejecutar el cliente.
  */
+
 public class Cliente extends Thread {
 
-	private Socket cliente;
-	private String miIp;
-	private ObjectInputStream entrada;
-	private ObjectOutputStream salida;
-	
-	// Objeto gson
-	private final Gson gson = new Gson();
-
-	// Paquete usuario y paquete personaje
-	private PaqueteUsuario paqueteUsuario;
-	private PaquetePersonaje paquetePersonaje;
-	private PaqueteComerciar paqueteComercio;
-	private PaqueteMensaje paqueteMensaje = new PaqueteMensaje();
-
-	// Acciones que realiza el usuario
-	private int accion;
-
-	//MENU COMERCIAR
-	private MenuComerciar m1;
-		
-	// Ip y puerto
-	private String ip;
-	private int puerto;
-	/**Pide la accion
-	 * @return Devuelve la accion
-	 */
+  private static final int SIN_PUERTO = -1;	
+  private Socket cliente;
+  private String miIp;
+  private ObjectInputStream entrada;
+  private ObjectOutputStream salida;
+  private final Gson gson = new Gson();
+  private PaqueteUsuario paqueteUsuario;
+  private PaquetePersonaje paquetePersonaje;
+  private PaqueteComerciar paqueteComercio;
+  private PaqueteMensaje paqueteMensaje = new PaqueteMensaje();
+  // Acciones que realiza el usuario
+  private int accion;
+  //MENU COMERCIAR
+  private MenuComerciar m1;	
+  // Ip y puerto
+  private String ip;
+  private final int puerto = obtenerPuerto();
+  
+ /**
+  *@return Devuelve la accion
+  */
 	public int getAccion() {
 		return accion;
 	}
@@ -76,11 +79,8 @@ public class Cliente extends Thread {
 			ip = "localhost";
 		}
 		try {
-			Properties prop = new Properties();
-			FileInputStream archivoPuerto = new FileInputStream("puerto.properties");
-			prop.load(archivoPuerto);
-			String puertoArchivo = prop.getProperty("puerto");
-			puerto = Integer.parseInt(puertoArchivo);
+	
+		//	puerto = Integer.parseInt(puertoArchivo);
 			cliente = new Socket(ip, puerto);
 			miIp = cliente.getInetAddress().getHostAddress();
 			entrada = new ObjectInputStream(cliente.getInputStream());
@@ -104,6 +104,23 @@ public class Cliente extends Thread {
 			System.exit(1);
 		}
 	}
+	
+	private int obtenerPuerto() {
+		String puertoArchivo = null;
+		try {
+			Properties prop = new Properties();
+			FileInputStream archivoPuerto = new FileInputStream("puerto.properties");
+			prop.load(archivoPuerto);
+			  puertoArchivo= prop.getProperty("puerto");
+			
+		}catch(IOException IO) {
+			JOptionPane.showMessageDialog(null, "No se  ha indicado el puerto para el juego.");
+			System.exit(1);
+		}
+		return Integer.parseInt(puertoArchivo);
+		
+	}
+		
 	
 	@Override
 	public void run() {
