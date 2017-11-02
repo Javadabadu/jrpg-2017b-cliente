@@ -1,12 +1,17 @@
 package comandos;
 
 import mensajeria.PaquetePersonaje;
-
+/**
+ * 
+ * @author UnlamPrograAvanzada 
+ * se actualizan los items
+ */
 public class ActualizarTrueque extends ComandosEscucha {
 
 	@Override
 	public void ejecutar() {
-		PaquetePersonaje paquetePersonaje = (PaquetePersonaje) gson.fromJson(cadenaLeida, PaquetePersonaje.class);
+		PaquetePersonaje paquetePersonaje =
+				(PaquetePersonaje) gson.fromJson(cadenaLeida, PaquetePersonaje.class);
 
 		juego.getPersonajesConectados().remove(paquetePersonaje.getId());
 		juego.getPersonajesConectados().put(paquetePersonaje.getId(), paquetePersonaje);
@@ -15,7 +20,8 @@ public class ActualizarTrueque extends ComandosEscucha {
 			juego.actualizarPersonaje();
 			juego.getEstadoJuego().actualizarPersonaje();
 			juego.getCliente().actualizarItems(paquetePersonaje);
-			juego.getCliente().actualizarPersonaje(juego.getPersonajesConectados().get(paquetePersonaje.getId()));
+			juego.getCliente().actualizarPersonaje(
+					juego.getPersonajesConectados().get(paquetePersonaje.getId()));
 
 		}
 
