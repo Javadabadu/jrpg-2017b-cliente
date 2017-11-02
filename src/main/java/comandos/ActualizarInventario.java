@@ -1,17 +1,11 @@
 package comandos;
 
 import mensajeria.PaquetePersonaje;
-/**
- * 
- * @author UnlamPrograAvanzada
- * se actualiza el inventario
-=======
 
 /**
  * Actualiza el Inventario del personaje.
  * @author prograAvanzada
  * 
->>>>>>> effef49f97e6a125aa58f5894f3f977cfc47255b
  */
 public class ActualizarInventario extends ComandosEscucha {
 
