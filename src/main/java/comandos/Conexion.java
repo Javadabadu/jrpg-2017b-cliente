@@ -7,7 +7,7 @@ import chat.VentanaContactos;
 import mensajeria.PaqueteDePersonajes;
 import mensajeria.PaquetePersonaje;
 /**
- * @author prograAvanzada
+ * @author Javadabadu
  * 
  */
 public class Conexion extends ComandosEscucha {

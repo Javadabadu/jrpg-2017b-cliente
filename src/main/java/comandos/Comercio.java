@@ -8,7 +8,7 @@ import frames.MenuComerciar;
 import mensajeria.Paquete;
 import mensajeria.PaqueteComerciar;
 /**
- * @author prograAvanzada
+ * @author Javadabadu
  * 
  */
 public class Comercio extends ComandosEscucha {

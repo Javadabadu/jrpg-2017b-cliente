@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 /**
  * 
- * @author UnlamPrograAvanzada
+ * @author Javadabadu
  * carga la imagen
  */
 public class CargadorImagen {

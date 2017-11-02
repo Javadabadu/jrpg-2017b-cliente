@@ -3,7 +3,7 @@ package comandos;
 import juego.Juego;
 import mensajeria.Comando;
 /**
- * @author prograAvanzada
+ * @author Javadabadu
  * 
  */
 public abstract class ComandosEscucha extends Comando {

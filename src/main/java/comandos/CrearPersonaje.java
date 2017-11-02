@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import mensajeria.PaquetePersonaje;
 /**
  * 
- * @author UnlamPrograAvanzada se crea el personaje
+ * @author Javadabadu se crea el personaje
  *
  */
 public class CrearPersonaje extends ComandosCliente {

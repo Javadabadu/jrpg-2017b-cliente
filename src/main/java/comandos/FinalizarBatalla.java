@@ -4,7 +4,7 @@ import estados.Estado;
 import mensajeria.PaqueteFinalizarBatalla;
 /**
  * Finaliza la batalla
- * @author prograAvanzada
+ * @author Javadavadu
  * 
  */
 public class FinalizarBatalla extends ComandosEscucha {

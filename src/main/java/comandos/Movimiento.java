@@ -2,7 +2,7 @@ package comandos;
 
 import mensajeria.PaqueteDeMovimientos;
 /**
- * @author prograAvanzada
+ * @author Javadabadu
  * 
  */
 public class Movimiento extends ComandosEscucha {

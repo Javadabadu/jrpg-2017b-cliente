@@ -6,7 +6,7 @@ import estados.EstadoBatallaNPC;
 import mensajeria.PaqueteBatalla;
 /**
  * 
- * @author UnlamPrograAvanzada
+ * @author Javadabadu
  *
  */
 public class Batalla extends ComandosEscucha{

@@ -4,7 +4,7 @@ import mensajeria.PaquetePersonaje;
 
 /**
  * Actualiza el Inventario del personaje.
- * @author prograAvanzada
+ * @author Javadabadu
  * 
  */
 public class ActualizarInventario extends ComandosEscucha {
