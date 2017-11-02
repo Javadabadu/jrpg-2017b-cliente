@@ -4,7 +4,11 @@ import javax.swing.JOptionPane;
 
 import mensajeria.Paquete;
 import mensajeria.PaquetePersonaje;
-
+/**
+ * 
+ * @author UnlamPrograAvanzada
+ *
+ */
 public class InicioSesion extends ComandosCliente {
 
 	@Override
@@ -20,9 +24,12 @@ public class InicioSesion extends ComandosCliente {
 
 		} else {
 			if (paquete.getMensaje().equals(Paquete.msjFracaso))
+			{
+
 				JOptionPane.showMessageDialog(null, "Error al iniciar sesión."
 						+ " Revise el usuario y la contraseña");
 
+			}
 			// El usuario no pudo iniciar sesión
 			cliente.getPaqueteUsuario().setInicioSesion(false);
 		}

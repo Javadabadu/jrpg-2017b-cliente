@@ -4,11 +4,15 @@ import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoBatallaNPC;
 import mensajeria.PaqueteBatalla;
-
-public class Batalla extends ComandosEscucha {
+/**
+ * 
+ * @author UnlamPrograAvanzada
+ *
+ */
+public class Batalla extends ComandosEscucha{
 
 	@Override
-	public void ejecutar() {
+	public void ejecutar(){
 		
 		PaqueteBatalla paqueteBatalla = (PaqueteBatalla) gson.fromJson(cadenaLeida, PaqueteBatalla.class);
 		juego.getPersonaje().setEstado(Estado.estadoBatalla);
@@ -20,7 +24,5 @@ public class Batalla extends ComandosEscucha {
 			juego.setEstadoBatalla(new EstadoBatallaNPC(juego, paqueteBatalla));
 			Estado.setEstado(juego.getEstadoBatallaNPC());
 		}
-		
 	}
-
 }
