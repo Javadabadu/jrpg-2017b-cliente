@@ -7,7 +7,7 @@ import mensajeria.Comando;
  * 
  */
 public abstract class ComandosEscucha extends Comando {
-	private Juego juego;
+	protected Juego juego;
 	public void setJuego(final Juego juego) {
 		this.juego = juego;
 	}
