@@ -16,6 +16,9 @@ public class CargadorImagen {
 	}
 	public static BufferedImage cargarImagen(final String path) {
 		try {
+			/**
+			 * @return se retorna la imagen 
+			 */
 			return  ImageIO.read(CargadorImagen.class.getResource(path));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Error al cargar el archivo " + path);
