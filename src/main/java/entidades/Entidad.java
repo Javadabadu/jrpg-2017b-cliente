@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
-import com.sun.javafx.collections.MappingChange.Map;
 
 import chat.VentanaContactos;
 import estados.Estado;
