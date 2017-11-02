@@ -4,7 +4,7 @@ import mensajeria.PaquetePersonaje;
 /**
  * 
  * @author UnlamPrograAvanzada 
- * se actualizan los items
+ * se actualiza el trueque
  */
 public class ActualizarTrueque extends ComandosEscucha {
 
