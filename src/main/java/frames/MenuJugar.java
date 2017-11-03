@@ -44,8 +44,8 @@ public class MenuJugar extends JFrame {
 	private static int y4 = 91;
 	private static int width4 = 91;
 	private static int height4 = 23;
-	private static int x5 = 121
-	private static int y5 = 162
+	private static int x5 = 121;
+	private static int y5 = 162;
 	private static int width5 = 191;
 	private static int height5 = 23;
 	private static int top = 5;
