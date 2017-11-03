@@ -6,7 +6,6 @@ import mensajeria.PaquetePersonaje;
  * 
  * @author UnlamPrograAvanzada
  * se actualiza el inventario
-
  */
 
 public class ActualizarInventario extends ComandosEscucha {
@@ -29,4 +28,4 @@ public class ActualizarInventario extends ComandosEscucha {
 	}
 	
 }
-}
+
