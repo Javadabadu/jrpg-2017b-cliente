@@ -13,7 +13,7 @@ public class FinalizarBatalla extends ComandosEscucha {
 	public void ejecutar() {
 		PaqueteFinalizarBatalla paqueteFinalizarBatalla =
 				(PaqueteFinalizarBatalla) gson.fromJson(cadenaLeida, PaqueteFinalizarBatalla.class);
-		juego.getPersonaje().setEstado(Estado.estadoJuego);
+		juego.getPersonaje().setEstado(Estado.getEstadoJuego());
 		Estado.setEstado(juego.getEstadoJuego());
 	}
 }

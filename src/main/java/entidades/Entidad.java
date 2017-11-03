@@ -375,7 +375,7 @@ public class Entidad {
 							&& juego.getPersonajesConectados().get(
 									actual.getIdPersonaje()) != null
 							&& juego.getPersonajesConectados()
-									.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+									.get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
 
 						if (tileMoverme[0] == tilePersonajes[0]
 								&& tileMoverme[1] == tilePersonajes[1]) {

@@ -15,7 +15,7 @@ public class Batalla extends ComandosEscucha{
 	public void ejecutar(){
 		
 		PaqueteBatalla paqueteBatalla = (PaqueteBatalla) gson.fromJson(cadenaLeida, PaqueteBatalla.class);
-		juego.getPersonaje().setEstado(Estado.estadoBatalla);
+		juego.getPersonaje().setEstado(Estado.getEstadoBatalla());
 		Estado.setEstado(null);
 		if (paqueteBatalla.getTipoBatalla() == paqueteBatalla.BATALLAPERSONAJE) {
 			juego.setEstadoBatalla(new EstadoBatalla(juego, paqueteBatalla));

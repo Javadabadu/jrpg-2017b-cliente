@@ -21,7 +21,7 @@ public class PaqueteNpc extends Paquete implements Serializable, Cloneable {
 	private int estado;
 
 	public PaqueteNpc() throws IOException {
-		estado = Estado.estadoOffline;
+		estado = Estado.getEstadoOffline();
 	}
 
 	public PaqueteNpc(int id, String nombre, String tipo, int nivel,
