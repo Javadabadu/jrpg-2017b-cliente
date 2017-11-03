@@ -13,12 +13,12 @@ public class Registro extends ComandosCliente {
 	@Override
 	public void ejecutar() {
 		synchronized (this) {
-			Paquete paquete = (Paquete) gson.fromJson(cadenaLeida, Paquete.class);
+			Paquete paquete = (Paquete) getGson().fromJson(getCadenaLeida(), Paquete.class);
 			if (paquete.getMensaje().equals(Paquete.msjExito)) {
 
 				// Abro el menu para la creaci�n del personaje
 				MenuCreacionPj menuCreacionPJ =
-						new MenuCreacionPj(cliente, cliente.getPaquetePersonaje(), gson);
+						new MenuCreacionPj(cliente, cliente.getPaquetePersonaje(), getGson());
 				menuCreacionPJ.setVisible(true);
 
 				// Espero a que el usuario cree el personaje

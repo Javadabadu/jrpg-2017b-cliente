@@ -14,7 +14,7 @@ public class Talk extends ComandosEscucha {
 		MiChat chat = null;
 		String destino;
 		juego.getCliente().setPaqueteMensaje(
-				(PaqueteMensaje)gson.fromJson(cadenaLeida, PaqueteMensaje.class));
+				(PaqueteMensaje)getGson().fromJson(getCadenaLeida(), PaqueteMensaje.class));
 		if (!(juego.getCliente().getPaqueteMensaje().getUserReceptor() == null)){
 			if (!(juego.getChatsActivos().containsKey(
 					juego.getCliente().getPaqueteMensaje().getUserEmisor()))) {
