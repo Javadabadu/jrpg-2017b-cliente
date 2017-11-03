@@ -1,5 +1,7 @@
 package mundo;
-
+/**
+ * @author Javadabadu
+ */
 public class Nodo {
 
 	private int x;
@@ -7,36 +9,51 @@ public class Nodo {
 	private int indice;
 	private int cantidadDeAdyacentes;
 	private Nodo [] nodosAdyacentes;
-
-	public Nodo(int indice, int x, int y){
+	private static int tamañoNodosAdyacentes = 8;
+	/**
+	 * Constructor parametrizado
+	 */
+	public Nodo(final int indice, final int x, final int y) {
 		this.x = x;
 		this.y = y;
 		this.indice = indice;
 		cantidadDeAdyacentes = 0;
-		nodosAdyacentes = new Nodo[8];
+		nodosAdyacentes = new Nodo[tamañoNodosAdyacentes];
 	}
-
-	public int obtenerX(){
+	/**
+	 * obtiene x
+	 */
+	public int obtenerX() {
 		return x;
 	}
-
-	public int obtenerY(){
+	/**
+	 * obtiene y
+	 */
+	public int obtenerY() {
 		return y;
 	}
-
-	public int obtenerIndice(){
+	/**
+	 * obtiene el indice
+	 */
+	public int obtenerIndice() {
 		return indice;
 	}
-
-	public Nodo [] obtenerNodosAdyacentes(){
+	/**
+	 * obtiene los nodos adyacentes
+	 */
+	public Nodo [] obtenerNodosAdyacentes() {
 		return nodosAdyacentes;
 	}
-
-	public void agregarAdyacente(Nodo nodo){
+	/**
+	 * agrega un nodo adyacente
+	 */
+	public void agregarAdyacente(final Nodo nodo) {
 		nodosAdyacentes[cantidadDeAdyacentes++] = nodo;
 	}
-
-	public int obtenerCantidadDeAdyacentes(){
+	/**
+	 * obtiene la cantidad de adyacentes
+	 */
+	public int obtenerCantidadDeAdyacentes() {
 		return cantidadDeAdyacentes;
 	}
 }
