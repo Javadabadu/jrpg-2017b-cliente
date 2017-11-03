@@ -6,7 +6,7 @@ import mensajeria.Paquete;
 import mensajeria.PaquetePersonaje;
 /**
  * 
- * @author UnlamPrograAvanzada
+ * @author Javadabadu
  *
  */
 public class InicioSesion extends ComandosCliente {

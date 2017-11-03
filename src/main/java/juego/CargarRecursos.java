@@ -10,7 +10,7 @@ import mensajeria.Comando;
 import recursos.Recursos;
 /**
  * 
- * @author UnlamPrograAvanzada
+ * @author Javadabadu
  *
  */
 public class CargarRecursos extends Thread {

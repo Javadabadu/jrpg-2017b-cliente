@@ -3,7 +3,7 @@ package comandos;
 import mensajeria.PaquetePersonaje;
 /**
  * 
- * @author UnlamPrograAvanzada 
+ * @author Javadabadu
  * se actualiza el trueque
  */
 public class ActualizarTrueque extends ComandosEscucha {
