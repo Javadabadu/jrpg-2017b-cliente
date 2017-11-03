@@ -1,63 +1,82 @@
 package mensajeria;
 
 import java.io.Serializable;
-
+/**
+ * @author Javadabadu
+ */
 public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 
 	private int idPj;
 	private String username;
 	private String password;
 	private boolean inicioSesion;
-
-	public PaqueteUsuario(){
+	/**
+	 * Constructor por defecto
+	 */
+	public PaqueteUsuario() {
 
 	}
-
-	public PaqueteUsuario(int pj, String user, String pw){
+	/**
+	 * Constructor parametrizado
+	 */
+	public PaqueteUsuario(final int pj, final String user, final String pw) {
 		idPj = pj;
 		username = user;
 		password = pw;
 		inicioSesion = false;
 	}
-
+	/**
+	 * obtiene el id del pj
+	 */
 	public int getIdPj() {
 		return idPj;
 	}
-
-	public void setIdPj(int idPj) {
+	/**
+	 * setea el id del pj
+	 */
+	public void setIdPj(final int idPj) {
 		this.idPj = idPj;
 	}
-
+	/**
+	 * obtiene el nombre de usuario
+	 */
 	public String getUsername() {
 		return username;
 	}
-
-	public void setUsername(String username) {
+	/**
+	 * setea el nombre de usuario
+	 */
+	public void setUsername(final String username) {
 		this.username = username;
 	}
-
+	/**
+	 * obtiene la contraseña
+	 */
 	public String getPassword() {
 		return password;
 	}
-
-	public void setPassword(String password) {
+	/**
+	 * setea la contraseña
+	 */
+	public void setPassword(final String password) {
 		this.password = password;
 	}
-
+	/**
+	 * obtiene inicioSesion
+	 */
 	public boolean isInicioSesion() {
 		return inicioSesion;
 	}
-
-	public void setInicioSesion(boolean inicioSesion) {
+	/**
+	 * setea inicioSesion
+	 */
+	public void setInicioSesion(final boolean inicioSesion) {
 		this.inicioSesion = inicioSesion;
 	}
-
 	@Override
 	public Object clone() {
 		Object obj = null;
 		obj = super.clone();
 		return obj;
 	}
-
-
 }
