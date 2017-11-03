@@ -187,9 +187,10 @@ public class Entidad {
 		if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 738
 				&& posMouse[0] <= 797 && posMouse[1] >= 545
 				&& posMouse[1] <= 597) {
-			if (Pantalla.menuInventario == null) {
-				Pantalla.menuInventario = new MenuInventario(juego.getCliente());
-				Pantalla.menuInventario.setVisible(true);
+			if (Pantalla.getMenuInventario() == null) {
+				MenuInventario menu = new MenuInventario(juego.getCliente());
+				Pantalla.setMenuInventario(menu);
+				Pantalla.getMenuInventario().setVisible(true);
 			}
 			juego.getHandlerMouse().setNuevoClick(false);
 		}

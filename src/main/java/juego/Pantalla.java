@@ -31,23 +31,22 @@ import frames.MenuJugar;
 import frames.MenuStats;
 import mensajeria.Comando;
 import mensajeria.Paquete;
-
+/**
+ * @author Javadabadu
+ */
 public class Pantalla {
 
   private JFrame pantalla;
   private Canvas canvas;
 
 	// Menus
-  public static MenuInventario menuInventario;
+  private static MenuInventario menuInventario;
   public static MenuAsignarSkills menuAsignar;
   public static MenuStats menuStats;
   public static MenuEscape menuEscp;
   public static VentanaContactos ventContac;
-
   private final Gson gson = new Gson();
-
-  /*
-   * @author Javadabadu
+  /**
    * Constructor Pantalla
    */
   public Pantalla(final String nombre, final int ancho, final int alto, final Cliente cliente) {
@@ -62,7 +61,7 @@ public class Pantalla {
 		pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		pantalla.addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent evt) {
+			public void windowClosing(final WindowEvent evt) {
 				try {
 					Paquete p = new Paquete();
 					p.setComando(Comando.DESCONECTAR);
@@ -72,7 +71,7 @@ public class Pantalla {
 					cliente.getSalida().close();
 					cliente.getSocket().close();
 					System.exit(0);
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
 					System.exit(1);
 				}
@@ -128,20 +127,28 @@ public class Pantalla {
 		pantalla.add(canvas);
 		pantalla.pack();
 	}
-
+    /**
+    * obtiene el Canvas
+    */
 	public Canvas getCanvas() {
 		return canvas;
 	}
-
- public JFrame getFrame() {
-     return pantalla;
+	/**
+	 * obtiene el JFrame
+	 */
+    public JFrame getFrame() {
+        return pantalla;
 	}
-
-  public void mostrar() {
-    pantalla.setVisible(true);
-  }
-
-	public static void centerString(Graphics g, Rectangle r, String s) {
+    /**
+     * muestra la pantalla
+     */
+    public void mostrar() {
+        pantalla.setVisible(true);
+    }
+    /**
+     * centra la cadena
+     */
+	public static void centerString(final Graphics g, final Rectangle r, final String s) {
 		FontRenderContext frc = new FontRenderContext(null, true, true);
 
 		Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
@@ -154,5 +161,65 @@ public class Pantalla {
 		int b = (r.height / 2) - (rHeight / 2) - rY;
 
 		g.drawString(s, r.x + a, r.y + b);
+	}
+	/**
+	 * obtiene el menuInventario
+	 */
+	public static MenuInventario getMenuInventario() {
+		return menuInventario;
+	}
+	/**
+	 * setea el menuInventario
+	 */
+	public static void setMenuInventario(final MenuInventario menuInventario) {
+		Pantalla.menuInventario = menuInventario;
+	}
+	/**
+	 * obtiene el menuAsignarSkills
+	 */
+	public static MenuAsignarSkills getMenuAsignar() {
+		return menuAsignar;
+	}
+	/**
+	 * setea el menuAsignarSkills
+	 */
+	public static void setMenuAsignar(final MenuAsignarSkills menuAsignar) {
+		Pantalla.menuAsignar = menuAsignar;
+	}
+	/**
+	 * obtiene el menuStats
+	 */
+	public static MenuStats getMenuStats() {
+		return menuStats;
+	}
+	/**
+	 * setea el menuStats
+	 */
+	public static void setMenuStats(final MenuStats menuStats) {
+		Pantalla.menuStats = menuStats;
+	}
+	/**
+	 * obtiene el menuEscp
+	 */
+	public static MenuEscape getMenuEscp() {
+		return menuEscp;
+	}
+	/**
+	 * setea el menuEscp
+	 */
+	public static void setMenuEscp(final MenuEscape menuEscp) {
+		Pantalla.menuEscp = menuEscp;
+	}
+	/**
+	 * obtiene la ventContac
+	 */
+	public static VentanaContactos getVentContac() {
+		return ventContac;
+	}
+	/**
+	 * setea la ventContac
+	 */
+	public static void setVentContac(final VentanaContactos ventContac) {
+		Pantalla.ventContac = ventContac;
 	}
 }

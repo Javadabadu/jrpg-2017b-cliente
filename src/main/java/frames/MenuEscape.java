@@ -86,9 +86,10 @@ public class MenuEscape extends JFrame  {
 				dispose();
 				Pantalla.menuEscp = null;
 				if(Estado.getEstado().esEstadoDeJuego()) {
-					if (Pantalla.menuInventario == null) {
-						Pantalla.menuInventario = new MenuInventario(cliente);
-						Pantalla.menuInventario.setVisible(true);
+					if (Pantalla.getMenuInventario() == null) {
+						MenuInventario menu = new MenuInventario(cliente);
+						Pantalla.setMenuInventario(menu);
+						Pantalla.getMenuInventario().setVisible(true);
 					}
 				}
 			}
