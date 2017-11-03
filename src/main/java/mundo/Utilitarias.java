@@ -5,11 +5,15 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
-
-
+/**
+ * @author Javadabadu
+ * 
+ */
 public class Utilitarias {
 
-	public static String archivoAString(String path) {
+	private Utilitarias() {}
+	
+	public static String archivoAString(final String path) {
 		StringBuilder builder = new StringBuilder();
 
 		try {
@@ -22,13 +26,13 @@ public class Utilitarias {
 
 			br.close();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Fallo al intentar cargar el mapa " + path );
+			JOptionPane.showMessageDialog(null, "Fallo al intentar cargar el mapa " + path);
 		}
 
 		return builder.toString();
 	}
 
-	public static int parseInt(String numero) {
+	public static int parseInt(final String numero) {
 		try {
 			return Integer.parseInt(numero);
 		} catch (NumberFormatException e) {
