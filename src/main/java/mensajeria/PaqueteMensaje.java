@@ -44,7 +44,7 @@ public class PaqueteMensaje extends Paquete implements Serializable, Cloneable {
 			return userReceptor;
 		}
 		/**
-		 * setea el usuario receptor
+		 * Setea el usuario receptor
 		 */
 		public void setUserReceptor(final String idReceptor) {
 			this.userReceptor = idReceptor;
