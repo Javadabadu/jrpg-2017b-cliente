@@ -59,7 +59,7 @@ public class EstadoJuego extends Estado {
 		try {
 			// Le envio al servidor que me conecte al mapa y mi posicion
 			juego.getPersonaje().setComando(Comando.CONEXION);
-			juego.getPersonaje().setEstado(Estado.estadoJuego);
+			juego.getPersonaje().setEstado(Estado.getEstadoJuego());
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
 		} catch (IOException e) {
@@ -114,7 +114,7 @@ public class EstadoJuego extends Estado {
 			while (it.hasNext()) {
 				key = it.next();
 				actual = ubicacionPersonajes.get(key);
-				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
 						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()],
 								(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
@@ -138,7 +138,7 @@ public class EstadoJuego extends Estado {
 			while (itNpc.hasNext()) {				
 				key = itNpc.next();
 				actual = npcs.get(key);
-				if (actual != null && npcs.get(actual.getId()).getEstado() == Estado.estadoJuego){
+				if (actual != null && npcs.get(actual.getId()).getEstado() == Estado.getEstadoJuego()){
 		 		Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32),
 		 				(int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10),
 		 				npcs.get(actual.getId()).getNombre());	

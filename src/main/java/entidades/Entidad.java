@@ -175,7 +175,7 @@ public class Entidad {
 		getEntrada();
 		mover();
 
-		juego.getCamara().Centrar(this);
+		juego.getCamara().centrar(this);
 	}
 
 	/**
@@ -187,9 +187,10 @@ public class Entidad {
 		if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 738
 				&& posMouse[0] <= 797 && posMouse[1] >= 545
 				&& posMouse[1] <= 597) {
-			if (Pantalla.menuInventario == null) {
-				Pantalla.menuInventario = new MenuInventario(juego.getCliente());
-				Pantalla.menuInventario.setVisible(true);
+			if (Pantalla.getMenuInventario() == null) {
+				MenuInventario menu = new MenuInventario(juego.getCliente());
+				Pantalla.setMenuInventario(menu);
+				Pantalla.getMenuInventario().setVisible(true);
 			}
 			juego.getHandlerMouse().setNuevoClick(false);
 		}
@@ -375,7 +376,7 @@ public class Entidad {
 							&& juego.getPersonajesConectados().get(
 									actual.getIdPersonaje()) != null
 							&& juego.getPersonajesConectados()
-									.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
+									.get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
 
 						if (tileMoverme[0] == tilePersonajes[0]
 								&& tileMoverme[1] == tilePersonajes[1]) {

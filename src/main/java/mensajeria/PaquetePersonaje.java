@@ -43,7 +43,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * @throws IOException
 	 */
 	public PaquetePersonaje() throws IOException {
-		estado = Estado.estadoOffline;
+		estado = Estado.getEstadoOffline();
 	}
 
 	/**

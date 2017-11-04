@@ -2,20 +2,28 @@ package mensajeria;
 
 import java.io.Serializable;
 import java.util.Map;
-
+/**
+ * @author Javadabadu
+ */
 public class PaqueteDeMovimientos extends Paquete implements Serializable, Cloneable {
 
 	private Map<Integer, PaqueteMovimiento> personajes;
-
-	public PaqueteDeMovimientos(){
+	/**
+	 * Constructor por defecto
+	 */
+	public PaqueteDeMovimientos() {
 
 	}
-
-	public PaqueteDeMovimientos(Map<Integer, PaqueteMovimiento> personajes){
+	/**
+	 * Constructor parametrizado
+	 */
+	public PaqueteDeMovimientos(final Map<Integer, PaqueteMovimiento> personajes) {
 		this.personajes = personajes;
 	}
-
-	public Map<Integer, PaqueteMovimiento> getPersonajes(){
+	/**
+	 * obtiene personajes
+	 */
+	public Map<Integer, PaqueteMovimiento> getPersonajes() {
 		return personajes;
 	}
 

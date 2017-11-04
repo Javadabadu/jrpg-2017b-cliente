@@ -13,17 +13,17 @@ public class InicioSesion extends ComandosCliente {
 
 	@Override
 	public void ejecutar() {
-		Paquete paquete = (Paquete) gson.fromJson(cadenaLeida, Paquete.class);
-		if (paquete.getMensaje().equals(Paquete.msjExito)) {
+		Paquete paquete = (Paquete) getGson().fromJson(getCadenaLeida(), Paquete.class);
+		if (paquete.getMensaje().equals(Paquete.getMsjExito())) {
 
 			// El usuario ya inicio sesi�n
 			cliente.getPaqueteUsuario().setInicioSesion(true);
 
 			// Recibo el paquete personaje con los datos
-			cliente.setPaquetePersonaje(gson.fromJson(cadenaLeida, PaquetePersonaje.class));
+			cliente.setPaquetePersonaje(getGson().fromJson(getCadenaLeida(), PaquetePersonaje.class));
 
 		} else {
-			if (paquete.getMensaje().equals(Paquete.msjFracaso))
+			if (paquete.getMensaje().equals(Paquete.getMsjFracaso()))
 			{
 
 				JOptionPane.showMessageDialog(null, "Error al iniciar sesión."
