@@ -25,7 +25,7 @@ public class EstadoDePersonaje {
 
 		int drawBarra = 0;
 
-		g.drawImage(Recursos.estadoPersonaje, x, y, null);
+		g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
 		g.drawImage(miniaturaPersonaje, x + 10, y + 9, ANCHOMINIATURA,
 				ALTOMINIATURA, null);
@@ -39,7 +39,7 @@ public class EstadoDePersonaje {
 
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD,
+		g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26, drawBarra, ALTOSALUD,
 				null);
 		g.drawString(
 				String.valueOf(personaje.getSalud()) + " / "
@@ -53,7 +53,7 @@ public class EstadoDePersonaje {
 					/ personaje.getEnergiaTope();
 		}
 
-		g.drawImage(Recursos.barraEnergia, x + 80, y + 42, drawBarra,
+		g.drawImage(Recursos.getBarraEnergia(), x + 80, y + 42, drawBarra,
 				ALTOENERGIA, null);
 		g.drawString(
 				String.valueOf(personaje.getEnergia()) + " / "
@@ -69,7 +69,7 @@ public class EstadoDePersonaje {
 		}
 
 		g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra,
+		g.drawImage(Recursos.getBarraExperiencia(), x + 77, y + 65, drawBarra,
 				ALTOEXPERIENCIA, null);
 		g.drawString(
 				String.valueOf(personaje.getExperiencia())
@@ -87,21 +87,21 @@ public class EstadoDePersonaje {
 
 		int drawBarra = 0;
 
-		g.drawImage(Recursos.estadoPersonaje, x, y, null);
+		g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
 		g.drawImage(miniaturaPersonaje, x + 10, y + 9, ANCHOMINIATURA,
 				ALTOMINIATURA, null);
 
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.drawImage(Recursos.barraSalud, x + 80, y + 26, ANCHOBARRA, ALTOSALUD,
+		g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26, ANCHOBARRA, ALTOSALUD,
 				null);
 		g.drawString(
 				String.valueOf(personaje.getSaludTope()) + " / "
 						+ String.valueOf(personaje.getSaludTope()), x + 132,
 				y + 37);
 
-		g.drawImage(Recursos.barraEnergia, x + 80, y + 42, ANCHOBARRA,
+		g.drawImage(Recursos.getBarraEnergia(), x + 80, y + 42, ANCHOBARRA,
 				ALTOENERGIA, null);
 		g.drawString(String.valueOf(personaje.getEnergiaTope()) + " / "
 				+ String.valueOf(personaje.getEnergiaTope()), x + 132, y + 52);
@@ -115,7 +115,7 @@ public class EstadoDePersonaje {
 		}
 
 		g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra,
+		g.drawImage(Recursos.getBarraExperiencia(), x + 77, y + 65, drawBarra,
 				ALTOEXPERIENCIA, null);
 		g.drawString(
 				String.valueOf(personaje.getExperiencia())
@@ -132,12 +132,12 @@ public class EstadoDePersonaje {
 
 		int drawBarra = 0;
 
-		g.drawImage(Recursos.estadoPersonaje, x, y, null);
+		g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 		g.drawImage(miniaturaPersonaje, x + 10, y + 9, ANCHOMINIATURA,
 				ALTOMINIATURA, null);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.drawImage(Recursos.barraSalud, x + 80, y + 26, ANCHOBARRA, ALTOSALUD,
+		g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26, ANCHOBARRA, ALTOSALUD,
 				null);
 		g.drawString(
 				String.valueOf(personajeNPC.getSalud()) + " / "
