@@ -52,27 +52,27 @@ public class MenuBatalla {
   
   public void graficar(final Graphics g) {
     if (habilitado) {
-      g.drawImage(Recursos.menuBatalla, X, Y, null);
+      g.drawImage(Recursos.getMenuBatalla(), X, Y, null);
     } else {
-      g.drawImage(Recursos.menuBatallaDeshabilitado, X, Y, null);
+      g.drawImage(Recursos.getMenuBatallaDeshabilitado(), X, Y, null);
     }
     // Dibujo los boones
-    g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[0]),
+    g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[0]),
         BOTONES[0][0], BOTONES[0][1],
         ANCHOBOTON, ANCHOBOTON, null);
-    g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[1]),
+    g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesRaza()[1]),
         BOTONES[1][0], BOTONES[1][1],
         ANCHOBOTON, ANCHOBOTON, null);
-    g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[0]),
+    g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[0]),
         BOTONES[2][0], BOTONES[2][1],
         ANCHOBOTON, ANCHOBOTON, null);
-    g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[1]),
+    g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[1]),
         BOTONES[3][0], BOTONES[3][1],
         ANCHOBOTON, ANCHOBOTON, null);
-    g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[2]),
+    g.drawImage(Recursos.getHabilidades().get(personaje.getHabilidadesCasta()[2]),
         BOTONES[4][0], BOTONES[4][1],
         ANCHOBOTON, ANCHOBOTON, null);
-    g.drawImage(Recursos.habilidades.get("Ser Energizado"),
+    g.drawImage(Recursos.getHabilidades().get("Ser Energizado"),
         BOTONES[5][0], BOTONES[5][1],
         ANCHOBOTON, ANCHOBOTON, null);
     // Dibujo las leyendas
@@ -93,11 +93,11 @@ public class MenuBatalla {
     g.setColor(Color.WHITE);
     if (habilitado) {
       Pantalla.centerString(g, 
-            new Rectangle(X, Y + 5, Recursos.menuBatalla.getWidth(), 20),
+            new Rectangle(X, Y + 5, Recursos.getMenuBatalla().getWidth(), 20),
             "Mi Turno");
     } else {
       Pantalla.centerString(g,
-            new Rectangle(X, Y + 5, Recursos.menuBatalla.getWidth(), 20),
+            new Rectangle(X, Y + 5, Recursos.getMenuBatalla().getWidth(), 20),
             "Turno Rival");
     }
   }
@@ -108,7 +108,7 @@ public class MenuBatalla {
     * Metodo getBotonClickeado
   **/
   
-  public int getBotonClickeado(int mouseX, int mouseY) {
+  public int getBotonClickeado(final int mouseX, final int mouseY) {
     if (!habilitado) {
       return 0;
     }
@@ -126,9 +126,9 @@ public class MenuBatalla {
     * Metodo clickEnMenu
   **/
   
-  public boolean clickEnMenu(int mouseX, int mouseY) {
-    if (mouseX >= X && mouseX <= X + Recursos.menuBatalla.getWidth()
-        && mouseY >= Y && mouseY <= Y + Recursos.menuBatalla.getHeight()) {
+  public boolean clickEnMenu(final int mouseX, final int mouseY) {
+    if (mouseX >= X && mouseX <= X + Recursos.getMenuBatalla().getWidth()
+        && mouseY >= Y && mouseY <= Y + Recursos.getMenuBatalla().getHeight()) {
       return habilitado;
     }
     return false;
@@ -139,7 +139,7 @@ public class MenuBatalla {
     * Metodo setHabilitado
   **/
   
-  public void setHabilitado(boolean b) {
+  public void setHabilitado(final boolean b) {
     habilitado = b;
   }
 }
