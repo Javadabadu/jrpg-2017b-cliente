@@ -48,6 +48,10 @@ public class MenuJugar extends JFrame {
 	private static int y5 = 162;
 	private static int width5 = 191;
 	private static int height5 = 23;
+	private static int x6 = 121;
+	private static int y6 = 92;
+	private static int width6 = 191;
+	private static int height6 = 23;
 	private static int top = 5;
 	private static int bottom = 5;
 	private static int left = 5;
@@ -131,7 +135,7 @@ public class MenuJugar extends JFrame {
 		});
 
 		JButton btnIniciarSesion = new JButton("Iniciar Sesion");
-		btnIniciarSesion.setBounds(x5, y5, width5, height5);
+		btnIniciarSesion.setBounds(x6, y6, width6, height6);
 		layeredPane.add(btnIniciarSesion, new Integer(1));
 		btnIniciarSesion.setFocusable(false);
 		btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));

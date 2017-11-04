@@ -36,7 +36,7 @@ public class MenuAsignarSkills extends JFrame {
 	private static final int BY = 100;
 	private static final int BW = 450;
 	private static final int BZ = 300;
-	private static final int EMPTYBORDER = 0;
+	private static final int EMPTYBORDER = 5;
 	private static final int BORDER = 0;
 	private static final int ASIGNARX = 100;
 	private static final int ASIGNARY = 100;

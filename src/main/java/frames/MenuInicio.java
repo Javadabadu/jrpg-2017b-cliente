@@ -28,10 +28,10 @@ public class MenuInicio extends JFrame {
 	private static int y1 = 100;
 	private static int width1 = 450;
 	private static int height1 = 300;
-	private static int x2 = 100;
-	private static int y2 = 100;
-	private static int width2 = 450;
-	private static int height2 = 300;
+	private static int x2 = 109;
+	private static int y2 = 39;
+	private static int width2 = 216;
+	private static int height2 = 90;
 	private static int x3 = 0;
 	private static int y3 = 0;
 	private static int width3 = 444;
