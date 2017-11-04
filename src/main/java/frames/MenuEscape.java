@@ -65,7 +65,7 @@ public class MenuEscape extends JFrame {
 	private static int left = 5;
 	private static int right = 5;
 	private static int widthScaled = 200;
-	private static int heightScaled = 350:
+	private static int heightScaled = 350;
 	/**
 	 * @param cliente
 	 * Create the frame.
