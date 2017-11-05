@@ -20,10 +20,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	private static final int DE_CASTA = 15;
 	private static final int NO_CASTA = 10;
-	//El coeficiente de asignacion contendra el valor a ser multiplicado para los puntos a asignar
-	private static final int COEF_ASIGN = 3; 
+	// El coeficiente de asignacion contendra el valor a ser multiplicado para los
+	// puntos a asignar
+	private static final int COEF_ASIGN = 3;
 	private int id;
+	private int idInventario;
+	private int idMochila;
 	private int idMapa;
+	private int idAlianza = -1;
 	private int estado;
 	private String casta;
 	private String nombre;
@@ -127,13 +131,15 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	/**
-	 * Setear un id al personaje
+	 * Setear un id al personaje Como son lo mismo, si seteo uno, seteo todos
 	 * 
 	 * @param id
 	 */
 
 	public void setId(final int id) {
 		this.id = id;
+		this.idMochila = id;
+		this.idInventario = id;
 	}
 
 	/**
@@ -144,6 +150,59 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	public String getCasta() {
 		return casta;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getIdInventario() {
+		return idInventario;
+	}
+
+	/**
+	 * Como son lo mismo, si seteo uno, seteo todos
+	 * 
+	 * @param id
+	 */
+	public void setIdInventario(final int id) {
+		this.id = id;
+		this.idMochila = id;
+		this.idInventario = id;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getIdMochila() {
+		return idMochila;
+	}
+
+	/**
+	 * 
+	 * @param idMochila
+	 */
+	public void setIdMochila(final int id) {
+		this.id = id;
+		this.idMochila = id;
+		this.idInventario = id;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getIdMapa() {
+		return idMapa;
+	}
+
+	/**
+	 * 
+	 * @param idMapa
+	 */
+	public void setIdMapa(int idMapa) {
+		this.idMapa = idMapa;
 	}
 
 	/**
@@ -294,8 +353,25 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	public int getIdAlianza() {
+		return idAlianza;
+	}
+
+	/**
+	 * 
+	 * @param idAlianza
+	 */
+	public void setIdAlianza(final int idAlianza) {
+		this.idAlianza = idAlianza;
+	}
+
+	/**
 	 * Metodo para clonar un paquete.
 	 */
+
 	@Override
 	public Object clone() {
 		Object obj = null;
@@ -392,15 +468,16 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	/**
 	 * metodo para sacar bonus
+	 * 
 	 * @param bonusSalud
 	 * @param bonusEnergia
 	 * @param bonusAtaque
 	 * @param bonusDefensa
 	 * @param bonusMagia
 	 */
-	
+
 	public final void sacarBonus(final int bonusSalud, final int bonusEnergia, final int bonusAtaque,
-								 final int bonusDefensa, final int bonusMagia) {
+			final int bonusDefensa, final int bonusMagia) {
 		saludTope -= bonusSalud;
 		energiaTope -= bonusEnergia;
 		fuerza -= bonusAtaque;
@@ -429,9 +506,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * @param bonusDefensa
 	 * @param bonusMagia
 	 */
-	public void useBonus(final int bonusSalud, final int bonusEnergia,
-						 final int bonusAtaque, final int bonusDefensa,
-						 final int bonusMagia) {
+	public void useBonus(final int bonusSalud, final int bonusEnergia, final int bonusAtaque, final int bonusDefensa,
+			final int bonusMagia) {
 		saludTope += bonusSalud;
 		energiaTope += bonusEnergia;
 		fuerza += bonusAtaque;
@@ -479,6 +555,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	/**
 	 * metodo para saber si hay un nuevo item
+	 * 
 	 * @return V o F
 	 */
 	public boolean nuevoItem() {
@@ -529,6 +606,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	/**
 	 * Actualiza los items luego de un trueque
+	 * 
 	 * @param items
 	 */
 	public void actualizarTrueque(final ArrayList<Item> items) {
@@ -539,8 +617,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	/**
-	 * Metodos que me devuelven 
-	 * los atributos iniciales segun la casta.
+	 * Metodos que me devuelven los atributos iniciales segun la casta.
+	 * 
 	 * @return
 	 */
 	public final int getFuerzaInicial() {
@@ -588,6 +666,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	/**
 	 * puntos a asignar
+	 * 
 	 * @return
 	 */
 	public final int getPuntosAsignar() {
