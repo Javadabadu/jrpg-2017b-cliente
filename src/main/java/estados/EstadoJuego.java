@@ -26,7 +26,9 @@ import mensajeria.PaqueteNpc;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
 import recursos.Recursos;
-
+/**
+ * @author Javadabadu
+ */
 public class EstadoJuego extends Estado {
 
 	private Entidad entidadPersonaje;
@@ -45,7 +47,7 @@ public class EstadoJuego extends Estado {
 
 	private BufferedImage miniaturaPersonaje;
 
-	MenuInfoPersonaje menuEnemigo;
+	private MenuInfoPersonaje menuEnemigo;
 	MenuNPC menuEnemigoNPC;
 
 	public EstadoJuego(Juego juego) {
@@ -181,6 +183,10 @@ public class EstadoJuego extends Estado {
 
 	public MenuInfoPersonaje getMenuEnemigo(){
 		return menuEnemigo;
+	}
+
+	public void setMenuEnemigo(final MenuInfoPersonaje menu) {
+		menuEnemigo = menu;
 	}
 
 	public int getTipoSolicitud() {
