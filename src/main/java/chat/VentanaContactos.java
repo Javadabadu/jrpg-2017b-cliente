@@ -26,7 +26,7 @@ public class VentanaContactos extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private static final int F_ALTO = 273;
-	private static final int F_ANCHO = 237;
+	private static final int F_ANCHO = 327;
 	private static final int F_VALORX = 100;
 	private static final int F_VALORY = 100;
 	private static final int PANEL_BORDE = 5;
