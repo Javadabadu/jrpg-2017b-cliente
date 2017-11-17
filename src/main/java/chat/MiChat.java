@@ -110,26 +110,50 @@ public class MiChat extends JFrame {
 		// SI TOCO ENTER
 		texto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!texto.getText().equals("")) {
-					chat.append("Me: " + texto.getText() + "\n");
-
-					juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
-					juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
-					juego.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
-
-					// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
-					juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
-					// El user receptor en espacio indica que es para todos
-					if (getTitle() == TIT_SALA) {
-						juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
-					}
-
-					try {
-						juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
-					} catch (IOException e1) {
-						JOptionPane.showMessageDialog(null, "Error al enviar mensaje");
-					}
-					texto.setText("");
+				String mensajeChat = texto.getText();
+				switch(mensajeChat) {
+					case "iddqd":
+						System.out.println("puso un truco");
+						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
+						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						break;
+					case "noclip":
+						System.out.println("puso un truco");
+						texto.setText("");
+						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) "+ "\n");
+						break;
+					case "bigdaddy":
+						System.out.println("puso un truco");
+						texto.setText("");
+						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						break;
+					case "war aint what it used to be":
+						System.out.println("puso un truco");
+						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						texto.setText("");
+						break;
+					case "":
+						System.out.println("No escribiste nada");
+						break;
+					default: 
+							chat.append("Me: " + mensajeChat  + "\n");
+							juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
+							juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
+							juego.getCliente().getPaqueteMensaje().setMensaje(mensajeChat);
+							// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
+							juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
+							// El user receptor en espacio indica que es para todos
+							if (getTitle() == TIT_SALA) {
+								juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
+							}
+	
+							try {
+								juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
+							} catch (IOException e1) {
+								JOptionPane.showMessageDialog(null, "Error al enviar mensaje");
+							}
+							texto.setText("");
+						break;
 				}
 				texto.requestFocus();
 			}
@@ -140,27 +164,50 @@ public class MiChat extends JFrame {
 		enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
 		enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!texto.getText().equals("")) {
-					chat.append("Me: " + texto.getText() + "\n");
-
-					juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
-					juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
-					juego.getCliente().getPaqueteMensaje().setMensaje(texto.getText());
-
-					// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
-					juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
-					// El user receptor en espacio indica que es para todos
-					if (getTitle() == "Sala") {
-						juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
-					}
-
-					try {
-						juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
-					} catch (IOException e1) {
-						JOptionPane.showMessageDialog(null, "Error al enviar mensaje");
-
-					}
-					texto.setText("");
+				String mensajeChat = texto.getText();
+				switch(mensajeChat) {
+					case "iddqd":
+						System.out.println("puso un truco");
+						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
+						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						break;
+					case "noclip":
+						System.out.println("puso un truco");
+						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
+						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						break;
+					case "bigdaddy":
+						System.out.println("puso un truco");
+						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
+						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						break;
+					case "war aint what it used to be":
+						System.out.println("puso un truco");
+						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
+						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						break;
+					case "":
+						System.out.println("No escribiste nada");
+						break;
+					default: 
+							chat.append("Me: " + mensajeChat  + "\n");
+							juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
+							juego.getCliente().getPaqueteMensaje().setUserReceptor(getTitle());
+							juego.getCliente().getPaqueteMensaje().setMensaje(mensajeChat);
+							// MANDO EL COMANDO PARA QUE ENVIE EL MSJ
+							juego.getCliente().getPaqueteMensaje().setComando(Comando.TALK);
+							// El user receptor en espacio indica que es para todos
+							if (getTitle() == TIT_SALA) {
+								juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
+							}
+	
+							try {
+								juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
+							} catch (IOException e1) {
+								JOptionPane.showMessageDialog(null, "Error al enviar mensaje");
+							}
+							texto.setText("");
+						break;
 				}
 				texto.requestFocus();
 			}
