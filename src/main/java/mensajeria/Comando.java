@@ -10,15 +10,15 @@ public abstract class Comando {
 	public static final String[] CLASSNAMES = {"Conexion", "CrearPersonaje",
 			"Desconectar", "InicioSesion", "MostrarMapas",
 			"Movimiento", "Registro", "Salir", "Batalla", "Atacar",
-			"FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl",
+			"FinalizarBatalla", "ActualizarPersonaje","ActualizarPersonajeLvl",
 			"ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque",
-			"ActualizarTrueque", "Talk", "ActualizarNPC"};
+			"ActualizarTrueque", "Talk", "ActualizarNPC","ActualizarCheats"};
 	public static final String[] CLASSNAMESBIS = {"Conexion", "CrearPersonaje",
 			"Desconectar", "InicioSesionSet", "MostrarMapas",
 			"Movimiento", "RegistroSet", "SalirSet", "Batalla", "Atacar",
 			"FinalizarBatalla", "ActualizarPersonaje", "ActualizarPersonajeLvl",
 			"ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque",
-			"ActualizarTrueque", "Talk", "ActualizarNPC"};
+			"ActualizarTrueque", "Talk", "ActualizarNPC","ActualizarCheats"};
 	public static final int CONEXION = 0;
 	public static final int CREACIONPJ = 1;
 	public static final int DESCONECTAR = 2;
@@ -39,6 +39,7 @@ public abstract class Comando {
 	public static final int ACTUALIZARTRUEQUE = 17;
 	public static final int TALK = 18;
 	public static final int ACTUALIZARNPC = 19;
+	public static final int ACTUALIZARCHEATS = 20;
 	
 	private final Gson gson = new Gson();
 	private String cadenaLeida;

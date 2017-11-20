@@ -96,6 +96,7 @@ public class EstadoBatallaNPC extends Estado {
 		seRealizoAccion = false;
 		haySpellSeleccionada = false;
 
+	
 		if (miTurno) {
 
 			if (juego.getHandlerMouse().getNuevoClick()) {

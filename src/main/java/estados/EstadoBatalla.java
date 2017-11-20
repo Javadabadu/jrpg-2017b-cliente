@@ -180,12 +180,26 @@ public class EstadoBatalla extends Estado {
 						Estado.setEstado(juego.getEstadoJuego());
 
 					} else {
-						paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+						if(juego.getCliente().getPaquetePersonaje().isModoDios() && !getPaqueteEnemigo().isModoDios()){
+							paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+							personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
+							personaje.getDefensa(), enemigo.getDefensa(),Integer.MAX_VALUE,
+							enemigo.getCasta().getProbabilidadEvitarDaño());	
+						}
+						else {
+							if(getPaqueteEnemigo().isModoDios() && !juego.getCliente().getPaquetePersonaje().isModoDios()  ) {
+								paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+								personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
+								personaje.getDefensa(), enemigo.getDefensa(),personaje.getCasta().getProbabilidadEvitarDaño(),
+								Integer.MAX_VALUE);
+							}
+							else {
+								paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
 								personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
 								personaje.getDefensa(), enemigo.getDefensa(),personaje.getCasta().getProbabilidadEvitarDaño(),
 								enemigo.getCasta().getProbabilidadEvitarDaño());
-						
-						
+							}
+						}
 						enviarAtaque(paqueteAtacar);
 						miTurno = false;
 						menuBatalla.setHabilitado(false);

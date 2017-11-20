@@ -352,6 +352,10 @@ public class Cliente extends Thread {
 	public void actualizarPersonaje(final PaquetePersonaje pP) {
 		paquetePersonaje = pP;
 	}
+	
+	public void actualizarCheats(final PaquetePersonaje pP) {
+		paquetePersonaje = pP;
+	}
 
 	/**
 	 * Solicitud de Juego actual

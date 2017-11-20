@@ -24,12 +24,13 @@ import javax.swing.text.DefaultCaret;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
+import mensajeria.PaquetePersonaje;
 
 /**
  * @author UnlamPrograAvanzada contenedor que tendra el chat.
  */
 
-public class MiChat extends JFrame {
+public class MiChat extends JFrame  {
 
 	private static final long serialVersionUID = 1L;
 	private static final int F_ALTO = 300;
@@ -57,6 +58,7 @@ public class MiChat extends JFrame {
 	private JPanel contentPane;
 	private JTextField texto;
 	private JTextArea chat;
+	private PaquetePersonaje paquetePersonaje;
 
 	/**
 	 * @param atributo
@@ -113,24 +115,41 @@ public class MiChat extends JFrame {
 				String mensajeChat = texto.getText();
 				switch(mensajeChat) {
 					case "iddqd":
+						try {
 						System.out.println("puso un truco");
 						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
-						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						chat.append("Me: " + mensajeChat  + "   (modo dios) " + "\n");
+						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
+						paquetePersonaje.setModoDios(true);
+						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
+						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+						} catch (IOException e2) {
+							JOptionPane.showMessageDialog(null, "Error al aplicar truco");
+						}
 						break;
 					case "noclip":
 						System.out.println("puso un truco");
 						texto.setText("");
-						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) "+ "\n");
+						chat.append("Me: " + mensajeChat  + "   (atravesar paredes) "+ "\n");
+						juego.getCliente().getPaquetePersonaje().setModoNoclip(true);
 						break;
 					case "bigdaddy":
-						System.out.println("puso un truco");
+						System.out.println("puso fuerza extra");
 						texto.setText("");
-						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						chat.append("Me: " + mensajeChat  + " ( tiene 100% más de fuerza) " + "\n");
+						juego.getPersonaje().setFuerza(juego.getPersonaje().getFuerza()*2);
+						break;
+					case "tinydaddy":
+						System.out.println("puso fuerza extra");
+						texto.setText("");
+						chat.append("Me: " + mensajeChat  + " ( tiene  50% menos de fuerza) " + "\n");
+						juego.getPersonaje().setFuerza((int) (juego.getPersonaje().getFuerza()*1.5));
 						break;
 					case "war aint what it used to be":
-						System.out.println("puso un truco");
+						System.out.println("puso invisible");
 						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
 						texto.setText("");
+						juego.getCliente().getPaquetePersonaje().setModoInvisible(true);
 						break;
 					case "":
 						System.out.println("No escribiste nada");
@@ -146,7 +165,6 @@ public class MiChat extends JFrame {
 							if (getTitle() == TIT_SALA) {
 								juego.getCliente().getPaqueteMensaje().setUserReceptor(null);
 							}
-	
 							try {
 								juego.getCliente().getSalida().writeObject(gson.toJson(juego.getCliente().getPaqueteMensaje()));
 							} catch (IOException e1) {
@@ -167,24 +185,41 @@ public class MiChat extends JFrame {
 				String mensajeChat = texto.getText();
 				switch(mensajeChat) {
 					case "iddqd":
+						try {
 						System.out.println("puso un truco");
 						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
-						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						chat.append("Me: " + mensajeChat  + "   (modo dios) " + "\n");
+						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
+						paquetePersonaje.setModoDios(true);
+						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
+						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+						} catch (IOException e2) {
+							JOptionPane.showMessageDialog(null, "Error al aplicar truco");
+						}
 						break;
 					case "noclip":
 						System.out.println("puso un truco");
-						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
-						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						texto.setText("");
+						chat.append("Me: " + mensajeChat  + "   (atravesar paredes) "+ "\n");
+						juego.getCliente().getPaquetePersonaje().setModoNoclip(true);
 						break;
 					case "bigdaddy":
-						System.out.println("puso un truco");
-						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
-						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						System.out.println("puso fuerza extra");
+						texto.setText("");
+						chat.append("Me: " + mensajeChat  + " ( tiene 100% mas de fuerza) " + "\n");
+						juego.getPersonaje().setFuerza(juego.getPersonaje().getFuerza()*2);
+						break;
+					case "tinydaddy":
+						System.out.println("puso fuerza extra");
+						texto.setText("");
+						chat.append("Me: " + mensajeChat  + " ( tiene  50%  mas de fuerza) " + "\n");
+						juego.getPersonaje().setFuerza((int) (juego.getPersonaje().getFuerza()*1.5));
 						break;
 					case "war aint what it used to be":
-						System.out.println("puso un truco");
-						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
+						System.out.println("puso invisible");
 						chat.append("Me: " + mensajeChat  + "   (Truco iniciado) " + "\n");
+						texto.setText("");
+						juego.getCliente().getPaquetePersonaje().setModoInvisible(true);
 						break;
 					case "":
 						System.out.println("No escribiste nada");

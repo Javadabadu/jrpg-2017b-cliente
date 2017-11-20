@@ -40,6 +40,46 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int nivel = 1;
 	private int experiencia;
 	private ArrayList<Item> items = new ArrayList<Item>();
+	
+	//Variables para el modulo de CHEATS
+	
+	private boolean modoDios = false;
+	public boolean isModoInvisible() {
+		return modoInvisible;
+	}
+
+	public void setModoInvisible(boolean modoInvisible) {
+		this.modoInvisible = modoInvisible;
+	}
+
+	public boolean isModoFuerte() {
+		return modoFuerte;
+	}
+
+	public void setModoFuerte(boolean modoFuerte) {
+		this.modoFuerte = modoFuerte;
+	}
+
+	public boolean isModoDebil() {
+		return modoDebil;
+	}
+
+	public void setModoDebil(boolean modoDebil) {
+		this.modoDebil = modoDebil;
+	}
+
+	public boolean isModoNoclip() {
+		return modoNoclip;
+	}
+
+	public void setModoNoclip(boolean modoNoclip) {
+		this.modoNoclip = modoNoclip;
+	}
+
+	private boolean modoInvisible = false;
+	private boolean modoFuerte = false;
+	private boolean modoDebil = false;
+	private boolean modoNoclip = false;
 
 	/**
 	 * Constructor
@@ -675,5 +715,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		int totalPuntosActual = this.getFuerza() + this.getDestreza() + this.getInteligencia();
 
 		return puntosAsignar - (totalPuntosActual - totalPuntosInicial);
+	}
+
+	public boolean isModoDios() {
+		return modoDios;
+	}
+
+	public void setModoDios(boolean modoDios) {
+		this.modoDios = modoDios;
+	
 	}
 }

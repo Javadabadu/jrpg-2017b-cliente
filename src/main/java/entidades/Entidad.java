@@ -60,6 +60,7 @@ public class Entidad {
 	private int[] tile;
 	private PaquetePersonaje paquete;
 
+
 	// Movimiento Actual
 	private static final int horizontalDer = 4;
 	private static final int horizontalIzq = 0;
@@ -432,25 +433,7 @@ public class Entidad {
 //					}
 //				}
 				//Me fijo si estoy cerca de un NPC (como pide Lucas)
-				
-				while(it.hasNext()){
-					key = it.next();
-					actualNPC = juego.getNpcs().get(key);
-					
-					if(actualNPC != null){
-						if(distanciaPeleable(tileActual[0], actualNPC.getPosX()) || distanciaPeleable(tileActual[1], actualNPC.getPosY())){
-							
-							idEnemigo = actualNPC.getId();
-							float XY[] = Mundo.isoA2D(x, y);
-
-							juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),
-																		MenuNPC.menuBatallar);
-							juego.getHandlerMouse().setNuevoClick(false);
-						}
-					}
-				}
-				// FIN NPC
-
+		
 			}
 		}
 
@@ -602,6 +585,20 @@ public class Entidad {
 
 			if (x == xFinal && y == yFinal - 32) {
 				enMovimiento = false;
+					
+			}
+			
+			Iterator <Integer> it = juego.getNpcs().keySet().iterator();
+			int key;
+			while (it.hasNext()) {
+				key = it.next();
+				if (distanciaPeleable(juego.getUbicacionPersonaje().getPosX(), juego.getUbicacionPersonaje().getPosY(), 
+					juego.getNpcs().get(key).getPosX(),juego.getNpcs().get(key).getPosY())){
+					PaqueteNpc actualNpc = juego.getNpcs().get(key);
+					idEnemigo = actualNpc.getId();
+					
+					juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),MenuNPC.menuBatallar);
+				}
 			}
 		}
 	}
@@ -890,17 +887,15 @@ private int getFrame() {
 		return yOffset;
 	}
 	
-	public static boolean distanciaPeleable(int x, int y){
-		
-		int absX, absY;
-		
-		absX = Math.abs(x);
-		absY = Math.abs(y);
-		
-		if(Math.abs(absX - absY) <= 2){
-			return true;
-		}
-		
-		return false;
+	public static boolean distanciaPeleable(float perX, float perY, float npcX, float npcY){
+		float radio = 30;
+		float distanciaX = Math.abs(npcX - perX);
+		float distanciaY = Math.abs(npcY - perY);
+		float distanciaTotal = (float) Math.sqrt(Math.pow((float)distanciaX, 2)+Math.pow((float)distanciaY, 2));
+		return distanciaTotal<=radio;
 	}
+	
+
+	
+
 }
