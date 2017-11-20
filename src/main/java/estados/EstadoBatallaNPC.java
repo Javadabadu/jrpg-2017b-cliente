@@ -19,6 +19,7 @@ import dominio.Humano;
 import dominio.NonPlayableCharacter;
 import dominio.Orco;
 import dominio.Personaje;
+import interfaz.EstadoDeNpc;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuBatalla;
 import interfaz.MenuInfoPersonaje;
@@ -169,6 +170,9 @@ public class EstadoBatallaNPC extends Estado {
 
 					} else {
 						// Ataque del NPC
+						if(paquetePersonaje.isModoDios()){
+						 enemigo.noAtacar();
+						}else {
 						enemigo.atacar(personaje);
 						if (!personaje.estaVivo()) {
 							juego.getEstadoJuego().setHaySolicitud(true,
@@ -179,8 +183,9 @@ public class EstadoBatallaNPC extends Estado {
 											.getIdEnemigo());
 							finalizarBatalla();
 							Estado.setEstado(juego.getEstadoJuego());
+							}
 						}
-						setMiTurno(true);
+					 setMiTurno(true);
 					}
 				} else if (haySpellSeleccionada && !seRealizoAccion) {
 					JOptionPane
@@ -213,8 +218,8 @@ public class EstadoBatallaNPC extends Estado {
 
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 25, 5, personaje,
 				miniaturaPersonaje);
-		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 550, 5, enemigo,
-				miniaturaEnemigo);
+		EstadoDeNpc.dibujarEstadoDeNpc(g, 550, 5, enemigo,
+  				miniaturaEnemigo);
 
 	}
 
@@ -250,12 +255,13 @@ public class EstadoBatallaNPC extends Estado {
 		}
 
 		// Crea personaje NPC
+		int nivelNpc = paqueteEnemigo.getNpc().getNivelNpc();
 		nombre = paqueteEnemigo.getNombre();
-		salud = paqueteEnemigo.getNpc().getSalud();
+		int saludNpc = paqueteEnemigo.getNpc().getSaludTope();
 		id = paqueteEnemigo.getId();
 
-		enemigo = new NonPlayableCharacter(nombre, nivel, 1);
-		enemigo.setSalud(salud);
+		enemigo = new NonPlayableCharacter(nombre, nivelNpc, 1);
+		enemigo.setSalud(saludNpc);
 	}
 
 	public void enviarAtaque(PaqueteAtacar paqueteAtacar) {

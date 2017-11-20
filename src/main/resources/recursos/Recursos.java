@@ -125,8 +125,8 @@ public class Recursos {
 	 * Batalla
 	 */
 	private static BufferedImage barraSpells;
-	private static BufferedImage estadoPersonaje;
-	private static BufferedImage barraSalud;
+	public static BufferedImage estadoPersonaje;
+	public static BufferedImage barraSalud;
 	private static BufferedImage barraEnergia;
 	private static BufferedImage barraExperiencia;
 	private static BufferedImage menuBatalla;
