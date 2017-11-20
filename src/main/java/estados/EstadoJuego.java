@@ -116,13 +116,18 @@ public class EstadoJuego extends Estado {
 			while (it.hasNext()) {
 				key = it.next();
 				actual = ubicacionPersonajes.get(key);
-				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
+				if(juego.getPersonajesConectados().get(key).isModoInvisible() && !juego.getCliente().getPaquetePersonaje().isModoInvisible()) {
+					
+				}else {
+					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
 						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()],
 								(int) (actual.getPosX() - juego.getCamara().getxOffset() ),
 								(int) (actual.getPosY() - juego.getCamara().getyOffset()),
 								64, 64, null);
-				}
+						
+					    }
+					}
 			}
 		}
 	}
