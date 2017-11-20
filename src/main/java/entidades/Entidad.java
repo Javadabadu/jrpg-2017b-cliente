@@ -895,7 +895,6 @@ private int getFrame() {
 		return distanciaTotal<=radio;
 	}
 	
-
+}
 	
 
-}
