@@ -328,10 +328,10 @@ public class MenuStats extends JFrame {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(VOLVERX, VOLVERY, VOLVERW, VOLVERZ);
+		btnVolver.setBounds(128, 245, 97, 25);
 		contentPane.add(btnVolver);
 		JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(IMAGENX, IMAGENY, Image.SCALE_DEFAULT)));
-		background.setBounds(BACKX, BACKY, BACKW, BACKZ);
+		background.setBounds(-12, -11,363, 312);
 		contentPane.add(background);
 	}
 
