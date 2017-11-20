@@ -128,10 +128,17 @@ public class MiChat extends JFrame  {
 						}
 						break;
 					case "noclip":
-						System.out.println("puso un truco");
-						texto.setText("");
-						chat.append("Me: " + mensajeChat  + "   (atravesar paredes) "+ "\n");
-						juego.getCliente().getPaquetePersonaje().setModoNoclip(true);
+						try {
+							System.out.println("puso un truco");
+							texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
+							chat.append("Me: " + mensajeChat  + "   (atravesar paredes) "+ "\n");
+							paquetePersonaje = juego.getCliente().getPaquetePersonaje();
+							paquetePersonaje.setModoNoclip(true);
+							paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
+							juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+							} catch (IOException e2) {
+								JOptionPane.showMessageDialog(null, "Error al aplicar truco");
+							}
 						break;
 					case "bigdaddy":
 						System.out.println("puso fuerza extra");

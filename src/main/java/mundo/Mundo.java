@@ -37,6 +37,7 @@ public class Mundo {
 	private int yMaximo;
 
 	private Grafo grafoDeTilesNoSolidos;
+	private Grafo grafoNoclip;
 	private int spawnX; 
 	private int spawnY;
 
@@ -157,16 +158,20 @@ public class Mundo {
 
 	}
 /**
- * Metodo que pasa el mundo a un modelo de gragos.
+ * Metodo que pasa el mundo a un modelo de grafos.
  */
 	private void mundoAGrafo() {
 		// Creo una matriz de nodos
 		Nodo[][] nodos = new Nodo[ancho][alto];
+		//Creo otra matriz de nodos para la implementacion del NoClip
+		Nodo[][] noclip = new Nodo[ancho][alto];
 		int indice = 0;
+		int indNoclip = 0; 
 		// Lleno la matriz con los nodos
 		for (int y = 0; y < alto; y++){
 			for (int x = 0; x < ancho; x++){
 				nodos[y][x] = new Nodo(indice++, x, y);
+				noclip[y][x] = new Nodo(indNoclip++,x,y);
 			}
 				
 		}
@@ -222,10 +227,54 @@ public class Mundo {
 		for (int i = 0; i < ancho; i++)
 			for (int j = 0; j < alto; j++)
 				grafoDeTilesNoSolidos.agregarNodo(nodos[i][j]);
+		
+		//Grafo sin solidos
+		
+		for (int x = 0; x < yFinal; x++) {
+			for (int y = 0; y < xFinal; y++) {
+				
+					if (y < yFinal - 1) {
+						noclip[x][y].agregarAdyacente(noclip[x][y + 1]);
+						noclip[x][y + 1].agregarAdyacente(noclip[x][y]);
+					}
+					
+					if (x < xFinal - 1) {
+					
+						if (y > 0 ) {
+							noclip[x][y].agregarAdyacente(noclip[x + 1][y - 1]);
+							noclip[x + 1][y - 1].agregarAdyacente(noclip[x][y]);
+						}
+						noclip[x][y].agregarAdyacente(noclip[x + 1][y]);
+						noclip[x + 1][y].agregarAdyacente(noclip[x][y]);
+						
+						if (y < yFinal - 1 ) {
+							noclip[x][y].agregarAdyacente(noclip[x + 1][y + 1]);
+							noclip[x + 1][y + 1].agregarAdyacente(noclip[x][y]);
+						}
+					}
+				}
+			}
+		
+		//Creo un grafo apra almacenar todos los tiles
+		
+		grafoNoclip = new Grafo(ancho * alto);
+		for (int i = 0; i < ancho; i++) {
+			for (int j = 0; j < alto; j++) {
+				grafoNoclip.agregarNodo(noclip[i][j]);
+				
+			}
+		}
+		
+		
 	}
 
 	public Grafo obtenerGrafoDeTilesNoSolidos() {
 		return grafoDeTilesNoSolidos;
+	}
+	
+
+	public Grafo getGrafoNoclip() {
+		return grafoNoclip;
 	}
 
 	public int obtenerAncho() {

@@ -691,7 +691,14 @@ private int getFrame() {
 	 */
 	private PilaDeTiles caminoMasCorto(final int xInicial, final int yInicial,
 			final int xFinal, final int yFinal) {
-		Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
+		
+		Grafo grafoLibres;
+		
+		if(juego.getPersonaje().isModoNoclip())
+			grafoLibres = mundo.getGrafoNoclip();
+		else
+			grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
+		
 		// Transformo las coordenadas iniciales y finales en indices
 		int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY())
 				* (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal())
