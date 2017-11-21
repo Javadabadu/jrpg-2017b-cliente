@@ -154,14 +154,15 @@ public class EstadoBatallaNPC extends Estado {
 
 				if (haySpellSeleccionada && seRealizoAccion) {
 					if (!enemigo.estaVivo()) {
-						juego.getEstadoJuego().setHaySolicitud(true,
-								juego.getPersonaje(),
-								MenuInfoPersonaje.menuGanarBatalla);
 						if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
 							juego.getPersonaje().setNivel(personaje.getNivel());
 							juego.getEstadoJuego().setHaySolicitud(true,
 									juego.getPersonaje(),
 									MenuInfoPersonaje.menuSubirNivel);
+						} else {
+							juego.getEstadoJuego().setHaySolicitud(true,
+									juego.getPersonaje(),
+									MenuInfoPersonaje.menuGanarBatallaANPC);	
 						}
 						paqueteFinalizarBatalla.setGanadorBatalla(juego
 								.getPersonaje().getId());
@@ -177,7 +178,7 @@ public class EstadoBatallaNPC extends Estado {
 						if (!personaje.estaVivo()) {
 							juego.getEstadoJuego().setHaySolicitud(true,
 									juego.getPersonaje(),
-									MenuInfoPersonaje.menuPerderBatalla);
+									MenuInfoPersonaje.menuPerderBatallaContraNPC);
 							paqueteFinalizarBatalla
 									.setGanadorBatalla(paqueteFinalizarBatalla
 											.getIdEnemigo());

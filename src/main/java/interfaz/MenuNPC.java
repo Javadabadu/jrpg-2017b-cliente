@@ -16,12 +16,9 @@ public class MenuNPC {
 	private static final BufferedImage menu = Recursos.getMenuEnemigo();
 	public static final int menuBatallar = 0;
 	public static final int menuInformacion = 1;
-	public static final int menuSubirNivel = 2;
-	public static final int menuGanarBatalla = 3;
-	public static final int menuPerderBatalla = 4;
-	public static final int menuGanarItem = 5;
-	public static final int menuComerciar = 6;
-	private static final String [] leyendaBoton = {"Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar", "Comerciar"};
+	public static final int menuGanarBatalla = 2;
+	public static final int menuPerderBatalla = 3;
+	private static final String [] leyendaBoton = {"Batallar", "Volver", "Aceptar", "Aceptar"};
 
 	private int x;
 	private int y;
@@ -54,6 +51,12 @@ public class MenuNPC {
 			case menuInformacion:
 				graficarMenuInformacion(g);
 				break;
+			case menuGanarBatalla:
+				graficarMenuGanarBatalla(g);
+				break;
+			case menuPerderBatalla:
+				graficarMenuPerderBatalla(g);
+				break;
 		}
 
 
@@ -74,7 +77,35 @@ public class MenuNPC {
 		// muestro los atributos
 		g.setFont(new Font("Book Antiqua", 0, 20));
 		g.drawString(personajeNPC.getType(), x + 100, y + 260);
+	}
+	
+	
+	private void graficarMenuPerderBatalla(Graphics g) {
+		g.setColor(Color.BLACK);
+		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has sido derrotado!");
 
+		g.setFont(new Font("Book Antiqua", 0, 14));
+		Pantalla.centerString(g, new Rectangle(x, y + 250, menu.getWidth(), 0), "Te gano el NPC");
+		Pantalla.centerString(g, new Rectangle(x, y + 270, menu.getWidth(), 0), "Porque resolviste todo en una clase");
+		Pantalla.centerString(g, new Rectangle(x, y + 290, menu.getWidth(), 0), "Igual todavia tenes chances");
+		Pantalla.centerString(g, new Rectangle(x, y + 310, menu.getWidth(), 0), "de promocionar o de ir a final");
+		Pantalla.centerString(g, new Rectangle(x, y + 330, menu.getWidth(), 0), "Muscula, Never Pony");
+		
+		
+	}
+	
+	private void graficarMenuGanarBatalla(Graphics g) {
+		g.setColor(Color.BLACK);
+		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has sido derrotado!");
+
+		g.setFont(new Font("Book Antiqua", 0, 14));
+		Pantalla.centerString(g, new Rectangle(x, y + 250, menu.getWidth(), 0), "Te gano el NPC");
+		Pantalla.centerString(g, new Rectangle(x, y + 270, menu.getWidth(), 0), "Porque resolviste todo en una clase");
+		Pantalla.centerString(g, new Rectangle(x, y + 290, menu.getWidth(), 0), "Igual todavia tenes chances");
+		Pantalla.centerString(g, new Rectangle(x, y + 310, menu.getWidth(), 0), "de promocionar o de ir a final");
+		Pantalla.centerString(g, new Rectangle(x, y + 330, menu.getWidth(), 0), "Muscula, Never Pony");
+		
+		
 	}
 	
 	public boolean clickEnBoton(int mouseX, int mouseY){

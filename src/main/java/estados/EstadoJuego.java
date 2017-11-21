@@ -98,7 +98,7 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.getChat(), 3, 524, 102, 35, null);
 		if(haySolicitud)
 			menuEnemigo.graficar(g, tipoSolicitud);
-		if(haySolicitudNPC)
+		if(haySolicitudNPC && tipoSolicitud == 0)
 			menuEnemigoNPC.graficar(g, tipoSolicitud);
 
 	}

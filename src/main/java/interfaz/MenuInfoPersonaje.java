@@ -22,7 +22,9 @@ public class MenuInfoPersonaje {
 	public static final int menuPerderBatalla = 4;
 	public static final int menuGanarItem = 5;
 	public static final int menuComerciar = 6;
-	private static final String [] leyendaBoton = {"Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar", "Comerciar"};
+	public static final int menuGanarBatallaANPC = 7;
+	public static final int menuPerderBatallaContraNPC = 8;
+	private static final String [] leyendaBoton = {"Batallar", "Volver", "Aceptar", "Aceptar", "Aceptar", "Aceptar", "Comerciar","Aceptar","Aceptar"};
 
 	private int x;
 	private int y;
@@ -70,6 +72,12 @@ public class MenuInfoPersonaje {
 			case menuComerciar:
 				graficarMenuComerciar(g);
 				break;
+			case menuGanarBatallaANPC:
+				graficarMenuGanarBatallaANPC(g);
+				break;
+			case menuPerderBatallaContraNPC:
+				graficarMenuPerderBatallaContraNPC(g);
+				break;
 		}
 
 
@@ -78,6 +86,20 @@ public class MenuInfoPersonaje {
 		g.drawImage(Recursos.getBotonMenu(), x + 50, y + 380, 200, 25, null);
 		g.setColor(Color.WHITE);
 		Pantalla.centerString(g, new Rectangle(x + 50, y + 380, 200, 25), leyendaBoton[tipoMenu]);
+	}
+
+	private void graficarMenuPerderBatallaContraNPC(Graphics g) {
+		g.setColor(Color.BLACK);
+		Pantalla.centerString(g, new Rectangle(x, y + 220, menu.getWidth(), 0), "¡Has sido derrotado!");
+
+		g.setFont(new Font("Book Antiqua", 0, 14));
+		Pantalla.centerString(g, new Rectangle(x, y + 250, menu.getWidth(), 0), "Te gano el NPC");
+		Pantalla.centerString(g, new Rectangle(x, y + 270, menu.getWidth(), 0), "Porque resolviste todo en una clase");
+		Pantalla.centerString(g, new Rectangle(x, y + 290, menu.getWidth(), 0), "Igual todavia tenes chances");
+		Pantalla.centerString(g, new Rectangle(x, y + 310, menu.getWidth(), 0), "de promocionar o de ir a final");
+		Pantalla.centerString(g, new Rectangle(x, y + 330, menu.getWidth(), 0), "Muscula, Never Pony");
+		
+		
 	}
 
 	private void graficarMenuPerderBatalla(Graphics g) {
@@ -105,6 +127,22 @@ public class MenuInfoPersonaje {
 		Pantalla.centerString(g, new Rectangle(x, y + 290, menu.getWidth(), 0), "a tu oponente, sigue así");
 		Pantalla.centerString(g, new Rectangle(x, y + 310, menu.getWidth(), 0), "para lograr subir de nivel");
 		Pantalla.centerString(g, new Rectangle(x, y + 330, menu.getWidth(), 0), "y mejorar tus atributos.");
+		
+	}
+	
+	private void graficarMenuGanarBatallaANPC(Graphics g) {
+
+		// Informo que gano la batalla
+		g.setColor(Color.BLACK);
+		Pantalla.centerString(g, new Rectangle(x, y + 200, menu.getWidth(), 0), "¡Has derrotado");
+		Pantalla.centerString(g, new Rectangle(x, y + 230, menu.getWidth(), 0), "al NPC!");
+
+		g.setFont(new Font("Book Antiqua", 0, 14));
+		Pantalla.centerString(g, new Rectangle(x, y + 270, menu.getWidth(), 0), "¡Felicitaciones! Has derrotado");
+		Pantalla.centerString(g, new Rectangle(x, y + 290, menu.getWidth(), 0), "al NPC, sigue así");
+		Pantalla.centerString(g, new Rectangle(x, y + 310, menu.getWidth(), 0), "para lograr subir de nivel");
+		Pantalla.centerString(g, new Rectangle(x, y + 330, menu.getWidth(), 0), ",mejorar tus atributos");
+		Pantalla.centerString(g, new Rectangle(x, y + 350, menu.getWidth(), 0), "y promocionar la materia");
 		
 	}
 
