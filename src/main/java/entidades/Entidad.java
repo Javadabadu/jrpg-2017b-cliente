@@ -215,7 +215,6 @@ public class Entidad {
 		}
 		// Tomo el click izquierdo
 		if (juego.getHandlerMouse().getNuevoClick()) {
-
 			// Comienzo NPC
 			if (juego.getEstadoJuego().getHaySolicitudNPC()) {
 				if (juego.getEstadoJuego().getMenuEnemigoNPC()
@@ -237,7 +236,7 @@ public class Entidad {
 
 							juego.getEstadoJuego().setHaySolicitudNPC(false,
 									null, MenuNPC.menuBatallar);
-
+							juego.getHandlerMouse().setNuevoClick(false);
 							try {
 								juego.getCliente().getSalida()
 										.writeObject(gson.toJson(pBatalla));
@@ -250,7 +249,6 @@ public class Entidad {
 					}
 				}
 				// FIN NPC
-
 			} else if (juego.getEstadoJuego().getHaySolicitud()) {
 
 				if (juego.getEstadoJuego().getMenuEnemigo()
@@ -435,6 +433,7 @@ public class Entidad {
 				//Me fijo si estoy cerca de un NPC (como pide Lucas)
 		
 			}
+			juego.getHandlerMouse().setNuevoClick(false);
 		}
 
 		if (juego.getHandlerMouse().getNuevoRecorrido()
@@ -596,7 +595,6 @@ public class Entidad {
 					juego.getNpcs().get(key).getPosX(),juego.getNpcs().get(key).getPosY())){
 					PaqueteNpc actualNpc = juego.getNpcs().get(key);
 					idEnemigo = actualNpc.getId();
-					
 					juego.getEstadoJuego().setHaySolicitudNPC(true, juego.getNpcs().get(idEnemigo),MenuNPC.menuBatallar);
 				}
 			}
