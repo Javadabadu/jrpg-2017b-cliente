@@ -119,7 +119,12 @@ public class MiChat extends JFrame  {
 						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
 						chat.append("Me: " + mensajeChat  + "   (modo dios) " + "\n");
 						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
-						paquetePersonaje.setModoDios(true);
+
+						if(paquetePersonaje.isModoDios())
+							paquetePersonaje.setModoDios(false);
+						else
+							paquetePersonaje.setModoDios(true);
+						
 						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 						} catch (IOException e2) {
@@ -131,7 +136,12 @@ public class MiChat extends JFrame  {
 							texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
 							chat.append("Me: " + mensajeChat  + "   (atravesar paredes) "+ "\n");
 							paquetePersonaje = juego.getCliente().getPaquetePersonaje();
-							paquetePersonaje.setModoNoclip(true);
+							
+							if(paquetePersonaje.isModoNoclip())
+								paquetePersonaje.setModoNoclip(false);
+							else
+								paquetePersonaje.setModoNoclip(true);
+							
 							paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 							juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 							} catch (IOException e2) {
@@ -153,7 +163,12 @@ public class MiChat extends JFrame  {
 							texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
 							chat.append("Me: " + mensajeChat  + "   (Modo Invisible) "+ "\n");
 							paquetePersonaje = juego.getCliente().getPaquetePersonaje();
-							paquetePersonaje.setModoInvisible(true);
+
+							if(paquetePersonaje.isModoInvisible())
+								paquetePersonaje.setModoInvisible(false);
+							else
+								paquetePersonaje.setModoInvisible(true);
+							
 							paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 							juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 							} catch (IOException e2) {
@@ -198,7 +213,12 @@ public class MiChat extends JFrame  {
 					texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
 					chat.append("Me: " + mensajeChat  + "   (modo dios) " + "\n");
 					paquetePersonaje = juego.getCliente().getPaquetePersonaje();
-					paquetePersonaje.setModoDios(true);
+
+					if(paquetePersonaje.isModoDios())
+						paquetePersonaje.setModoDios(false);
+					else
+						paquetePersonaje.setModoDios(true);
+					
 					paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 					juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 					} catch (IOException e2) {
@@ -210,7 +230,12 @@ public class MiChat extends JFrame  {
 						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
 						chat.append("Me: " + mensajeChat  + "   (atravesar paredes) "+ "\n");
 						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
-						paquetePersonaje.setModoNoclip(true);
+
+						if(paquetePersonaje.isModoNoclip())
+							paquetePersonaje.setModoNoclip(false);
+						else
+							paquetePersonaje.setModoNoclip(true);
+						
 						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 						} catch (IOException e2) {
@@ -232,7 +257,12 @@ public class MiChat extends JFrame  {
 						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
 						chat.append("Me: " + mensajeChat  + "   (Modo Invisible) "+ "\n");
 						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
-						paquetePersonaje.setModoInvisible(true);
+
+						if(paquetePersonaje.isModoInvisible())
+							paquetePersonaje.setModoInvisible(false);
+						else
+							paquetePersonaje.setModoInvisible(true);
+						
 						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 						} catch (IOException e2) {

@@ -693,7 +693,7 @@ private int getFrame() {
 			final int xFinal, final int yFinal) {
 		
 		Grafo grafoLibres;
-		
+			
 		if(juego.getPersonaje().isModoNoclip())
 			grafoLibres = mundo.getGrafoNoclip();
 		else
