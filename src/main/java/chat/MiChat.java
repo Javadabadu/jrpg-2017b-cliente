@@ -117,13 +117,18 @@ public class MiChat extends JFrame  {
 					case "iddqd":
 						try {
 						texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
-						chat.append("Me: " + mensajeChat  + "   (modo dios) " + "\n");
+						
 						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
 
-						if(paquetePersonaje.isModoDios())
+						if(paquetePersonaje.isModoDios()) {
 							paquetePersonaje.setModoDios(false);
-						else
+							chat.append("Me: " + mensajeChat  + "   (modo dios desactivado) " + "\n");
+						}
+						else {
 							paquetePersonaje.setModoDios(true);
+							chat.append("Me: " + mensajeChat  + "   (modo dios activado) " + "\n");	
+						}
+							
 						
 						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
@@ -134,13 +139,17 @@ public class MiChat extends JFrame  {
 					case "noclip":
 						try {
 							texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
-							chat.append("Me: " + mensajeChat  + "   (atravesar paredes) "+ "\n");
+							
 							paquetePersonaje = juego.getCliente().getPaquetePersonaje();
 							
-							if(paquetePersonaje.isModoNoclip())
+							if(paquetePersonaje.isModoNoclip()) {
 								paquetePersonaje.setModoNoclip(false);
-							else
+								chat.append("Me: " + mensajeChat  + "   (atravesar paredes desactivado) "+ "\n");	
+							}
+							else {
 								paquetePersonaje.setModoNoclip(true);
+								chat.append("Me: " + mensajeChat  + "   (atravesar paredes activado) "+ "\n");		
+								}
 							
 							paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 							juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
@@ -149,25 +158,62 @@ public class MiChat extends JFrame  {
 							}
 						break;
 					case "bigdaddy":
+						try {
 						texto.setText("");
-						chat.append("Me: " + mensajeChat  + " ( tiene 100% más de fuerza) " + "\n");
-						juego.getPersonaje().setFuerza(juego.getPersonaje().getFuerza()*2);
+						
+						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
+
+						if(paquetePersonaje.isModoFuerte()) {
+							paquetePersonaje.setModoFuerte(false);
+							chat.append("Me: " + mensajeChat  + "   (bigdaddy desactivado) "+ "\n");
+							paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()/2);
+						}else {
+							paquetePersonaje.setModoFuerte(true);
+							chat.append("Me: " + mensajeChat  + "   (bigdaddy activado) "+ "\n");
+							paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()*2);
+						}
+						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
+						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+						} catch (IOException e2) {
+							JOptionPane.showMessageDialog(null, "Error al aplicar truco");
+						}
 						break;
 					case "tinydaddy":
+						try {
 						texto.setText("");
-						chat.append("Me: " + mensajeChat  + " ( tiene  50% menos de fuerza) " + "\n");
-						juego.getPersonaje().setFuerza((int) (juego.getPersonaje().getFuerza()*1.5));
+						
+						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
+
+						if(paquetePersonaje.isModoFuerte()) {
+							paquetePersonaje.setModoFuerte(false);
+							chat.append("Me: " + mensajeChat  + "   (tinydaddy desactivado) "+ "\n");
+							paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()*2);
+						}else {
+							paquetePersonaje.setModoFuerte(true);
+							chat.append("Me: " + mensajeChat  + "   (tinydaddy activado) "+ "\n");
+							paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()/2);
+						}
+						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
+						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+						} catch (IOException e2) {
+							JOptionPane.showMessageDialog(null, "Error al aplicar truco");
+						}
 						break;
 					case "war aint what it used to be":
 						try {
 							texto.setText(""); // PARA PONER EL RENGLON PARA ESCRIBIR EN BLANCO
-							chat.append("Me: " + mensajeChat  + "   (Modo Invisible) "+ "\n");
+							
 							paquetePersonaje = juego.getCliente().getPaquetePersonaje();
 
-							if(paquetePersonaje.isModoInvisible())
+							if(paquetePersonaje.isModoInvisible()) {
 								paquetePersonaje.setModoInvisible(false);
-							else
+								chat.append("Me: " + mensajeChat  + "   (Modo Invisible desactivado) "+ "\n");
+							}
+							else {
 								paquetePersonaje.setModoInvisible(true);
+								chat.append("Me: " + mensajeChat  + "   (Modo Invisible activado) "+ "\n");
+							}
+								
 							
 							paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 							juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
