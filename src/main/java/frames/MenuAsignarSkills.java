@@ -65,7 +65,7 @@ public class MenuAsignarSkills extends JFrame {
 	private static final int DESTREZAW = 56;
 	private static final int DESTREZAZ = 16;
 	private static final int FUERZAX = 50;
-	private static final int FUERZAY = 130;
+	private static final int FUERZAY = 72;
 	private static final int FUERZAW = 56;
 	private static final int FUERZAZ = 16;
 	private static final int CONFIRMX = 176;
@@ -249,7 +249,9 @@ public class MenuAsignarSkills extends JFrame {
 		} else {
 			buttonReset.setEnabled(true);
 		}
-
+		buttonReset.setBounds(RESETX, RESETY, RESETW, RESETZ);
+		contentPane.add(buttonReset);
+		
 		final JButton buttonMinus = new JButton("");
 		final JButton buttonMinus1 = new JButton("");
 		final JButton buttonMinus2 = new JButton("");
@@ -480,6 +482,8 @@ public class MenuAsignarSkills extends JFrame {
 				JOptionPane.showMessageDialog(null, "Se han reseteado tus stats.");
 			}
 		});
+
+		buttonReset.setIcon(resetIcon);
 		buttonReset.setBounds(RESETX, RESETY, RESETW, RESETZ);
 		contentPane.add(buttonReset);
 

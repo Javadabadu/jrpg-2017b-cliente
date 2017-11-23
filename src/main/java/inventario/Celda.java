@@ -33,7 +33,7 @@ public class Celda extends JPanel {
      * Constructor parametrizado
      */
     public Celda(final Item item, final PaquetePersonaje paquetePersonaje) throws IOException {
-		this.item = item.getFoto();
+		this.item = item.getBufferedFoto();
 		it = item;
 		this.paquetePersonaje = paquetePersonaje;
 		label = new JLabel(new ImageIcon(this.item.getScaledInstance(width, height, Image.SCALE_DEFAULT)));
