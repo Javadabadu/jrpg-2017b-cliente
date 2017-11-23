@@ -97,7 +97,6 @@ public class MenuInfoPersonaje {
 		Pantalla.centerString(g, new Rectangle(x, y + 270, menu.getWidth(), 0), "Porque resolviste todo en una clase");
 		Pantalla.centerString(g, new Rectangle(x, y + 290, menu.getWidth(), 0), "Igual todavia tenes chances");
 		Pantalla.centerString(g, new Rectangle(x, y + 310, menu.getWidth(), 0), "de promocionar o de ir a final");
-		Pantalla.centerString(g, new Rectangle(x, y + 330, menu.getWidth(), 0), "Muscula, Never Pony");
 		
 		
 	}
