@@ -160,18 +160,10 @@ public class MiChat extends JFrame  {
 					case "bigdaddy":
 						try {
 						texto.setText("");
-						
 						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
-
-						if(paquetePersonaje.isModoFuerte()) {
-							paquetePersonaje.setModoFuerte(false);
-							chat.append("Me: " + mensajeChat  + "   (bigdaddy desactivado) "+ "\n");
-							paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()/2);
-						}else {
-							paquetePersonaje.setModoFuerte(true);
-							chat.append("Me: " + mensajeChat  + "   (bigdaddy activado) "+ "\n");
-							paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()*2);
-						}
+						paquetePersonaje.setModoFuerte(true);
+						chat.append("Me: " + mensajeChat  + "   (Fuerza Extra) "+ "\n");
+						paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()*2);
 						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 						} catch (IOException e2) {
@@ -181,18 +173,9 @@ public class MiChat extends JFrame  {
 					case "tinydaddy":
 						try {
 						texto.setText("");
-						
-						paquetePersonaje = juego.getCliente().getPaquetePersonaje();
-
-						if(paquetePersonaje.isModoFuerte()) {
-							paquetePersonaje.setModoFuerte(false);
-							chat.append("Me: " + mensajeChat  + "   (tinydaddy desactivado) "+ "\n");
-							paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()*2);
-						}else {
-							paquetePersonaje.setModoFuerte(true);
-							chat.append("Me: " + mensajeChat  + "   (tinydaddy activado) "+ "\n");
-							paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()/2);
-						}
+						paquetePersonaje.setModoFuerte(true);
+						chat.append("Me: " + mensajeChat  + "   (Fuerza reducida) "+ "\n");
+						paquetePersonaje.setFuerza(paquetePersonaje.getFuerza()/2);
 						paquetePersonaje.setComando(Comando.ACTUALIZARCHEATS);
 						juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 						} catch (IOException e2) {
